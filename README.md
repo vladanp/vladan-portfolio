@@ -28,7 +28,14 @@ To run the Hugo site locally, you'll need to have <a href="https://gohugo.io/" t
 
 ## Deployment
 
-<TODO>
+The site is automatically deployed to GitHub Pages whenever changes are pushed to the main branch. The deployment process is managed via GitHub Actions, using the following workflow:
+
+1. Ensure the main branch is up to date with your latest changes.
+2. Push your changes to the main branch:
+   ```bash
+   git push origin main
+   ```
+3. GitHub Actions will automatically build and deploy the site to the gh-pages branch, which is configured to serve the site.
 
 ## License
 
