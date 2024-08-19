@@ -2,11 +2,10 @@
 public/
 resources/
 hugo_stats.json
+.hugo_build.lock
 
-# Logs and databases
+# Logs
 *.log
-*.sql
-*.sqlite
 
 # Node modules and dependencies (if you have a package.json)
 node_modules/
@@ -20,3 +19,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.swp
+
+# Hugo temp directories
+/cache/
