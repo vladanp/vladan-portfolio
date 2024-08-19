@@ -1,6 +1,6 @@
 # Vladan Petrovic Portfolio
 
-This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using Hugo, a fast and flexible static site generator.
+This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using <a href="https://gohugo.io/" target="_blank">Hugo</a>, a fast and flexible static site generator.
 
 ## Project Structure
 
@@ -11,7 +11,7 @@ This is the source code for the portfolio of Vladan Petrovic, a Senior Software 
 
 ## How to Run the Project Locally
 
-To run the Hugo site locally, you'll need to have [Hugo](https://gohugo.io/) installed on your machine.
+To run the Hugo site locally, you'll need to have <a href="https://gohugo.io/" target="_blank">Hugo</a> installed on your machine.
 
 ### Steps:
 
@@ -24,12 +24,12 @@ To run the Hugo site locally, you'll need to have [Hugo](https://gohugo.io/) ins
    ```bash
    hugo server -D
    ```
-3. Open your web browser and go to http://localhost:1313 to view the site.
+3. Open your web browser and go to [http://localhost:1313](http://localhost:1313) to view the site.
 
 ## Deployment
 
-This site is deployed on GitHub Pages. The public/ directory, which contains the generated static files, is pushed to the gh-pages branch.
+<TODO>
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
