@@ -8,6 +8,7 @@
   --skill-image-size: 100px;
   --skills-padding-bottom: 40px;
   --focus-outline: 3px solid rgb(255, 255, 255);
+  --mobile-top-padding: 60px;
 }
 
 body {
@@ -20,6 +21,8 @@ body {
   min-height: 100vh;
   background-color: var(--background-color);
   color: var(--font-color);
+  padding-top: var(--mobile-top-padding);
+  box-sizing: border-box;
 }
 
 a:focus,
@@ -34,6 +37,8 @@ button:focus {
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  min-height: calc(100vh - var(--mobile-top-padding));
+  padding-bottom: var(--mobile-top-padding);
 }
 
 .intro-section {
@@ -118,44 +123,60 @@ button:focus {
   object-fit: contain;
 }
 
-/* Mobile adjustments for devices up to 390px wide */
 @media (max-width: 390px) {
+  body {
+    padding-top: var(--mobile-top-padding);
+  }
+
+  .main-container {
+    min-height: calc(100vh - var(--mobile-top-padding));
+    justify-content: flex-start;
+    padding-bottom: 20px;
+  }
+
   .intro-section {
-    margin-bottom: 20px; /* Increase margin to move name and title further down */
+    margin-bottom: 15px;
   }
 
   .site-name {
-    font-size: 1.5rem; /* Adjust font size */
-    margin-top: 30px; /* Add margin-top to move further down */
+    font-size: 1.5rem;
+    margin-top: 0;
   }
 
   .job-title {
-    font-size: 1rem; /* Adjust font size */
-    margin-top: 20px; /* Add margin-top to move further down */
+    font-size: 1rem;
+    margin-top: 10px;
   }
 
+  .social-links,
   .skills {
-    margin-top: 20px; /* Move skills section closer to the top */
-    margin-bottom: var(
-      --skills-padding-bottom
-    ); /* Keep padding at the bottom */
+    margin: var(--section-margin);
   }
 
-  .social-links {
-    margin: 20px 0; /* Adjust margins to keep it centered */
+  .social-links-heading,
+  .skills-heading {
+    margin-bottom: var(--title-margin-bottom);
   }
 
   .social-links ul {
-    gap: 10px; /* Reduce gap between icons */
+    gap: 10px;
   }
 
   .social-icon img {
-    width: 30px; /* Smaller icons on mobile */
+    width: 30px;
     height: 30px;
   }
 
   .skills a img {
-    width: 80px; /* Smaller skill images on mobile */
+    width: 80px;
     height: 80px;
+  }
+
+  .skills-container {
+    gap: 10px;
+  }
+
+  .skill {
+    margin: 5px;
   }
 }
