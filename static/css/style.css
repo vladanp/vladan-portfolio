@@ -18,6 +18,22 @@ header {
   margin: 40px 0;
 }
 
+#social-links ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+#social-links li {
+  display: inline-block;
+}
+
+#social-links .social-icon img {
+  width: 40px;
+  height: 40px;
+}
+
 #skills .skills-container {
   display: flex;
   flex-wrap: wrap;
@@ -30,6 +46,7 @@ header {
 }
 
 .skill img {
-  max-width: 100px;
-  height: auto;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }

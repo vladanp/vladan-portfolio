@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Site.Title }}</title>
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="{{ .Site.Params.metaDescription }}" />
+    <meta name="description" content="{{ .Site.Params.description }}" />
     <meta name="keywords" content="{{ with .Site.Params.keywords }}{{ delimit .
     ", " }}{{ else }}{{ "default, keywords" }}{{ end }}" />
     <meta name="author" content="{{ .Site.Params.author }}" />
@@ -22,25 +22,12 @@
     <meta property="og:url" content="{{ .Site.BaseURL }}" />
     <meta property="og:image" content="{{ .Site.Params.ogImage | relURL }}" />
 
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{ .Site.Title }}" />
-    <meta
-      name="twitter:description"
-      content="{{ .Site.Params.twitterDescription }}"
-    />
-    <meta
-      name="twitter:image"
-      content="{{ .Site.Params.twitterImage | relURL }}"
-    />
-    <meta name="twitter:creator" content="{{ .Site.Params.twitterCreator }}" />
-
     <!-- Favicon -->
     <link rel="icon" href="{{ "images/favicon-16x16.png" | relURL }}"
-    sizes="16x16" type="image/png"> <link rel="icon" href="{{
-    "images/favicon-32x32.png" | relURL }}" sizes="32x32" type="image/png">
+    sizes="16x16" type="image/png" /> <link rel="icon" href="{{
+    "images/favicon-32x32.png" | relURL }}" sizes="32x32" type="image/png" />
     <link rel="icon" href="{{ "images/favicon.ico" | relURL }}"
-    type="image/x-icon">
+    type="image/x-icon" />
 
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="{{ "images/apple-touch-icon.png" | relURL
@@ -48,9 +35,9 @@
 
     <!-- Android Chrome Icons -->
     <link rel="icon" href="{{ "images/android-chrome-192x192.png" | relURL }}"
-    sizes="192x192" type="image/png"> <link rel="icon" href="{{
+    sizes="192x192" type="image/png" /> <link rel="icon" href="{{
     "images/android-chrome-512x512.png" | relURL }}" sizes="512x512"
-    type="image/png">
+    type="image/png" />
   </head>
 
   <body>
@@ -62,10 +49,17 @@
     {{ block "main" . }} {{ end }}
 
     <section id="social-links">
-      <h3>Connect with me</h3>
       <ul>
         {{ range .Site.Params.socialLinks }}
-        <li><a href="{{ .url }}">{{ .name }}</a></li>
+        <li>
+          <a
+            href="{{ .url }}"
+            class="social-icon"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><img src="images/{{ .image | lower }}" alt="{{ .name }}"
+          /></a>
+        </li>
         {{ end }}
       </ul>
     </section>

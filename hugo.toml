@@ -1,31 +1,32 @@
 baseURL = "https://vladanp.github.io/"
 languageCode = "en-us"
 title = "Vladan Petrovic"
-metaDescription = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
-author = "Vladan Petrovic"
-keywords = ["Vladan Petrovic", "Senior Software Engineer", "JavaScript", "React", "Web Development", "Portfolio"]
+
 
 [params]
+  description = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
+  author = "Vladan Petrovic"
+  keywords = ["Vladan Petrovic", "Senior Software Engineer", "JavaScript", "React", "Web Development", "Portfolio"]
+
+  # Open Graph (OG) Meta Tags for social media sharing
+  ogImage = "images/og-image.webp"
+  ogDescription = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
+
   name = "Vladan Petrovic"
   jobTitle = "Senior Software Engineer"
 
-  # Open Graph (OG) Meta Tags for social media sharing
-  ogImage = "images/og-image.png" # Replace with your actual image path
-  ogDescription = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
-
-  # Twitter Card Meta Tags
-  twitterImage = "images/twitter-image.png" # Replace with your actual image path
-  twitterCreator = "@yourTwitterHandle" # Replace with your actual Twitter handle
-  twitterDescription = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
-
+  # Social Links with updated image paths
   [[params.socialLinks]]
     name = "LinkedIn"
     url = "https://www.linkedin.com/in/vladanpet"
+    image = "linkedin-logo.png"
 
   [[params.socialLinks]]
     name = "GitHub"
     url = "https://github.com/vladanp"
+    image = "github-logo.png"
 
+  # Skills
   [[params.skills]]
     name = "JavaScript"
     image = "images/javascript-logo.webp"
@@ -33,10 +34,3 @@ keywords = ["Vladan Petrovic", "Senior Software Engineer", "JavaScript", "React"
   [[params.skills]]
     name = "React"
     image = "images/react-logo.webp"
-
-[taxonomies]
-  category = "categories"
-  tag = "tags"
-
-  # Example of adding a custom taxonomy
-  skill = "skills"
