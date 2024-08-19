@@ -32,8 +32,16 @@ title = "Vladan Petrovic"
   # Skills
   [[params.skills]]
     name = "JavaScript"
-    image = "images/javascript-logo.webp"
+    image = "images/javascript-logo.png"
 
   [[params.skills]]
+    name = "TypeScript"
+    image = "images/typescript-logo.png"
+    
+  [[params.skills]]
     name = "React"
-    image = "images/react-logo.webp"
+    image = "images/react-logo.png"
+
+  [[params.skills]]
+    name = "Angular"
+    image = "images/angular-logo.png"
