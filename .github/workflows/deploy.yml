@@ -21,10 +21,6 @@ jobs:
       - name: Build the site
         run: hugo
 
-      - name: Preserve CNAME file
-        run: |
-          cp CNAME public/
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
