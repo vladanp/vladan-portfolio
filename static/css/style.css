@@ -124,7 +124,7 @@ button:focus {
   object-fit: contain;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 600px) {
   body {
     padding-top: var(--mobile-top-padding);
   }
