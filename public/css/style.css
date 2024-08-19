@@ -117,3 +117,45 @@ button:focus {
   height: var(--skill-image-size);
   object-fit: contain;
 }
+
+/* Mobile adjustments for devices up to 390px wide */
+@media (max-width: 390px) {
+  .intro-section {
+    margin-bottom: 20px; /* Increase margin to move name and title further down */
+  }
+
+  .site-name {
+    font-size: 1.5rem; /* Adjust font size */
+    margin-top: 30px; /* Add margin-top to move further down */
+  }
+
+  .job-title {
+    font-size: 1rem; /* Adjust font size */
+    margin-top: 20px; /* Add margin-top to move further down */
+  }
+
+  .skills {
+    margin-top: 20px; /* Move skills section closer to the top */
+    margin-bottom: var(
+      --skills-padding-bottom
+    ); /* Keep padding at the bottom */
+  }
+
+  .social-links {
+    margin: 20px 0; /* Adjust margins to keep it centered */
+  }
+
+  .social-links ul {
+    gap: 10px; /* Reduce gap between icons */
+  }
+
+  .social-icon img {
+    width: 30px; /* Smaller icons on mobile */
+    height: 30px;
+  }
+
+  .skills a img {
+    width: 80px; /* Smaller skill images on mobile */
+    height: 80px;
+  }
+}
