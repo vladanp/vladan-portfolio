@@ -41,15 +41,17 @@
   </head>
 
   <body>
-    <header>
+    <header class="site-header" role="banner">
       <h1>{{ .Site.Params.name }}</h1>
       <h2>{{ .Site.Params.jobTitle }}</h2>
     </header>
 
-    {{ block "main" . }} {{ end }}
+    <main id="main-content" class="content" role="main">
+      {{ block "main" . }} {{ end }}
+    </main>
 
-    <section id="social-links">
-      <h3>{{ .Site.Params.connectTitle }}</h3>
+    <section class="social-links" aria-labelledby="social-links-heading">
+      <h3 id="social-links-heading">{{ .Site.Params.connectTitle }}</h3>
       <ul>
         {{ range .Site.Params.socialLinks }}
         <li>
@@ -58,6 +60,7 @@
             class="social-icon"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="{{ .name }}"
           >
             <img src="images/{{ .image }}" alt="{{ .name }}" />
           </a>
@@ -66,13 +69,20 @@
       </ul>
     </section>
 
-    <section id="skills">
-      <h3>{{ .Site.Params.skillsTitle }}</h3>
+    <section class="skills" aria-labelledby="skills-heading">
+      <h3 id="skills-heading">{{ .Site.Params.skillsTitle }}</h3>
       <div class="skills-container">
         {{ range .Site.Params.skills }}
         <div class="skill">
-          <img src="{{ .image | relURL }}" alt="{{ .name }}" />
-          <p>{{ .name }}</p>
+          <a
+            href="{{ .url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="{{ .name }}"
+          >
+            <img src="{{ .image | relURL }}" alt="{{ .name }}" />
+            <p>{{ .name }}</p>
+          </a>
         </div>
         {{ end }}
       </div>

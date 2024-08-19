@@ -38,17 +38,19 @@
   </head>
 
   <body>
-    <header>
-      <h1>Vladan Petrovic</h1>
+    <header class="site-header" role="banner">
+      <h1>Vladan Petrović</h1>
       <h2>Senior Software Engineer</h2>
     </header>
 
-    
+    <main id="main-content" class="content" role="main">
+      
 <main></main>
 
+    </main>
 
-    <section id="social-links">
-      <h3>Connect with me</h3>
+    <section class="social-links" aria-labelledby="social-links-heading">
+      <h3 id="social-links-heading">Connect with me</h3>
       <ul>
         
         <li>
@@ -57,6 +59,7 @@
             class="social-icon"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
           >
             <img src="images/linkedin-logo.png" alt="LinkedIn" />
           </a>
@@ -68,6 +71,7 @@
             class="social-icon"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
           >
             <img src="images/github-logo.png" alt="GitHub" />
           </a>
@@ -76,28 +80,56 @@
       </ul>
     </section>
 
-    <section id="skills">
-      <h3>My Skills</h3>
+    <section class="skills" aria-labelledby="skills-heading">
+      <h3 id="skills-heading">My Skills</h3>
       <div class="skills-container">
         
         <div class="skill">
-          <img src="/images/javascript-logo.png" alt="JavaScript" />
-          <p>JavaScript</p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="JavaScript"
+          >
+            <img src="/images/javascript-logo.png" alt="JavaScript" />
+            <p>JavaScript</p>
+          </a>
         </div>
         
         <div class="skill">
-          <img src="/images/typescript-logo.png" alt="TypeScript" />
-          <p>TypeScript</p>
+          <a
+            href="https://www.typescriptlang.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TypeScript"
+          >
+            <img src="/images/typescript-logo.png" alt="TypeScript" />
+            <p>TypeScript</p>
+          </a>
         </div>
         
         <div class="skill">
-          <img src="/images/react-logo.png" alt="React" />
-          <p>React</p>
+          <a
+            href="https://reactjs.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="React"
+          >
+            <img src="/images/react-logo.png" alt="React" />
+            <p>React</p>
+          </a>
         </div>
         
         <div class="skill">
-          <img src="/images/angular-logo.png" alt="Angular" />
-          <p>Angular</p>
+          <a
+            href="https://angular.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Angular"
+          >
+            <img src="/images/angular-logo.png" alt="Angular" />
+            <p>Angular</p>
+          </a>
         </div>
         
       </div>

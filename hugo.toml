@@ -11,7 +11,7 @@ title = "Vladan Petrovic"
   ogImage = "images/og-image.webp"
   ogDescription = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
 
-  name = "Vladan Petrovic"
+  name = "Vladan Petrović"
   jobTitle = "Senior Software Engineer"
 
   # Section Titles
@@ -33,15 +33,23 @@ title = "Vladan Petrovic"
   [[params.skills]]
     name = "JavaScript"
     image = "images/javascript-logo.png"
+    url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
   [[params.skills]]
     name = "TypeScript"
     image = "images/typescript-logo.png"
-    
+    url = "https://www.typescriptlang.org/"
+
   [[params.skills]]
     name = "React"
     image = "images/react-logo.png"
+    url = "https://reactjs.org/"
 
   [[params.skills]]
     name = "Angular"
     image = "images/angular-logo.png"
+    url = "https://angular.io/"
+
+[taxonomies]
+  tag = ""
+  category = ""
