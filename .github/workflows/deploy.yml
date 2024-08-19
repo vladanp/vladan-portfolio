@@ -21,9 +21,14 @@ jobs:
       - name: Build the site
         run: hugo
 
+      - name: Preserve CNAME file
+        run: |
+          cp CNAME public/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+          allow_empty_commit: true
