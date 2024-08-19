@@ -1,15 +1,24 @@
 baseURL = "https://vladan.dev/"
 languageCode = "en-us"
-title = "Vladan Petrovic"
+title = "Vladan Petrovic | Senior Software Engineer"
+author = "Vladan Petrovic"
 
 [params]
-  description = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
+  description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
   author = "Vladan Petrovic"
-  keywords = ["Vladan Petrovic", "Senior Software Engineer", "JavaScript", "React", "Web Development", "Portfolio"]
+  keywords = ["Vladan Petrovic", "Senior Software Engineer", "JavaScript", "React", "Angular", "Web Development", "Portfolio", "Software Engineer", "Frontend Developer", "Senior Frontend Developer", "Web Developer"]
 
   # Open Graph (OG) Meta Tags for social media sharing
   ogImage = "images/og-image.webp"
-  ogDescription = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
+  ogTitle = "Vladan Petrovic - Senior Software Engineer"
+  ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
+
+  # Twitter Meta Tags
+  twitterCard = "summary_large_image"
+  twitterSite = "@VladanPetrovic"
+  twitterTitle = "Vladan Petrovic | Senior Software Engineer"
+  twitterDescription = "The official portfolio of Vladan Petrovic, showcasing expertise in JavaScript, React, Angular and web development."
+  twitterImage = "images/og-image.webp"
 
   name = "Vladan Petrović"
   jobTitle = "Senior Software Engineer"
