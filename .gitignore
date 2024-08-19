@@ -1,0 +1,22 @@
+# Hugo files
+public/
+resources/
+hugo_stats.json
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Node modules and dependencies (if you have a package.json)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
