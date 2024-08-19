@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /private/
 Allow: /
 
-Sitemap: https://vladanp.github.io/sitemap.xml
+Sitemap: https://vladanp.github.io/vladan-portfolio/sitemap.xml
