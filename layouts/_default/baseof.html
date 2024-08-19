@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Site.Title }}</title>
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ "images/favicon-16x16.png" | relURL }}"
+    sizes="16x16" type="image/png"> <link rel="icon" href="{{
+    "images/favicon-32x32.png" | relURL }}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ "images/favicon.ico" | relURL }}"
+    type="image/x-icon">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="{{ "images/apple-touch-icon.png" | relURL
+    }}">
+
+    <!-- Android Chrome Icons -->
+    <link rel="icon" href="{{ "images/android-chrome-192x192.png" | relURL }}"
+    sizes="192x192" type="image/png"> <link rel="icon" href="{{
+    "images/android-chrome-512x512.png" | relURL }}" sizes="512x512"
+    type="image/png">
+  </head>
+
+  <body>
+    <header>
+      <h1>{{ .Site.Params.name }}</h1>
+      <h2>{{ .Site.Params.jobTitle }}</h2>
+    </header>
+
+    {{ block "main" . }} {{ end }}
+
+    <section id="social-links">
+      <h3>Connect with me</h3>
+      <ul>
+        {{ range .Site.Params.socialLinks }}
+        <li><a href="{{ .url }}">{{ .name }}</a></li>
+        {{ end }}
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h3>My Skills</h3>
+      <div class="skills-container">
+        {{ range .Site.Params.skills }}
+        <div class="skill">
+          <img src="{{ .image | relURL }}" alt="{{ .name }}" />
+          <p>{{ .name }}</p>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+  </body>
+</html>

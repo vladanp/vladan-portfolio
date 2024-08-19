@@ -1,0 +1,23 @@
+baseURL = "https://vladanp.github.io/"
+languageCode = "en-us"
+title = "Vladan's Portfolio"
+
+[params]
+  name = "Vladan Petrovic"
+  jobTitle = "Senior Software Engineer"
+
+  [[params.socialLinks]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/in/vladanpet"
+
+  [[params.socialLinks]]
+    name = "GitHub"
+    url = "https://github.com/vladanp"
+
+  [[params.skills]]
+    name = "JavaScript"
+    image = "images/javascript-logo.webp"
+
+  [[params.skills]]
+    name = "React"
+    image = "images/react-logo.webp"
