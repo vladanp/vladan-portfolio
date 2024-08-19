@@ -11,6 +11,7 @@
     <meta name="keywords" content="{{ with .Site.Params.keywords }}{{ delimit .
     ", " }}{{ else }}{{ "default, keywords" }}{{ end }}" />
     <meta name="author" content="{{ .Site.Params.author }}" />
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="{{ .Site.Title }}" />
@@ -21,6 +22,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ .Site.BaseURL }}" />
     <meta property="og:image" content="{{ .Site.Params.ogImage | relURL }}" />
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="{{ .Permalink }}" />
 
     <!-- Favicon -->
     <link rel="icon" href="{{ "images/favicon-16x16.png" | relURL }}"
@@ -38,6 +42,17 @@
     sizes="192x192" type="image/png" /> <link rel="icon" href="{{
     "images/android-chrome-512x512.png" | relURL }}" sizes="512x512"
     type="image/png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ .Site.Title }}",
+        "url": "{{ .Site.BaseURL }}",
+        "description": "{{ .Site.Params.description }}"
+      }
+    </script>
   </head>
 
   <body>
