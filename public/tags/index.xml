@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Vladan&#39;s Portfolio</title>
+    <title>Tags on Vladan Petrovic</title>
     <link>http://localhost:1313/tags/</link>
-    <description>Recent content in Tags on Vladan&#39;s Portfolio</description>
+    <description>Recent content in Tags on Vladan Petrovic</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
