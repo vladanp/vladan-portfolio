@@ -5,33 +5,54 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   min-height: 100vh;
 }
 
 header {
   text-align: center;
-  margin: 20px 0;
+  margin-top: auto; /* Auto margin to center vertically */
+  margin-bottom: 20px;
 }
 
 #social-links {
   margin: 40px 0;
+  text-align: center; /* Center align the content inside #social-links */
+  width: 100%; /* Ensure it takes full width to center the title */
+}
+
+#social-links h3 {
+  margin-bottom: 20px; /* Add some space below the "Connect with me" title */
 }
 
 #social-links ul {
   list-style: none;
   padding: 0;
   display: flex;
+  justify-content: center; /* Center the social links horizontally */
+  align-items: center; /* Vertically center the social links */
   gap: 20px;
 }
 
 #social-links li {
-  display: inline-block;
+  display: flex;
+  justify-content: center; /* Center each icon within its container */
+  align-items: center; /* Vertically center each icon within its container */
 }
 
 #social-links .social-icon img {
   width: 40px;
   height: 40px;
+}
+
+#skills {
+  margin-bottom: auto; /* Allow space below skills */
+  padding-bottom: 40px; /* Give some space below the skills section */
+  text-align: center; /* Center align the content inside #skills */
+  width: 100%; /* Ensure it takes full width to center the title */
+}
+
+#skills h3 {
+  margin-bottom: 20px; /* Add some space below the "My Skills" title */
 }
 
 #skills .skills-container {

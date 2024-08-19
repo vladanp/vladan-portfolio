@@ -2,7 +2,6 @@ baseURL = "https://vladanp.github.io/"
 languageCode = "en-us"
 title = "Vladan Petrovic"
 
-
 [params]
   description = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, and web development."
   author = "Vladan Petrovic"
@@ -14,6 +13,10 @@ title = "Vladan Petrovic"
 
   name = "Vladan Petrovic"
   jobTitle = "Senior Software Engineer"
+
+  # Section Titles
+  connectTitle = "Connect with me"
+  skillsTitle = "My Skills"
 
   # Social Links with updated image paths
   [[params.socialLinks]]
