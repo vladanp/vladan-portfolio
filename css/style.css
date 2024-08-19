@@ -8,8 +8,6 @@
   --skill-image-size: 100px;
   --skills-padding-bottom: 40px;
   --focus-outline: 3px solid rgb(255, 255, 255);
-  --skip-link-bg: #000;
-  --skip-link-color: #fff;
 }
 
 body {
@@ -24,43 +22,46 @@ body {
   color: var(--font-color);
 }
 
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background-color: var(--skip-link-bg);
-  color: var(--skip-link-color);
-  padding: 8px;
-  z-index: 100;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
 a:focus,
 button:focus {
   outline: var(--focus-outline);
 }
 
-.site-header {
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.intro-section {
   text-align: center;
-  margin-top: auto;
   margin-bottom: var(--header-margin-bottom);
+}
+
+.site-name,
+.job-title {
+  margin: 0;
 }
 
 .content {
   width: 100%;
   max-width: 1200px;
+  margin-bottom: var(--section-margin);
 }
 
 .social-links {
-  margin: var(--section-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  width: 100%;
+  margin: var(--section-margin);
 }
 
-.social-links h3 {
+.social-links-heading {
   margin-bottom: var(--title-margin-bottom);
 }
 
@@ -82,13 +83,11 @@ button:focus {
 }
 
 .skills {
-  margin-bottom: auto;
-  padding-bottom: var(--skills-padding-bottom);
+  margin: var(--section-margin);
   text-align: center;
-  width: 100%;
 }
 
-.skills h3 {
+.skills-heading {
   margin-bottom: var(--title-margin-bottom);
 }
 
@@ -96,6 +95,7 @@ button:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
 }
 
 .skill {
