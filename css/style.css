@@ -3,7 +3,7 @@
   --font-color: rgb(191, 191, 191);
   --header-margin-bottom: 20px;
   --section-margin: 40px 0;
-  --title-margin-bottom: 20px;
+  --title-margin: 10px;
   --icon-size: 40px;
   --skill-image-size: 100px;
   --skills-padding-bottom: 40px;
@@ -93,7 +93,8 @@ button:focus {
 }
 
 .skills-heading {
-  margin-bottom: var(--title-margin-bottom);
+  margin-bottom: var(--title-margin);
+  margin-top: var(--title-margin);
 }
 
 .skills-container {
@@ -135,7 +136,7 @@ button:focus {
   }
 
   .intro-section {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 
   .site-name {
@@ -145,17 +146,11 @@ button:focus {
 
   .job-title {
     font-size: 1rem;
-    margin-top: 10px;
   }
 
   .social-links,
   .skills {
-    margin: var(--section-margin);
-  }
-
-  .social-links-heading,
-  .skills-heading {
-    margin-bottom: var(--title-margin-bottom);
+    margin: 10px 0;
   }
 
   .social-links ul {
