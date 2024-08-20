@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Site.Title }}</title>
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
 
@@ -59,7 +56,55 @@
   </head>
 
   <body>
-    <div class="main-container">
+    <main class="main-container">
+      <section class="intro-section">
+        <h1 class="person-name" tabindex="0">{{ .Site.Params.name }}</h1>
+        <h2 class="job-title" tabindex="0">{{ .Site.Params.jobTitle }}</h2>
+      </section>
+
+      <section class="social-links" aria-labelledby="social-links-heading">
+        <h3 class="social-links-heading" tabindex="0">
+          {{ .Site.Params.connectTitle }}
+        </h3>
+        <ul>
+          {{ range .Site.Params.socialLinks }}
+          <li>
+            <a
+              href="{{ .url }}"
+              class="social-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="{{ .name }}"
+            >
+              <img src="images/{{ .image }}" alt="{{ .name }}" />
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+
+      <section class="skills" aria-labelledby="skills-heading">
+        <h3 class="skills-heading" tabindex="0">
+          {{ .Site.Params.skillsTitle }}
+        </h3>
+        <div class="skills-container">
+          {{ range .Site.Params.skills }}
+          <div class="skill">
+            <a
+              href="{{ .url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="{{ .name }}"
+            >
+              <img src="{{ .image | relURL }}" alt="{{ .name }}" />
+              <p>{{ .name }}</p>
+            </a>
+          </div>
+          {{ end }}
+        </div>
+      </section>
+    </main>
+    <!-- <div class="main-container">
       <div class="intro-section">
         <h1 class="site-name" tabindex="0">{{ .Site.Params.name }}</h1>
         <h2 class="job-title" tabindex="0">{{ .Site.Params.jobTitle }}</h2>
@@ -108,6 +153,6 @@
           {{ end }}
         </div>
       </section>
-    </div>
+    </div> -->
   </body>
 </html>
