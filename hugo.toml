@@ -66,6 +66,6 @@ author = "Vladan Petrovic"
 
 [sitemap]
   filename = "sitemap.xml"
-  priority = 0.5
+  priority = 1
   changefreq = "monthly"
   disable = false
