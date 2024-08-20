@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vladanp.dev/sitemap.xml
+Sitemap: https://vladan.dev/sitemap.xml
