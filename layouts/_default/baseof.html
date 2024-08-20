@@ -9,7 +9,7 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="{{ .Site.Params.description }}" />
     <meta name="keywords" content="{{ with .Site.Params.keywords }}{{ delimit .
-    ", " }}{{ else }}{{ "default, keywords" }}{{ end }}" />
+    ", " }}{{ else }}default, keywords{{ end }}" />
     <meta name="author" content="{{ .Site.Params.author }}" />
     <meta name="robots" content="index, follow" />
 
@@ -82,9 +82,16 @@
               class="social-icon"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="{{ .name }}"
+              aria-label="Visit my {{ .name }} profile"
             >
-              <img src="images/{{ .image }}" alt="{{ .name }}" />
+              <img
+                srcset="images/{{ .image | relURL }}-200.png 200w,
+                        images/{{ .image | relURL }}-400.png 400w,
+                        images/{{ .image | relURL }}-800.png 800w"
+                sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+                src="images/{{ .image | relURL }}-400.png"
+                alt="{{ .name }} logo"
+              />
             </a>
           </li>
           {{ end }}
@@ -102,9 +109,16 @@
               href="{{ .url }}"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="{{ .name }}"
+              aria-label="Learn more about {{ .name }}"
             >
-              <img src="{{ .image | relURL }}" alt="{{ .name }}" />
+              <img
+                srcset="images/{{ .image | relURL }}-200.png 200w,
+                        images/{{ .image | relURL }}-400.png 400w,
+                        images/{{ .image | relURL }}-800.png 800w"
+                sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+                src="images/{{ .image | relURL }}-400.png"
+                alt="{{ .name }} logo"
+              />
               <p>{{ .name }}</p>
             </a>
           </div>
