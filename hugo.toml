@@ -32,32 +32,32 @@ author = "Vladan Petrovic"
   [[params.socialLinks]]
     name = "LinkedIn"
     url = "https://www.linkedin.com/in/vladanpet"
-    image = "linkedin-logo.png"
+    image = "linkedin-logo"
 
   [[params.socialLinks]]
     name = "GitHub"
     url = "https://github.com/vladanp"
-    image = "github-logo.png"
+    image = "github-logo"
 
   # Skills
   [[params.skills]]
     name = "JavaScript"
-    image = "images/javascript-logo.png"
+    image = "javascript-logo"
     url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
   [[params.skills]]
     name = "TypeScript"
-    image = "images/typescript-logo.png"
+    image = "typescript-logo"
     url = "https://www.typescriptlang.org/"
 
   [[params.skills]]
     name = "React"
-    image = "images/react-logo.png"
+    image = "react-logo"
     url = "https://reactjs.org/"
 
   [[params.skills]]
     name = "Angular"
-    image = "images/angular-logo.png"
+    image = "angular-logo"
     url = "https://angular.io/"
 
 [taxonomies]
