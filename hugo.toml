@@ -1,7 +1,5 @@
 baseURL = "https://vladan.dev/"
-languageCode = "en-us"
 title = "Vladan Petrovic | Senior Software Engineer"
-author = "Vladan Petrovic"
 
 [params]
   description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
@@ -14,21 +12,14 @@ author = "Vladan Petrovic"
   ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
   locale = "en_US"
 
-  # Twitter Meta Tags
-  twitterCard = "summary_large_image"
-  twitterSite = "@VladanPetrovic"
-  twitterTitle = "Vladan Petrovic | Senior Software Engineer"
-  twitterDescription = "The official portfolio of Vladan Petrovic, showcasing expertise in JavaScript, React, Angular and web development."
-  twitterImage = "images/og-image.webp"
-
-  name = "Vladan Petrovic"
+  name = "Vladan Petrović"
   jobTitle = "Senior Software Engineer"
 
   # Section Titles
   connectTitle = "Connect with me"
   skillsTitle = "My Skills"
 
-  # Social Links with updated image paths
+  # Social Links
   [[params.socialLinks]]
     name = "LinkedIn"
     url = "https://www.linkedin.com/in/vladanpet"
