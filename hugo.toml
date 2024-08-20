@@ -12,6 +12,7 @@ author = "Vladan Petrovic"
   ogImage = "images/og-image.webp"
   ogTitle = "Vladan Petrovic - Senior Software Engineer"
   ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
+  locale = "en_US"
 
   # Twitter Meta Tags
   twitterCard = "summary_large_image"
