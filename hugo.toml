@@ -58,5 +58,5 @@ title = "Vladan Petrovic | Senior Software Engineer"
 [sitemap]
   filename = "sitemap.xml"
   priority = 1
-  changefreq = "monthly"
+  changefreq = "yearly"
   disable = false
