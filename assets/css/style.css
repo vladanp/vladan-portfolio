@@ -41,6 +41,7 @@ button:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh; /* Fallback for browsers that don't support svh */
   min-height: 100svh;
   gap: var(--space-6x);
 }
