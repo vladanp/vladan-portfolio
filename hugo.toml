@@ -60,3 +60,8 @@ title = "Vladan Petrovic | Senior Software Engineer"
   priority = 1.0
   changefreq = "yearly"
   disable = false
+
+[minify]
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepDocumentTags = true

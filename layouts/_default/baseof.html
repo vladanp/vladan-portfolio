@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Site.Title }}</title>
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
+
+    <!-- Minified CSS -->
+    {{ $styles := resources.Get "css/style.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" />
 
     <!-- Google Verification tag -->
     <meta
@@ -20,6 +23,7 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph Meta Tags -->
+    {{ $ogImage := resources.Get "images/og-image.webp" | fingerprint }}
     <meta
       property="og:title"
       content="{{ .Site.Params.ogTitle | default .Site.Title }}"
@@ -30,7 +34,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ .Permalink }}" />
-    <meta property="og:image" content="{{ .Site.Params.ogImage | relURL }}" />
+    <meta property="og:image" content="{{ $ogImage.Permalink }}" />
     <meta property="og:site_name" content="{{ .Site.Title }}" />
     <meta property="og:locale" content="{{ .Site.Params.locale | default "en_US"
     }}" />
@@ -41,21 +45,48 @@
     <link rel="canonical" href="{{ .Permalink }}" />
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ "images/favicon-16x16.png" | relURL }}"
-    sizes="16x16" type="image/png" /> <link rel="icon" href="{{
-    "images/favicon-32x32.png" | relURL }}" sizes="32x32" type="image/png" />
-    <link rel="icon" href="{{ "images/favicon.ico" | relURL }}"
-    type="image/x-icon" />
+    {{ $favicon16 := resources.Get "images/favicon-16x16.png" | fingerprint }}
+    <link
+      rel="icon"
+      href="{{ $favicon16.Permalink }}"
+      sizes="16x16"
+      type="image/png"
+    />
+
+    {{ $favicon32 := resources.Get "images/favicon-32x32.png" | fingerprint }}
+    <link
+      rel="icon"
+      href="{{ $favicon32.Permalink }}"
+      sizes="32x32"
+      type="image/png"
+    />
+
+    {{ $favicon := resources.Get "images/favicon.ico" | fingerprint }}
+    <link rel="icon" href="{{ $favicon.Permalink }}" type="image/x-icon" />
 
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="{{ "images/apple-touch-icon.png" | relURL
-    }}" />
+    {{ $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint
+    }}
+    <link rel="apple-touch-icon" href="{{ $appleIcon.Permalink }}" />
 
     <!-- Android Chrome Icons -->
-    <link rel="icon" href="{{ "images/android-chrome-192x192.png" | relURL }}"
-    sizes="192x192" type="image/png" /> <link rel="icon" href="{{
-    "images/android-chrome-512x512.png" | relURL }}" sizes="512x512"
-    type="image/png" />
+    {{ $androidIcon192 := resources.Get "images/android-chrome-192x192.png" |
+    fingerprint }}
+    <link
+      rel="icon"
+      href="{{ $androidIcon192.Permalink }}"
+      sizes="192x192"
+      type="image/png"
+    />
+
+    {{ $androidIcon512 := resources.Get "images/android-chrome-512x512.png" |
+    fingerprint }}
+    <link
+      rel="icon"
+      href="{{ $androidIcon512.Permalink }}"
+      sizes="512x512"
+      type="image/png"
+    />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -94,14 +125,14 @@
               rel="noopener noreferrer"
               aria-label="Visit my {{ .name }} profile"
             >
-              <img
-                srcset="images/{{ .image | relURL }}-200.png 200w,
-                        images/{{ .image | relURL }}-400.png 400w,
-                        images/{{ .image | relURL }}-800.png 800w"
-                sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
-                src="images/{{ .image | relURL }}-400.png"
-                alt="{{ .name }} logo"
-              />
+              {{ $image := resources.Get (print "images/" .image "-400.png") |
+              fingerprint }} <img srcset="{{ (resources.Get (print "images/"
+              .image "-200.png") | fingerprint).Permalink }} 200w, {{
+              (resources.Get (print "images/" .image "-400.png") |
+              fingerprint).Permalink }} 400w, {{ (resources.Get (print "images/"
+              .image "-800.png") | fingerprint).Permalink }} 800w"
+              sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+              src="{{ $image.Permalink }}" alt="{{ .name }} logo" />
             </a>
           </li>
           {{ end }}
@@ -122,14 +153,14 @@
               class="skills-container__link"
               aria-label="Learn more about {{ .name }}"
             >
-              <img
-                srcset="images/{{ .image | relURL }}-200.png 200w,
-                        images/{{ .image | relURL }}-400.png 400w,
-                        images/{{ .image | relURL }}-800.png 800w"
-                sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
-                src="images/{{ .image | relURL }}-400.png"
-                alt="{{ .name }} logo"
-              />
+              {{ $skillImage := resources.Get (print "images/" .image
+              "-400.png") | fingerprint }} <img srcset="{{ (resources.Get (print
+              "images/" .image "-200.png") | fingerprint).Permalink }} 200w, {{
+              (resources.Get (print "images/" .image "-400.png") |
+              fingerprint).Permalink }} 400w, {{ (resources.Get (print "images/"
+              .image "-800.png") | fingerprint).Permalink }} 800w"
+              sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+              src="{{ $skillImage.Permalink }}" alt="{{ .name }} logo" />
               <p>{{ .name }}</p>
             </a>
           </div>
