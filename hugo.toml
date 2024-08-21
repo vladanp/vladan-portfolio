@@ -2,66 +2,73 @@ baseURL = "https://vladan.dev/"
 title = "Vladan Petrovic | Senior Software Engineer"
 
 [params]
-  description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
-  author = "Vladan Petrovic"
-  keywords = ["Vladan Petrovic", "Senior Software Engineer", "JavaScript", "React", "Angular", "Web Development", "Portfolio", "Software Engineer", "Frontend Developer", "Senior Frontend Developer", "Web Developer"]
+author = "Vladan Petrovic"
+description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
+keywords = [
+  "Vladan Petrovic",
+  "Senior Software Engineer",
+  "JavaScript",
+  "React",
+  "Angular",
+  "Web Development",
+  "Portfolio",
+  "Software Engineer",
+  "Senior Frontend Developer",
+  "Web Developer",
+  "Senior Fullstack Developer",
+  "Senior Fullstack Engineer",
+]
 
-  # Open Graph (OG) Meta Tags for social media sharing
-  ogImage = "images/og-image.webp"
-  ogTitle = "Vladan Petrovic - Senior Software Engineer"
-  ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
-  locale = "en_US"
+# Open Graph (OG) Meta Tags for social media sharing
+locale = "en_US"
+ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
+ogTitle = "Vladan Petrovic - Senior Software Engineer"
 
-  name = "Vladan Petrović"
-  jobTitle = "Senior Software Engineer"
+jobTitle = "Senior Software Engineer"
+name = "Vladan Petrović"
 
-  # Section Titles
-  connectTitle = "Connect with me"
-  skillsTitle = "My Skills"
+# Section Titles
+connectTitle = "Connect with me"
+skillsTitle = "My Skills"
 
-  # Social Links
-  [[params.socialLinks]]
-    name = "LinkedIn"
-    url = "https://www.linkedin.com/in/vladanpet"
-    image = "linkedin-logo"
+# Social Links
+[[params.socialLinks]]
+image = "linkedin-logo"
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/vladanpet"
 
-  [[params.socialLinks]]
-    name = "GitHub"
-    url = "https://github.com/vladanp"
-    image = "github-logo"
+[[params.socialLinks]]
+image = "github-logo"
+name = "GitHub"
+url = "https://github.com/vladanp"
 
-  # Skills
-  [[params.skills]]
-    name = "JavaScript"
-    image = "javascript-logo"
-    url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+# Skills
+[[params.skills]]
+image = "javascript-logo"
+name = "JavaScript"
+url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
-  [[params.skills]]
-    name = "TypeScript"
-    image = "typescript-logo"
-    url = "https://www.typescriptlang.org/"
+[[params.skills]]
+image = "typescript-logo"
+name = "TypeScript"
+url = "https://www.typescriptlang.org/"
 
-  [[params.skills]]
-    name = "React"
-    image = "react-logo"
-    url = "https://reactjs.org/"
+[[params.skills]]
+image = "react-logo"
+name = "React"
+url = "https://reactjs.org/"
 
-  [[params.skills]]
-    name = "Angular"
-    image = "angular-logo"
-    url = "https://angular.io/"
+[[params.skills]]
+image = "angular-logo"
+name = "Angular"
+url = "https://angular.io/"
 
 [taxonomies]
-  tag = ""
-  category = ""
+category = ""
+tag = ""
 
 [sitemap]
-  filename = "sitemap.xml"
-  priority = 1.0
-  changefreq = "yearly"
-  disable = false
-
-[minify]
-  [minify.tdewolff]
-    [minify.tdewolff.html]
-      keepDocumentTags = true
+changefreq = "yearly"
+disable = false
+filename = "sitemap.xml"
+priority = 1.0
