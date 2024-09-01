@@ -2,9 +2,14 @@
 
 [![Deploy Hugo Site](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
 
+[![Security Analysis](https://github.com/vladanp/vladan-portfolio/actions/workflows/security.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/security.yml)
+
+[![SEO Audit](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml)
+
 This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using [Hugo](https://gohugo.io/), a fast and flexible static site generator.
 
 ## Table of Contents
+
 [Project Structure](#project-structure)
 
 [How to Run the Project Locally](#how-to-run-the-project-locally)
@@ -44,12 +49,14 @@ To run the Hugo site locally using Docker, follow these steps:
 1. Download and install Docker Desktop from the official Docker website.
 
 2. Clone the repository:
+
    ```bash
    git clone https://github.com/vladanp/vladan-portfolio.git
    cd vladan-portfolio
    ```
 
 3. Start the Hugo server using Docker:
+
    ```bash
    docker compose up --build
    ```
@@ -63,6 +70,7 @@ The site is automatically deployed to GitHub Pages whenever changes are pushed t
 1. Ensure the main branch is up to date with your latest changes.
 
 2. Push your changes to the main branch:
+
    ```bash
    git push origin main
    ```
