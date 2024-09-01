@@ -10,14 +10,17 @@
         class="skills-container__link"
         aria-label="Learn more about {{ .name }}"
       >
-        {{ $skillImage := resources.Get (print "images/" .image "-400.png") |
-        fingerprint }} <img srcset="{{ (resources.Get (print "images/" .image
-        "-200.png") | fingerprint).Permalink }} 200w, {{ (resources.Get (print
-        "images/" .image "-400.png") | fingerprint).Permalink }} 400w, {{
-        (resources.Get (print "images/" .image "-800.png") |
-        fingerprint).Permalink }} 800w" sizes="(max-width: 600px) 200px,
-        (max-width: 1200px) 400px, 800px" src="{{ $skillImage.Permalink }}"
-        alt="{{ .name }} logo" />
+        {{ $skillImage200 := resources.Get .image200 | fingerprint }} {{
+        $skillImage400 := resources.Get .image400 | fingerprint }} {{
+        $skillImage800 := resources.Get .image800 | fingerprint }}
+        <img
+          srcset="{{ $skillImage200.Permalink }} 200w, 
+                     {{ $skillImage400.Permalink }} 400w, 
+                     {{ $skillImage800.Permalink }} 800w"
+          sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+          src="{{ $skillImage400.Permalink }}"
+          alt="{{ .name }} logo"
+        />
         <p>{{ .name }}</p>
       </a>
     </div>

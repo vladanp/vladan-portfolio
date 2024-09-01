@@ -29,32 +29,44 @@ skillsTitle = "My Skills"
 
 # Skills
 [[skills]]
-image = "javascript-logo"
+image200 = "images/javascript-logo-200.png"
+image400 = "images/javascript-logo-400.png"
+image800 = "images/javascript-logo-800.png"
 name = "JavaScript"
 url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
 [[skills]]
-image = "typescript-logo"
+image200 = "images/typescript-logo-200.png"
+image400 = "images/typescript-logo-400.png"
+image800 = "images/typescript-logo-800.png"
 name = "TypeScript"
 url = "https://www.typescriptlang.org/"
 
 [[skills]]
-image = "react-logo"
+image200 = "images/react-logo-200.png"
+image400 = "images/react-logo-400.png"
+image800 = "images/react-logo-800.png"
 name = "React"
 url = "https://reactjs.org/"
 
 [[skills]]
-image = "angular-logo"
+image200 = "images/angular-logo-200.png"
+image400 = "images/angular-logo-400.png"
+image800 = "images/angular-logo-800.png"
 name = "Angular"
 url = "https://angular.io/"
 
 # Social Links
 [[socialLinks]]
-image = "linkedin-logo"
+image200 = "images/linkedin-logo-200.png"
+image400 = "images/linkedin-logo-400.png"
+image800 = "images/linkedin-logo-800.png"
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/vladanpet"
 
 [[socialLinks]]
-image = "github-logo"
+image200 = "images/github-logo-200.png"
+image400 = "images/github-logo-400.png"
+image800 = "images/github-logo-800.png"
 name = "GitHub"
 url = "https://github.com/vladanp"

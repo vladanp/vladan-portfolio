@@ -1,4 +1,4 @@
-changefreq = "yearly"
+changefreq = "monthly"
 disable = false
 filename = "sitemap.xml"
 priority = 1.0
