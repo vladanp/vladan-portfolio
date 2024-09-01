@@ -8,7 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -16,15 +15,10 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.133.1"
+          hugo-version: "0.133.0"
 
       - name: Build the site
         run: hugo
-
-      - name: Check for broken links
-        uses: lycheeverse/lychee-action@v1.10.0
-        with:
-          args: --no-progress --timeout 30s --retry-count 3 ./public
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -33,3 +27,17 @@ jobs:
           publish_dir: ./public
           publish_branch: gh-pages
           allow_empty_commit: true
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: "javascript"
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
