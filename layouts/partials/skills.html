@@ -1,0 +1,26 @@
+<section class="skills" aria-labelledby="skills-heading">
+  <h3 class="skills__heading" tabindex="0">{{ .Site.Params.skillsTitle }}</h3>
+  <div class="skills-container">
+    {{ range .Site.Params.skills }}
+    <div class="skills-container__skill">
+      <a
+        href="{{ .url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="skills-container__link"
+        aria-label="Learn more about {{ .name }}"
+      >
+        {{ $skillImage := resources.Get (print "images/" .image "-400.png") |
+        fingerprint }} <img srcset="{{ (resources.Get (print "images/" .image
+        "-200.png") | fingerprint).Permalink }} 200w, {{ (resources.Get (print
+        "images/" .image "-400.png") | fingerprint).Permalink }} 400w, {{
+        (resources.Get (print "images/" .image "-800.png") |
+        fingerprint).Permalink }} 800w" sizes="(max-width: 600px) 200px,
+        (max-width: 1200px) 400px, 800px" src="{{ $skillImage.Permalink }}"
+        alt="{{ .name }} logo" />
+        <p>{{ .name }}</p>
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</section>

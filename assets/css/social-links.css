@@ -1,0 +1,26 @@
+.social-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 var(--space);
+}
+
+.social-links__heading {
+  margin-bottom: var(--space-2x);
+}
+
+.social-links ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: var(--space-2x);
+}
+
+.social-links__link img {
+  width: var(--social-image-size);
+  height: var(--social-image-size);
+}

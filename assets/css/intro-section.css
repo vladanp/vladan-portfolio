@@ -1,0 +1,8 @@
+.intro-section {
+  text-align: center;
+}
+
+.intro-section__person-name,
+.intro-section__job-title {
+  margin: 0;
+}
