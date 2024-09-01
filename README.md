@@ -1,5 +1,7 @@
 # Vladan Petrovic Portfolio
 
+[![Deploy Hugo Site](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
+
 This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using [Hugo](https://gohugo.io/), a fast and flexible static site generator.
 
 ## Table of Contents
