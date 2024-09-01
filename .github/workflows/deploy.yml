@@ -59,6 +59,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Dependencies
+        run: sudo apt-get install -y libnss3 xvfb # Install necessary dependencies for Chrome
+
       - name: Run Lighthouse SEO Check
         uses: treosh/lighthouse-ci-action@v8
         with:
