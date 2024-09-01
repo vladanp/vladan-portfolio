@@ -33,7 +33,25 @@ jobs:
           allow_empty_commit: true
 
       - name: Bump version and push tag
+        id: tag_version
         uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
+
+      - name: Get commit messages
+        id: get_commit_messages
+        run: echo "commit_messages=$(git log --oneline $(git describe --tags --abbrev=0)..HEAD)" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: |
+            Changes in this release:
+            ${{ steps.get_commit_messages.outputs.commit_messages }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
