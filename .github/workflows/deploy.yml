@@ -41,7 +41,7 @@ jobs:
 
       - name: Get commit messages
         id: get_commit_messages
-        run: echo "commit_messages=$(git log --oneline $(git describe --tags --abbrev=0)..HEAD)" >> $GITHUB_ENV
+        run: echo "COMMIT_MESSAGES=$(git log --oneline $(git describe --tags --abbrev=0)..HEAD)" >> $GITHUB_ENV
         shell: bash
 
       - name: Create GitHub Release
@@ -51,7 +51,7 @@ jobs:
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: |
             Changes in this release:
-            ${{ env.commit_messages }}
+            ${{ env.COMMIT_MESSAGES }}
           draft: false
           prerelease: false
         env:
