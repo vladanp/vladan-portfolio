@@ -1,8 +1,7 @@
 {
   "ci": {
     "collect": {
-      "url": ["https://vladan.dev"],
-      "numberOfRuns": 1
+      "url": ["https://vladan.dev"]
     },
     "assert": {
       "assertions": {
