@@ -8,17 +8,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Adding permissions for versioning within the deploy job
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: "0" # Full history required for versioning
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.133.0"
+          hugo-version: "0.133.1"
 
       - name: Build the site
-        run: hugo
+        run: hugo --minify
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -27,6 +31,12 @@ jobs:
           publish_dir: ./public
           publish_branch: gh-pages
           allow_empty_commit: true
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false
 
   security:
     runs-on: ubuntu-latest
