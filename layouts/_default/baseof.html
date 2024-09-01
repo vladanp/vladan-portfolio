@@ -18,9 +18,7 @@
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="{{ .Site.Params.description }}" />
-    <meta name="keywords" content="{{ with .Site.Params.keywords }}{{ delimit .
-    ", " }}{{ else }}Vladan Petrovic, Senior Software Engineer, Web Development,
-    Portfolio{{ end }}" />
+    <meta name="keywords" content="{{ delimit .Site.Params.keywords ", " }}" />
     <meta name="author" content="{{ .Site.Params.author }}" />
     <meta name="robots" content="index, follow" />
 

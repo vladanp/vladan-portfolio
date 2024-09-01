@@ -1,7 +1,3 @@
-baseURL = "https://vladan.dev/"
-title = "Vladan Petrovic | Senior Software Engineer"
-
-[params]
 author = "Vladan Petrovic"
 description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
 keywords = [
@@ -31,44 +27,34 @@ name = "Vladan Petrović"
 connectTitle = "Connect with me"
 skillsTitle = "My Skills"
 
-# Social Links
-[[params.socialLinks]]
-image = "linkedin-logo"
-name = "LinkedIn"
-url = "https://www.linkedin.com/in/vladanpet"
-
-[[params.socialLinks]]
-image = "github-logo"
-name = "GitHub"
-url = "https://github.com/vladanp"
-
 # Skills
-[[params.skills]]
+[[skills]]
 image = "javascript-logo"
 name = "JavaScript"
 url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
-[[params.skills]]
+[[skills]]
 image = "typescript-logo"
 name = "TypeScript"
 url = "https://www.typescriptlang.org/"
 
-[[params.skills]]
+[[skills]]
 image = "react-logo"
 name = "React"
 url = "https://reactjs.org/"
 
-[[params.skills]]
+[[skills]]
 image = "angular-logo"
 name = "Angular"
 url = "https://angular.io/"
 
-[taxonomies]
-category = ""
-tag = ""
+# Social Links
+[[socialLinks]]
+image = "linkedin-logo"
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/vladanpet"
 
-[sitemap]
-changefreq = "yearly"
-disable = false
-filename = "sitemap.xml"
-priority = 1.0
+[[socialLinks]]
+image = "github-logo"
+name = "GitHub"
+url = "https://github.com/vladanp"
