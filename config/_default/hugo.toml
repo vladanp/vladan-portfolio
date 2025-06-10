@@ -1,2 +1,13 @@
 baseURL = "https://vladan.dev/"
 title = "Vladan Petrovic | Senior Software Engineer"
+languageCode = "en-us"
+enableRobotsTXT = true
+
+# Enable 404 page generation
+disableKinds = []
+
+# Custom 404 page
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,81 @@
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 50vh;
+  padding: 0 var(--space-2x);
+}
+
+.error-page__content {
+  max-width: 600px;
+  width: 100%;
+}
+
+.error-page__code {
+  font-size: 8rem;
+  font-weight: bold;
+  margin: 0 0 var(--space-2x) 0;
+  line-height: 1;
+  color: var(--font-color);
+  opacity: 0.8;
+}
+
+.error-page__title {
+  font-size: 2rem;
+  margin: 0 0 var(--space-3x) 0;
+  color: var(--font-color);
+}
+
+.error-page__message {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 var(--space-4x) 0;
+  color: var(--font-color);
+  opacity: 0.9;
+}
+
+.error-page__actions {
+  margin-top: var(--space-4x);
+}
+
+.error-page__home-link {
+  display: inline-block;
+  padding: var(--space-2x) var(--space-4x);
+  background-color: transparent;
+  color: var(--font-color);
+  text-decoration: none;
+  border: 2px solid var(--font-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.error-page__home-link:hover,
+.error-page__home-link:focus {
+  background-color: var(--font-color);
+  color: var(--background-color);
+  outline: var(--focus-outline);
+}
+
+@media (max-width: var(--mobile-breakpoint)) {
+  .error-page__code {
+    font-size: 6rem;
+  }
+
+  .error-page__title {
+    font-size: 1.5rem;
+  }
+
+  .error-page__message {
+    font-size: 1rem;
+  }
+
+  .error-page__home-link {
+    padding: var(--space-2x) var(--space-3x);
+    font-size: 0.9rem;
+  }
+}
