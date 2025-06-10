@@ -20,7 +20,13 @@
   gap: var(--space-2x);
 }
 
+.social-links__link {
+  display: inline-block;
+  outline-offset: 0;
+}
+
 .social-links__link img {
+  display: block;
   width: var(--social-image-size);
   height: var(--social-image-size);
 }

@@ -27,6 +27,8 @@
 .skills-container__link {
   color: inherit;
   text-decoration: none;
+  display: inline-block;
+  outline-offset: 0;
 }
 
 .skills-container__link:hover {
@@ -37,4 +39,5 @@
   width: var(--skill-image-size);
   height: var(--skill-image-size);
   object-fit: contain;
+  display: block;
 }
