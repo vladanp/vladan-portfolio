@@ -1,13 +1,18 @@
 baseURL = "https://vladan.dev/"
-title = "Vladan Petrovic | Senior Software Engineer"
-languageCode = "en-us"
+enableEmoji = true
+enableGitInfo = true
 enableRobotsTXT = true
+hasCJKLanguage = false
+languageCode = "en-us"
+rssLimit = 20
+title = "Vladan Petrovic | Senior Software Engineer"
 
-# Enable 404 page generation
-disableKinds = []
+[sitemap]
+changefreq = "monthly"
+filename = "sitemap.xml"
+priority = 0.5
 
-# Custom 404 page
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
