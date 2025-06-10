@@ -22,6 +22,9 @@
           sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
           src="{{ $image400.Permalink }}"
           alt="{{ .name }} logo"
+          onerror="this.style.display='none'"
+          loading="lazy"
+          decoding="async"
         />
       </a>
     </li>

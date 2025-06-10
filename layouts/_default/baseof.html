@@ -102,8 +102,11 @@
 
   <body>
     <main class="main-container">
-      {{ partial "intro-section.html" . }} {{ partial "social-links.html" . }}
-      {{ partial "skills.html" . }}
+      <header class="hero-section">{{ partial "intro-section.html" . }}</header>
+      <section class="contact-section">
+        {{ partial "social-links.html" . }}
+      </section>
+      <section class="expertise-section">{{ partial "skills.html" . }}</section>
     </main>
   </body>
 </html>

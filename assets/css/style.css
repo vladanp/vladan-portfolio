@@ -32,9 +32,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a:focus,
-button:focus {
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
   outline: var(--focus-outline);
+  outline-offset: 2px;
 }
 
 .main-container {
@@ -42,8 +44,8 @@ button:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Fallback for browsers that don't support svh */
   min-height: 100svh;
+  min-height: 100vh;
   gap: var(--space-6x);
 }
 

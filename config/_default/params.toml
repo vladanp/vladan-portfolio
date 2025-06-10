@@ -1,9 +1,10 @@
 author = "Vladan Petrovic"
-description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
+description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, Node.js, React, Angular, and modern web development."
 keywords = [
   "Vladan Petrovic",
   "Senior Software Engineer",
   "JavaScript",
+  "Node.js",
   "React",
   "Angular",
   "Web Development",
@@ -17,7 +18,7 @@ keywords = [
 
 # Open Graph (OG) Meta Tags for social media sharing
 locale = "en_US"
-ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, React, Angular, and modern web development."
+ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, Node.js, React, Angular, and modern web development."
 ogTitle = "Vladan Petrovic - Senior Software Engineer"
 
 jobTitle = "Senior Software Engineer"
@@ -55,6 +56,13 @@ image400 = "images/angular-logo-400.png"
 image800 = "images/angular-logo-800.png"
 name = "Angular"
 url = "https://angular.io/"
+
+[[skills]]
+image200 = "images/nodejs-logo-200.png"
+image400 = "images/nodejs-logo-400.png"
+image800 = "images/nodejs-logo-800.png"
+name = "Node.js"
+url = "https://nodejs.org/"
 
 # Social Links
 [[socialLinks]]
