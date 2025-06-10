@@ -25,6 +25,12 @@
   outline-offset: 0;
 }
 
+.social-links__link:focus-visible {
+  transform: scale(1.05);
+  outline: var(--focus-outline);
+  outline-offset: 4px;
+}
+
 .social-links__link img {
   display: block;
   width: var(--social-image-size);

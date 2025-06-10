@@ -35,6 +35,12 @@
   color: var(--font-color);
 }
 
+.skills-container__link:focus-visible {
+  transform: scale(1.05);
+  outline: var(--focus-outline);
+  outline-offset: 4px;
+}
+
 .skills-container__link img {
   width: var(--skill-image-size);
   height: var(--skill-image-size);
