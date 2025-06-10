@@ -11,18 +11,19 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Visit my {{ .name }} profile"
+        onkeydown="if(event.key==='Enter'||event.key===' '){this.click()}"
       >
         {{ $image200 := resources.Get .image200 | fingerprint }} {{ $image400 :=
         resources.Get .image400 | fingerprint }} {{ $image800 := resources.Get
         .image800 | fingerprint }}
         <img
           srcset="{{ $image200.Permalink }} 200w, 
-                     {{ $image400.Permalink }} 400w, 
-                     {{ $image800.Permalink }} 800w"
+         {{ $image400.Permalink }} 400w, 
+         {{ $image800.Permalink }} 800w"
           sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
           src="{{ $image400.Permalink }}"
           alt="{{ .name }} logo"
-          onerror="this.style.display='none'"
+          onerror="this.style.display='none'; this.parentElement.setAttribute('aria-hidden', 'true');"
           loading="lazy"
           decoding="async"
         />
