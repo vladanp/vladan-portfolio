@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ .Site.Title }}</title>
+    <title>
+      {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title
+      }}{{ end }}
+    </title>
 
     <!-- Dynamically Combine and Minify All CSS Files into a Single File -->
     {{ $cssFiles := resources.Match "css/*.css" }} {{ $combinedCSS := $cssFiles
@@ -17,20 +20,30 @@
     />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="{{ .Site.Params.description }}" />
-    <meta name="keywords" content="{{ delimit .Site.Params.keywords ", " }}" />
-    <meta name="author" content="{{ .Site.Params.author }}" />
+    <meta
+      name="description"
+      content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+    />
+    <meta name="keywords" content="{{ if .Params.keywords }}{{ delimit
+    .Params.keywords ", " }}{{ else }}{{ delimit .Site.Params.keywords ", " }}{{
+    end }}" />
+    <meta
+      name="author"
+      content="{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}"
+    />
     <meta name="robots" content="index, follow" />
+    <meta name="language" content="en" />
+    <meta name="copyright" content="{{ .Site.Params.author }}" />
 
     <!-- Open Graph Meta Tags -->
     {{ $ogImage := resources.Get "images/og-image.webp" | fingerprint }}
     <meta
       property="og:title"
-      content="{{ .Site.Params.ogTitle | default .Site.Title }}"
+      content="{{ if .IsHome }}{{ .Site.Params.ogTitle | default .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}"
     />
     <meta
       property="og:description"
-      content="{{ .Site.Params.ogDescription }}"
+      content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.ogDescription }}{{ end }}"
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ .Permalink }}" />
