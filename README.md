@@ -92,17 +92,17 @@ pnpm format:check   # check formatting (CI + pre-commit)
 
 ## Deployment
 
-The site is automatically deployed to GitHub Pages whenever changes are pushed to the main branch. The deployment process is managed via GitHub Actions, using the following workflow:
+The site is automatically deployed to GitHub Pages via GitHub Actions whenever changes are merged into the main branch.
 
-1. Ensure the main branch is up to date with your latest changes.
-
-2. Push your changes to the main branch:
+1. Push your changes to a feature branch:
 
    ```bash
-   git push origin main
+   git push origin <branch-name>
    ```
 
-3. GitHub Actions will automatically build and deploy the site to the gh-pages branch, which is configured to serve the site.
+2. Open a pull request against the main branch.
+
+3. Once merged, GitHub Actions will automatically build and deploy the site to the gh-pages branch, which is configured to serve the site.
 
 ## License
 
