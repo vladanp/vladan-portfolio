@@ -8,7 +8,7 @@ test("404 page loads correctly for nonexistent route", async ({ page }) => {
   await expect(page.locator(".error-page__title")).toBeVisible();
   await expect(page.locator(".error-page__home-link")).toHaveAttribute(
     "href",
-    "/"
+    "/",
   );
 });
 

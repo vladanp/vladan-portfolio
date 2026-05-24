@@ -24,7 +24,7 @@ This is the source code for the portfolio of Vladan Petrovic, a Senior Software 
 
 ## Project Structure
 
-- **config/_default/**: Hugo configuration files (hugo.toml, params.toml, sitemap.toml).
+- **config/\_default/**: Hugo configuration files (hugo.toml, params.toml, sitemap.toml).
 - **content/**: Markdown files for each page on the site.
 - **layouts/**: Custom HTML templates and partials for the site.
 - **assets/**: CSS and images processed by Hugo Pipes.
