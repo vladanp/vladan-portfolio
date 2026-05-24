@@ -1,5 +1,5 @@
 <section class="social-links" aria-labelledby="social-links-heading">
-  <h3 id="social-links-heading" class="social-links__heading" tabindex="0">
+  <h3 id="social-links-heading" class="social-links__heading">
     {{ .Site.Params.connectTitle }}
   </h3>
   <ul>
@@ -19,9 +19,12 @@
           srcset="{{ $image200.RelPermalink }} 200w, 
          {{ $image400.RelPermalink }} 400w, 
          {{ $image800.RelPermalink }} 800w"
-          sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
+          sizes="56px"
           src="{{ $image400.RelPermalink }}"
-          alt="{{ .name }} logo"
+          alt=""
+          width="56"
+          height="56"
+          loading="lazy"
         />
       </a>
     </li>

@@ -8,11 +8,6 @@ disableKinds = ["taxonomy", "term"]
 rssLimit = 20
 title = "Vladan Petrovic | Senior Software Engineer"
 
-[sitemap]
-changefreq = "monthly"
-filename = "sitemap.xml"
-priority = 0.5
-
 [markup]
 [markup.goldmark]
 [markup.goldmark.renderer]

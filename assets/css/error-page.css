@@ -37,7 +37,6 @@
 }
 
 .error-page__actions {
-  margin-top: var(--space-4x);
 }
 
 .error-page__home-link {
@@ -55,7 +54,7 @@
 }
 
 .error-page__home-link:hover,
-.error-page__home-link:focus {
+.error-page__home-link:focus-visible {
   background-color: var(--font-color);
   color: var(--background-color);
   outline: var(--focus-outline);

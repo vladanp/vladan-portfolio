@@ -25,12 +25,16 @@
       name="author"
       content="{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}"
     />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="en" />
-    <meta name="copyright" content="{{ .Site.Params.author }}" />
+    <meta name="robots" content="{{ if .Params.noindex }}noindex, nofollow{{ else }}index, follow{{ end }}" />
+
+    <!-- Twitter Card Meta Tags -->
+    {{ $ogImage := resources.Get "images/og-image.webp" | fingerprint }}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Params.ogTitle | default .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+    <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.ogDescription }}{{ end }}" />
+    <meta name="twitter:image" content="{{ $ogImage.Permalink }}" />
 
     <!-- Open Graph Meta Tags -->
-    {{ $ogImage := resources.Get "images/og-image.webp" | fingerprint }}
     <meta
       property="og:title"
       content="{{ if .IsHome }}{{ .Site.Params.ogTitle | default .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}"
@@ -99,10 +103,14 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "{{ .Site.Title }}",
-        "url": "{{ .Site.BaseURL }}",
-        "description": "{{ .Site.Params.description }}"
+        "@type": "Person",
+        "name": "{{ .Site.Params.author }}",
+        "jobTitle": "{{ .Site.Params.jobTitle }}",
+        "url": "{{ .Site.Home.Permalink }}",
+        "sameAs": [
+          {{ range $index, $link := .Site.Params.socialLinks }}{{ if $index }},{{ end }}"{{ $link.url }}"
+          {{ end }}
+        ]
       }
     </script>
   </head>
