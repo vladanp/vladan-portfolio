@@ -1,9 +1,7 @@
 # Vladan Petrovic Portfolio
 
-[![Deploy Hugo Site](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
-
-[![Security Analysis](https://github.com/vladanp/vladan-portfolio/actions/workflows/security.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/security.yml)
-
+[![Deploy](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
+[![E2E Tests](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml)
 [![SEO Audit](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml)
 
 This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using [Hugo](https://gohugo.io/), a fast and flexible static site generator.
@@ -16,6 +14,8 @@ This is the source code for the portfolio of Vladan Petrovic, a Senior Software 
 
 [How to Run the Project Locally with Docker](#how-to-run-the-project-locally-with-docker)
 
+[Running Tests](#running-tests)
+
 [Deployment](#deployment)
 
 [License](#license)
@@ -25,44 +25,57 @@ This is the source code for the portfolio of Vladan Petrovic, a Senior Software 
 - **config/_default/**: Hugo configuration files (hugo.toml, params.toml, sitemap.toml).
 - **content/**: Markdown files for each page on the site.
 - **layouts/**: Custom HTML templates and partials for the site.
-- **assets/**: CSS, JavaScript, and images processed by Hugo Pipes.
+- **assets/**: CSS and images processed by Hugo Pipes.
 - **static/**: Static files served as-is (CNAME, robots.txt).
 
 ## How to Run the Project Locally
 
-To run the Hugo site locally, you'll need to have <a href="https://gohugo.io/" target="_blank">Hugo</a> installed on your machine.
+This project uses [mise](https://mise.jdx.dev/) to manage tool versions. The `.mise.toml` file pins Hugo, Node.js, and pnpm.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/vladanp/vladan-portfolio.git
-   cd vladan-portfolio
-   ```
-2. Start the Hugo server:
-   ```bash
-   hugo server -D
-   ```
-3. Open your web browser and go to [http://localhost:1313](http://localhost:1313) to view the site.
+**Prerequisites:** Hugo 0.161.1, Node.js 24, pnpm 11
+
+```bash
+git clone https://github.com/vladanp/vladan-portfolio.git
+cd vladan-portfolio
+
+# If using mise:
+mise trust && mise install
+
+# Install test dependencies
+pnpm install
+
+# Start the Hugo dev server
+hugo server --baseURL http://localhost:1313 --disableFastRender --noHTTPCache
+```
+
+Open [http://localhost:1313](http://localhost:1313) to view the site.
 
 ## How to Run the Project Locally with Docker
 
-To run the Hugo site locally using Docker, follow these steps:
+No local toolchain required.
 
-1. Download and install Docker Desktop from the official Docker website.
+```bash
+git clone https://github.com/vladanp/vladan-portfolio.git
+cd vladan-portfolio
+docker compose up
+```
 
-2. Clone the repository:
+Open [http://localhost:1313](http://localhost:1313) to view the site.
 
-   ```bash
-   git clone https://github.com/vladanp/vladan-portfolio.git
-   cd vladan-portfolio
-   ```
+## Running Tests
 
-3. Start the Hugo server using Docker:
+End-to-end tests use [Playwright](https://playwright.dev/). The Hugo dev server starts and stops automatically.
 
-   ```bash
-   docker compose up --build
-   ```
+```bash
+pnpm install                     # first time only
+pnpm exec playwright install chromium  # first time only
 
-4. Open your web browser and go to [http://localhost:1313](http://localhost:1313) to view the site.
+pnpm test                        # run all tests
+pnpm test:headed                 # watch the browser
+pnpm test:ui                     # interactive UI mode
+```
+
+Tests run automatically on pull requests to `main` via GitHub Actions.
 
 ## Deployment
 
