@@ -55,6 +55,7 @@
 
     <!-- Canonical Link -->
     <link rel="canonical" href="{{ .Permalink }}" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#202124" />
 
     <!-- Favicon -->
@@ -75,12 +76,15 @@
     />
 
     {{ $favicon := resources.Get "images/favicon.ico" | fingerprint }}
-    <link rel="icon" href="{{ $favicon.RelPermalink }}" type="image/x-icon" />
+    <link rel="icon" href="{{ $favicon.RelPermalink }}" sizes="32x32" type="image/vnd.microsoft.icon" />
+
+    {{ $faviconSVG := resources.Get "images/favicon.svg" | fingerprint }}
+    <link rel="icon" href="{{ $faviconSVG.RelPermalink }}" type="image/svg+xml" />
 
     <!-- Apple Touch Icon -->
     {{ $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint
     }}
-    <link rel="apple-touch-icon" href="{{ $appleIcon.RelPermalink }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleIcon.RelPermalink }}" />
 
     <!-- Android Chrome Icons -->
     {{ $androidIcon192 := resources.Get "images/android-chrome-192x192.png" |

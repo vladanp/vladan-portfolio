@@ -16,15 +16,13 @@
         $skillImage400 := resources.Get .image400 | fingerprint }} {{
         $skillImage800 := resources.Get .image800 | fingerprint }}
         <img
-          srcset="{{ $skillImage200.RelPermalink }} 200w, 
-                     {{ $skillImage400.RelPermalink }} 400w, 
-                     {{ $skillImage800.RelPermalink }} 800w"
-          sizes="80px"
-          src="{{ $skillImage400.RelPermalink }}"
+          src="{{ $skillImage200.RelPermalink }}"
+          srcset="{{ $skillImage200.RelPermalink }} 1x,
+                  {{ $skillImage400.RelPermalink }} 2x,
+                  {{ $skillImage800.RelPermalink }} 3x"
           alt=""
           width="80"
           height="80"
-          loading="lazy"
         />
         <p>{{ .name }}</p>
       </a>
