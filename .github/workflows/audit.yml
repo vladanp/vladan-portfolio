@@ -2,7 +2,7 @@ name: SEO Audit
 
 on:
   workflow_run:
-    workflows: ["Deploy Hugo Site"]
+    workflows: ["Deploy Hugo Site and Create Release"]
     types:
       - completed
 
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Audit using Lighthouse
-        uses: treosh/lighthouse-ci-action@v12
+        uses: googlechrome/lighthouse-ci@v0.14.0
         with:
-          uploadArtifacts: true
+          urls: "https://vladan.dev"
           configPath: "./lighthouserc.json"

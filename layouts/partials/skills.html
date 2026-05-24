@@ -1,5 +1,5 @@
 <section class="skills" aria-labelledby="skills-heading">
-  <h3 id="skills-heading" class="skills__heading" tabindex="0">
+  <h3 id="skills-heading" class="skills__heading">
     {{ .Site.Params.skillsTitle }}
   </h3>
   <div class="skills-container">
@@ -16,12 +16,15 @@
         $skillImage400 := resources.Get .image400 | fingerprint }} {{
         $skillImage800 := resources.Get .image800 | fingerprint }}
         <img
-          srcset="{{ $skillImage200.Permalink }} 200w, 
-                     {{ $skillImage400.Permalink }} 400w, 
-                     {{ $skillImage800.Permalink }} 800w"
-          sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, 800px"
-          src="{{ $skillImage400.Permalink }}"
-          alt="{{ .name }} logo"
+          srcset="{{ $skillImage200.RelPermalink }} 200w, 
+                     {{ $skillImage400.RelPermalink }} 400w, 
+                     {{ $skillImage800.RelPermalink }} 800w"
+          sizes="80px"
+          src="{{ $skillImage400.RelPermalink }}"
+          alt=""
+          width="80"
+          height="80"
+          loading="lazy"
         />
         <p>{{ .name }}</p>
       </a>

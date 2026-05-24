@@ -3,14 +3,9 @@ enableEmoji = true
 enableGitInfo = true
 enableRobotsTXT = true
 hasCJKLanguage = false
-languageCode = "en-us"
-rssLimit = 20
+locale = "en-us"
+disableKinds = ["taxonomy", "term"]
 title = "Vladan Petrovic | Senior Software Engineer"
-
-[sitemap]
-changefreq = "monthly"
-filename = "sitemap.xml"
-priority = 0.5
 
 [markup]
 [markup.goldmark]
