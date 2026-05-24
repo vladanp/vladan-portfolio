@@ -18,7 +18,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "hugo server --port 1313 --baseURL http://localhost:1313 --disableFastRender",
+    command: "hugo server --port 1313 --baseURL http://localhost:1313 --disableFastRender --noHTTPCache",
     url: "http://localhost:1313",
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
