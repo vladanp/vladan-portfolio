@@ -90,12 +90,6 @@ pnpm format         # format all files
 pnpm format:check   # check formatting (CI + pre-commit)
 ```
 
-Versions are pinned by default. Run this once per machine:
-
-```bash
-pnpm config set save-exact true
-```
-
 ## Deployment
 
 The site is automatically deployed to GitHub Pages whenever changes are pushed to the main branch. The deployment process is managed via GitHub Actions, using the following workflow:
