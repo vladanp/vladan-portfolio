@@ -29,7 +29,7 @@ export default defineConfig({
     command:
       "hugo server --port 1313 --baseURL http://localhost:1313 --disableFastRender --noHTTPCache",
     url: "http://localhost:1313",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
     timeout: 120000,
   },
   outputDir: "./e2e-results",

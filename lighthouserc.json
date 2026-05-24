@@ -1,8 +1,8 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:1313"],
-      "startServerCommand": "pnpm exec hugo server --port 1313 --baseURL http://localhost:1313 --disableFastRender --noHTTPCache",
+      "url": ["http://localhost:1314"],
+      "startServerCommand": "hugo --minify --environment production && python3 -m http.server 1314 -d public",
       "settings": {
         "chromeFlags": "--no-sandbox --disable-gpu --headless"
       }

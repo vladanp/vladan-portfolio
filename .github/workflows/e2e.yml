@@ -1,4 +1,4 @@
-name: E2E Tests
+name: Code Quality
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  e2e:
+  checks:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions: {}
