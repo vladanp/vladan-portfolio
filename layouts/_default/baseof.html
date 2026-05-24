@@ -15,12 +15,13 @@
       {{ end }}
     </title>
 
-    <!-- Dynamically Combine and Minify All CSS Files into a Single File -->
+    <!-- Inline all CSS to eliminate render-blocking requests -->
     {{ $cssFiles := resources.Match "css/*.css" }}
     {{ $combinedCSS := $cssFiles
-      | resources.Concat "css/combined.css" | minify | fingerprint
+      | resources.Concat "css/combined.css" | minify
     }}
-    <link rel="stylesheet" href="{{ $combinedCSS.RelPermalink }}" />
+    <style>
+      {{ $combinedCSS.Content | safeCSS }}</style>
 
     <!-- SEO Meta Tags -->
     <meta

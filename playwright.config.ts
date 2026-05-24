@@ -8,7 +8,7 @@ export default defineConfig({
     timeout: 10000,
   },
   retries: process.env.CI ? 2 : 0,
-  workers: 1,
+  workers: process.env.CI ? 2 : 1,
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
     baseURL: "http://localhost:1313",
