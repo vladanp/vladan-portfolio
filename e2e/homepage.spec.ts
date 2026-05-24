@@ -23,9 +23,12 @@ test.describe("homepage", () => {
 
     for (let i = 0; i < count; i++) {
       const link = links.nth(i);
+      const href = await link.getAttribute("href");
+      if (href?.startsWith("mailto:")) {
+        continue;
+      }
       await expect(link).toHaveAttribute("target", "_blank");
       await expect(link).toHaveAttribute("rel", "noopener noreferrer");
-      const href = await link.getAttribute("href");
       expect(href).toMatch(/^https?:\/\//);
     }
   });
