@@ -10,9 +10,9 @@ jobs:
   seo_audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Audit using Lighthouse
-        uses: googlechrome/lighthouse-ci@v0.14.0
+        uses: googlechrome/lighthouse-ci@v0.15.1
         with:
           urls: "https://vladan.dev"
           configPath: "./lighthouserc.json"
