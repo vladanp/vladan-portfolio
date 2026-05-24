@@ -75,9 +75,6 @@
       type="image/png"
     />
 
-    {{ $favicon := resources.Get "images/favicon.ico" | fingerprint }}
-    <link rel="icon" href="{{ $favicon.RelPermalink }}" sizes="32x32" type="image/vnd.microsoft.icon" />
-
     {{ $faviconSVG := resources.Get "images/favicon.svg" | fingerprint }}
     <link rel="icon" href="{{ $faviconSVG.RelPermalink }}" type="image/svg+xml" />
 

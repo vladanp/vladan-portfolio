@@ -1,7 +1,9 @@
 # Vladan Petrovic Portfolio
 
 [![Deploy](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
+
 [![E2E Tests](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml)
+
 [![SEO Audit](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml)
 
 This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using [Hugo](https://gohugo.io/), a fast and flexible static site generator.

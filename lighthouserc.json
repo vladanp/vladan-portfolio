@@ -1,7 +1,10 @@
 {
   "ci": {
     "collect": {
-      "url": ["https://vladan.dev"]
+      "url": ["https://vladan.dev"],
+      "settings": {
+        "chromeFlags": "--no-sandbox --disable-gpu --headless"
+      }
     },
     "assert": {
       "assertions": {
