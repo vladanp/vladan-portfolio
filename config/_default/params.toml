@@ -32,51 +32,51 @@ skillsTitle = "My Skills"
 
 # Skills
 [[skills]]
-image200 = "images/javascript-logo-200.png"
-image400 = "images/javascript-logo-400.png"
-image800 = "images/javascript-logo-800.png"
+image200 = "images/javascript-logo-200.webp"
+image400 = "images/javascript-logo-400.webp"
+image800 = "images/javascript-logo-800.webp"
 name = "JavaScript"
 url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
 [[skills]]
-image200 = "images/typescript-logo-200.png"
-image400 = "images/typescript-logo-400.png"
-image800 = "images/typescript-logo-800.png"
+image200 = "images/typescript-logo-200.webp"
+image400 = "images/typescript-logo-400.webp"
+image800 = "images/typescript-logo-800.webp"
 name = "TypeScript"
 url = "https://www.typescriptlang.org/"
 
 [[skills]]
-image200 = "images/react-logo-200.png"
-image400 = "images/react-logo-400.png"
-image800 = "images/react-logo-800.png"
+image200 = "images/react-logo-200.webp"
+image400 = "images/react-logo-400.webp"
+image800 = "images/react-logo-800.webp"
 name = "React"
 url = "https://reactjs.org/"
 
 [[skills]]
-image200 = "images/angular-logo-200.png"
-image400 = "images/angular-logo-400.png"
-image800 = "images/angular-logo-800.png"
+image200 = "images/angular-logo-200.webp"
+image400 = "images/angular-logo-400.webp"
+image800 = "images/angular-logo-800.webp"
 name = "Angular"
 url = "https://angular.io/"
 
 [[skills]]
-image200 = "images/nodejs-logo-200.png"
-image400 = "images/nodejs-logo-400.png"
-image800 = "images/nodejs-logo-800.png"
+image200 = "images/nodejs-logo-200.webp"
+image400 = "images/nodejs-logo-400.webp"
+image800 = "images/nodejs-logo-800.webp"
 name = "Node.js"
 url = "https://nodejs.org/"
 
 # Social Links
 [[socialLinks]]
-image200 = "images/linkedin-logo-200.png"
-image400 = "images/linkedin-logo-400.png"
-image800 = "images/linkedin-logo-800.png"
+image200 = "images/linkedin-logo-200.webp"
+image400 = "images/linkedin-logo-400.webp"
+image800 = "images/linkedin-logo-800.webp"
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/vladanpet"
 
 [[socialLinks]]
-image200 = "images/github-logo-200.png"
-image400 = "images/github-logo-400.png"
-image800 = "images/github-logo-800.png"
+image200 = "images/github-logo-200.webp"
+image400 = "images/github-logo-400.webp"
+image800 = "images/github-logo-800.webp"
 name = "GitHub"
 url = "https://github.com/vladanp"
