@@ -20,6 +20,10 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
   font-family:
     system-ui,
     -apple-system,
@@ -47,8 +51,7 @@ button:focus-visible,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100svh;
-  min-height: 100vh;
+  flex: 1;
   gap: var(--space-6x);
 }
 

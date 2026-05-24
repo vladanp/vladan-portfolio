@@ -129,7 +129,11 @@
 
     <!-- Canonical Link -->
     <link rel="canonical" href="{{ .Permalink }}" />
-    <link rel="manifest" href="/manifest.json" />
+    {{ $manifestData := readFile "static/manifest.json" | base64Encode }}
+    <link
+      rel="manifest"
+      href="{{ print "data:application/manifest+json;base64," $manifestData | safeURL }}"
+    />
     <meta name="theme-color" content="#202124" />
 
     <!-- Favicon -->
@@ -205,5 +209,6 @@
 
   <body>
     {{ block "main" . }}{{ end }}
+    {{ partial "footer.html" . }}
   </body>
 </html>

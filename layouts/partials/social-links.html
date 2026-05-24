@@ -38,5 +38,29 @@
         </a>
       </li>
     {{ end }}
+    <li>
+      <a
+        href="mailto:{{ .Site.Params.email }}"
+        class="social-links__link"
+        aria-label="Send me an email"
+        title="{{ .Site.Params.email }}"
+      >
+        {{ $email200 := resources.Get "images/email-logo-200.webp" | fingerprint }}
+        {{ $email400 := resources.Get "images/email-logo-400.webp" | fingerprint }}
+        {{ $email800 := resources.Get "images/email-logo-800.webp" | fingerprint }}
+        <img
+          src="{{ $email200.RelPermalink }}"
+          srcset="
+            {{ $email200.RelPermalink }} 1x,
+            {{ $email400.RelPermalink }} 2x,
+            {{ $email800.RelPermalink }} 3x
+          "
+          alt=""
+          width="56"
+          height="56"
+          loading="lazy"
+        />
+      </a>
+    </li>
   </ul>
 </section>

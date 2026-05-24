@@ -1,0 +1,13 @@
+.site-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-3x) 0;
+  font-size: 0.875rem;
+  color: var(--font-color);
+  opacity: 0.7;
+}
+
+.site-footer__copyright {
+  margin: 0;
+}
