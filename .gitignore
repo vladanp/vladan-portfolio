@@ -23,3 +23,8 @@ Thumbs.db
 
 # Hugo temp directories
 /cache/
+
+# Playwright
+/e2e-results/
+/playwright-report/
+/playwright/.cache/
