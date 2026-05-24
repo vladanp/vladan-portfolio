@@ -16,15 +16,13 @@
         resources.Get .image400 | fingerprint }} {{ $image800 := resources.Get
         .image800 | fingerprint }}
         <img
-          srcset="{{ $image200.RelPermalink }} 200w, 
-         {{ $image400.RelPermalink }} 400w, 
-         {{ $image800.RelPermalink }} 800w"
-          sizes="56px"
-          src="{{ $image400.RelPermalink }}"
+          src="{{ $image200.RelPermalink }}"
+          srcset="{{ $image200.RelPermalink }} 1x,
+                  {{ $image400.RelPermalink }} 2x,
+                  {{ $image800.RelPermalink }} 3x"
           alt=""
           width="56"
           height="56"
-          loading="lazy"
         />
       </a>
     </li>
