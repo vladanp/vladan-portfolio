@@ -1,3 +1,9 @@
 {{ define "main" }}
-<div class="content">{{ .Content }}</div>
+<main class="main-container">
+  <section>{{ partial "intro-section.html" . }}</section>
+  <section class="contact-section">
+    {{ partial "social-links.html" . }}
+  </section>
+  <section class="expertise-section">{{ partial "skills.html" . }}</section>
+</main>
 {{ end }}

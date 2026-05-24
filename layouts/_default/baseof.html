@@ -11,7 +11,7 @@
     <!-- Dynamically Combine and Minify All CSS Files into a Single File -->
     {{ $cssFiles := resources.Match "css/*.css" }} {{ $combinedCSS := $cssFiles
     | resources.Concat "css/combined.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $combinedCSS.Permalink }}" />
+    <link rel="stylesheet" href="{{ $combinedCSS.RelPermalink }}" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -55,7 +55,7 @@
     {{ $favicon16 := resources.Get "images/favicon-16x16.png" | fingerprint }}
     <link
       rel="icon"
-      href="{{ $favicon16.Permalink }}"
+      href="{{ $favicon16.RelPermalink }}"
       sizes="16x16"
       type="image/png"
     />
@@ -63,25 +63,25 @@
     {{ $favicon32 := resources.Get "images/favicon-32x32.png" | fingerprint }}
     <link
       rel="icon"
-      href="{{ $favicon32.Permalink }}"
+      href="{{ $favicon32.RelPermalink }}"
       sizes="32x32"
       type="image/png"
     />
 
     {{ $favicon := resources.Get "images/favicon.ico" | fingerprint }}
-    <link rel="icon" href="{{ $favicon.Permalink }}" type="image/x-icon" />
+    <link rel="icon" href="{{ $favicon.RelPermalink }}" type="image/x-icon" />
 
     <!-- Apple Touch Icon -->
     {{ $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint
     }}
-    <link rel="apple-touch-icon" href="{{ $appleIcon.Permalink }}" />
+    <link rel="apple-touch-icon" href="{{ $appleIcon.RelPermalink }}" />
 
     <!-- Android Chrome Icons -->
     {{ $androidIcon192 := resources.Get "images/android-chrome-192x192.png" |
     fingerprint }}
     <link
       rel="icon"
-      href="{{ $androidIcon192.Permalink }}"
+      href="{{ $androidIcon192.RelPermalink }}"
       sizes="192x192"
       type="image/png"
     />
@@ -90,7 +90,7 @@
     fingerprint }}
     <link
       rel="icon"
-      href="{{ $androidIcon512.Permalink }}"
+      href="{{ $androidIcon512.RelPermalink }}"
       sizes="512x512"
       type="image/png"
     />
@@ -108,12 +108,8 @@
   </head>
 
   <body>
-    <main class="main-container">
-      <section>{{ partial "intro-section.html" . }}</section>
-      <section class="contact-section">
-        {{ partial "social-links.html" . }}
-      </section>
-      <section class="expertise-section">{{ partial "skills.html" . }}</section>
-    </main>
+    {{ block "main" . }}{{ end }}
+    {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
+    <script src="{{ $js.RelPermalink }}" defer></script>
   </body>
 </html>

@@ -3,7 +3,8 @@ enableEmoji = true
 enableGitInfo = true
 enableRobotsTXT = true
 hasCJKLanguage = false
-languageCode = "en-us"
+locale = "en-us"
+disableKinds = ["taxonomy", "term"]
 rssLimit = 20
 title = "Vladan Petrovic | Senior Software Engineer"
 
