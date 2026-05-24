@@ -1,4 +1,4 @@
-name: E2E Tests
+name: Code Quality
 
 on:
   pull_request:
@@ -10,9 +10,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  e2e:
+  checks:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
+    permissions: {}
 
     steps:
       - name: Checkout repository
@@ -44,7 +45,7 @@ jobs:
       - name: Run Playwright tests
         run: pnpm test
 
-      - name: Upload test report on failure
+      - name: Upload Playwright report on failure
         if: failure()
         uses: actions/upload-artifact@v7
         with:
@@ -52,4 +53,15 @@ jobs:
           path: |
             playwright-report/
             e2e-results/
+          retention-days: 7
+
+      - name: Run Lighthouse CI
+        run: pnpm lhci
+
+      - name: Upload Lighthouse report on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-report
+          path: .lighthouseci/
           retention-days: 7

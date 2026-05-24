@@ -3,7 +3,7 @@
     {{ .Site.Params.connectTitle }}
   </h3>
   <ul>
-    {{ range .Site.Params.socialLinks }}
+    {{ range $index, $link := .Site.Params.socialLinks }}
       <li>
         <a
           href="{{ .url }}"
@@ -29,6 +29,11 @@
             alt=""
             width="56"
             height="56"
+            fetchpriority="{{ if eq $index 0 }}
+              high
+            {{ else }}
+              auto
+            {{ end }}"
           />
         </a>
       </li>
