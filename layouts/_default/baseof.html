@@ -1,57 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      {{ if .IsHome }}{{ .Site.Title }}{{ else if eq .Kind "404" }}Page Not Found | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title
-      }}{{ end }}
+      {{ if .IsHome }}
+        {{ .Site.Title }}
+      {{ else if eq .Kind "404" }}
+        Page Not Found |
+        {{ .Site.Title }}
+      {{ else }}
+        {{ .Title }} |
+        {{ .Site.Title }}
+      {{ end }}
     </title>
 
     <!-- Dynamically Combine and Minify All CSS Files into a Single File -->
-    {{ $cssFiles := resources.Match "css/*.css" }} {{ $combinedCSS := $cssFiles
-    | resources.Concat "css/combined.css" | minify | fingerprint }}
+    {{ $cssFiles := resources.Match "css/*.css" }}
+    {{ $combinedCSS := $cssFiles
+      | resources.Concat "css/combined.css" | minify | fingerprint
+    }}
     <link rel="stylesheet" href="{{ $combinedCSS.RelPermalink }}" />
 
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="{{ if .Description }}{{ .Description }}{{ else if eq .Kind "404" }}The page you are looking for does not exist.{{ else }}{{ .Site.Params.description }}{{ end }}"
+      content="{{ if .Description }}
+        {{ .Description }}
+      {{ else if eq .Kind "404" }}
+        The page you are looking for does not exist.
+      {{ else }}
+        {{ .Site.Params.description }}
+      {{ end }}"
     />
-    <meta name="keywords" content="{{ if .Params.keywords }}{{ delimit
-    .Params.keywords ", " }}{{ else }}{{ delimit .Site.Params.keywords ", " }}{{
-    end }}" />
+    <meta
+      name="keywords"
+      content="{{ if .Params.keywords }}
+        {{ delimit
+          .Params.keywords ", "
+        }}
+      {{ else }}
+        {{ delimit .Site.Params.keywords ", " }}
+      {{ end }}"
+    />
     <meta
       name="author"
-      content="{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}"
+      content="{{ if .Params.author }}
+        {{ .Params.author }}
+      {{ else }}
+        {{ .Site.Params.author }}
+      {{ end }}"
     />
-    <meta name="robots" content="{{ if or (.Params.noindex) (eq .Kind "404") }}noindex, nofollow{{ else }}index, follow{{ end }}" />
+    <meta
+      name="robots"
+      content="{{ if or (.Params.noindex) (eq .Kind "404") }}
+        noindex, nofollow
+      {{ else }}
+        index, follow
+      {{ end }}
+      "
+    />
 
     <!-- Twitter Card Meta Tags -->
     {{ $ogImage := resources.Get "images/og-image.webp" | fingerprint }}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Params.ogTitle | default .Site.Title }}{{ else if eq .Kind "404" }}Page Not Found | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
-    <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else if eq .Kind "404" }}The page you are looking for does not exist.{{ else }}{{ .Site.Params.ogDescription }}{{ end }}" />
+    <meta
+      name="twitter:title"
+      content="{{ if .IsHome }}
+        {{ .Site.Params.ogTitle | default .Site.Title }}
+      {{ else if eq .Kind "404" }}
+        Page Not Found |
+        {{ .Site.Title }}
+      {{ else }}
+        {{ .Title }} |
+        {{ .Site.Title }}
+      {{ end }}"
+    />
+    <meta
+      name="twitter:description"
+      content="{{ if .Description }}
+        {{ .Description }}
+      {{ else if eq .Kind "404" }}
+        The page you are looking for does not exist.
+      {{ else }}
+        {{ .Site.Params.ogDescription }}
+      {{ end }}"
+    />
     <meta name="twitter:image" content="{{ $ogImage.Permalink }}" />
 
     <!-- Open Graph Meta Tags -->
     <meta
       property="og:title"
-      content="{{ if .IsHome }}{{ .Site.Params.ogTitle | default .Site.Title }}{{ else if eq .Kind "404" }}Page Not Found | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}"
+      content="{{ if .IsHome }}
+        {{ .Site.Params.ogTitle | default .Site.Title }}
+      {{ else if eq .Kind "404" }}
+        Page Not Found |
+        {{ .Site.Title }}
+      {{ else }}
+        {{ .Title }} |
+        {{ .Site.Title }}
+      {{ end }}"
     />
     <meta
       property="og:description"
-      content="{{ if .Description }}{{ .Description }}{{ else if eq .Kind "404" }}The page you are looking for does not exist.{{ else }}{{ .Site.Params.ogDescription }}{{ end }}"
+      content="{{ if .Description }}
+        {{ .Description }}
+      {{ else if eq .Kind "404" }}
+        The page you are looking for does not exist.
+      {{ else }}
+        {{ .Site.Params.ogDescription }}
+      {{ end }}"
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:image" content="{{ $ogImage.Permalink }}" />
     <meta property="og:site_name" content="{{ .Site.Title }}" />
-    <meta property="og:locale" content="{{ .Site.Params.locale | default "en_US"
-    }}" />
+    <meta
+      property="og:locale"
+      content="{{ .Site.Params.locale | default "en_US" }}"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="{{ .Site.Params.ogTitle | default .Site.Title }}" />
+    <meta
+      property="og:image:alt"
+      content="{{ .Site.Params.ogTitle | default .Site.Title }}"
+    />
 
     <!-- Canonical Link -->
     <link rel="canonical" href="{{ .Permalink }}" />
@@ -75,20 +148,25 @@
       type="image/png"
     />
 
-    {{ $favicon := resources.Get "images/favicon.ico" | fingerprint }}
-    <link rel="icon" href="{{ $favicon.RelPermalink }}" sizes="32x32" type="image/vnd.microsoft.icon" />
-
     {{ $faviconSVG := resources.Get "images/favicon.svg" | fingerprint }}
-    <link rel="icon" href="{{ $faviconSVG.RelPermalink }}" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="{{ $faviconSVG.RelPermalink }}"
+      type="image/svg+xml"
+    />
 
     <!-- Apple Touch Icon -->
-    {{ $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint
-    }}
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleIcon.RelPermalink }}" />
+    {{ $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint }}
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ $appleIcon.RelPermalink }}"
+    />
 
     <!-- Android Chrome Icons -->
     {{ $androidIcon192 := resources.Get "images/android-chrome-192x192.png" |
-    fingerprint }}
+      fingerprint
+    }}
     <link
       rel="icon"
       href="{{ $androidIcon192.RelPermalink }}"
@@ -97,7 +175,8 @@
     />
 
     {{ $androidIcon512 := resources.Get "images/android-chrome-512x512.png" |
-    fingerprint }}
+      fingerprint
+    }}
     <link
       rel="icon"
       href="{{ $androidIcon512.RelPermalink }}"

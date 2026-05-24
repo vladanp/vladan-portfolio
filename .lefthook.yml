@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    format-check:
+      glob: "*.{ts,js,css,html,json,yml,yaml,md,toml}"
+      run: npx prettier --check .

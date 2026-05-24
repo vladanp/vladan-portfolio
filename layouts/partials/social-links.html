@@ -4,28 +4,34 @@
   </h3>
   <ul>
     {{ range .Site.Params.socialLinks }}
-    <li>
-      <a
-        href="{{ .url }}"
-        class="social-links__link"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit my {{ .name }} profile"
-      >
-        {{ $image200 := resources.Get .image200 | fingerprint }} {{ $image400 :=
-        resources.Get .image400 | fingerprint }} {{ $image800 := resources.Get
-        .image800 | fingerprint }}
-        <img
-          src="{{ $image200.RelPermalink }}"
-          srcset="{{ $image200.RelPermalink }} 1x,
-                  {{ $image400.RelPermalink }} 2x,
-                  {{ $image800.RelPermalink }} 3x"
-          alt=""
-          width="56"
-          height="56"
-        />
-      </a>
-    </li>
+      <li>
+        <a
+          href="{{ .url }}"
+          class="social-links__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit my {{ .name }} profile"
+        >
+          {{ $image200 := resources.Get .image200 | fingerprint }}
+          {{ $image400 :=
+            resources.Get .image400 | fingerprint
+          }}
+          {{ $image800 := resources.Get
+            .image800 | fingerprint
+          }}
+          <img
+            src="{{ $image200.RelPermalink }}"
+            srcset="
+              {{ $image200.RelPermalink }} 1x,
+              {{ $image400.RelPermalink }} 2x,
+              {{ $image800.RelPermalink }} 3x
+            "
+            alt=""
+            width="56"
+            height="56"
+          />
+        </a>
+      </li>
     {{ end }}
   </ul>
 </section>

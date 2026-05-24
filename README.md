@@ -1,7 +1,9 @@
 # Vladan Petrovic Portfolio
 
 [![Deploy](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
+
 [![E2E Tests](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml)
+
 [![SEO Audit](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml)
 
 This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using [Hugo](https://gohugo.io/), a fast and flexible static site generator.
@@ -16,13 +18,15 @@ This is the source code for the portfolio of Vladan Petrovic, a Senior Software 
 
 [Running Tests](#running-tests)
 
+[Code Quality](#code-quality)
+
 [Deployment](#deployment)
 
 [License](#license)
 
 ## Project Structure
 
-- **config/_default/**: Hugo configuration files (hugo.toml, params.toml, sitemap.toml).
+- **config/\_default/**: Hugo configuration files (hugo.toml, params.toml, sitemap.toml).
 - **content/**: Markdown files for each page on the site.
 - **layouts/**: Custom HTML templates and partials for the site.
 - **assets/**: CSS and images processed by Hugo Pipes.
@@ -76,6 +80,15 @@ pnpm test:ui                     # interactive UI mode
 ```
 
 Tests run automatically on pull requests to `main` via GitHub Actions.
+
+## Code Quality
+
+This project uses **Prettier** with `prettier-plugin-go-template` for consistent formatting across all file types including Hugo templates. A **lefthook** pre-commit hook runs `prettier --check` on every commit, and the same check runs in CI.
+
+```bash
+pnpm format         # format all files
+pnpm format:check   # check formatting (CI + pre-commit)
+```
 
 ## Deployment
 

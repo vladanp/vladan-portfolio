@@ -1,0 +1,6 @@
+public/
+resources/
+node_modules/
+.hugo_cache/
+/dist/
+pnpm-lock.yaml
