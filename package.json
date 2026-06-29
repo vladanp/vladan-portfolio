@@ -14,11 +14,11 @@
     "prepare": "lefthook install"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.11.3",
-    "@lhci/cli": "0.14.0",
-    "@playwright/test": "1.60.0",
-    "lefthook": "2.1.8",
-    "prettier": "3.8.3",
+    "@axe-core/playwright": "4.12.1",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.61.1",
+    "lefthook": "2.1.9",
+    "prettier": "3.9.3",
     "prettier-plugin-go-template": "0.0.15"
   }
 }
