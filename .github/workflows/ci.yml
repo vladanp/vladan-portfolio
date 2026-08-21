@@ -96,7 +96,7 @@ jobs:
           name: production-site-${{ github.sha }}
           path: public/
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 7
 
       - name: Upload diagnostics on failure
         if: failure()
