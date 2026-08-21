@@ -6,3 +6,8 @@ pre-commit:
     lint:
       glob: "*.{ts,js,mjs}"
       run: pnpm lint
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm commitlint --edit {1}
