@@ -19,9 +19,9 @@ const chromeFlags = [
   ...(process.env.CI ? ["--no-sandbox"] : []),
 ].join(" ");
 const thresholds = {
-  performance: 0.9,
+  performance: 1,
   accessibility: 1,
-  "best-practices": 0.95,
+  "best-practices": 1,
   seo: 1,
 };
 

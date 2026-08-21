@@ -70,8 +70,9 @@ appropriate.
 
 Pull requests to `main` run formatting, linting, dependency audit, a strict
 production Hugo build, Playwright/Axe tests, endpoint and resource integrity
-checks, and Lighthouse thresholds. Pushes to `main` run the same validation,
-then deploy that exact validated artifact to the GitHub Pages deployment branch.
+checks, and perfect Lighthouse thresholds across performance, accessibility,
+best practices, and SEO. Pushes to `main` run the same validation, then deploy
+that exact validated artifact to the GitHub Pages deployment branch.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three

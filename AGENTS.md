@@ -37,8 +37,9 @@ formatting because Oxfmt excludes HTML.
 Write behavior-focused Playwright cases under `e2e/`; Playwright starts Hugo
 automatically. Use `pnpm test:ui`, `pnpm test:headed`, or `pnpm test:debug` while
 developing. Accessibility changes must preserve zero Axe WCAG 2.2 AA and best-
-practice violations. Lighthouse minimums are 90 performance, 100 accessibility,
-95 best practices, and 100 SEO. There is no numeric code-coverage requirement.
+practice violations. Lighthouse minimums are 100 performance, 100
+accessibility, 100 best practices, and 100 SEO. There is no numeric
+code-coverage requirement.
 
 ## Commit & Pull Request Guidelines
 
