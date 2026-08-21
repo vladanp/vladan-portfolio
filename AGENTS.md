@@ -21,6 +21,7 @@ Use the versions pinned in `.mise.toml` (Hugo 0.165.0, Node 24.19.0, and pnpm
 - `pnpm test` runs Playwright on desktop Chrome and a Pixel 5 profile.
 - `pnpm lighthouse` starts and audits a local production Hugo server.
 - `pnpm format:check` and `pnpm lint` run Oxc validation.
+- `pnpm commitlint --last` validates the latest commit message.
 - `pnpm check` runs formatting, linting, build, tests, and Lighthouse.
 
 ## Coding Style & Naming Conventions
@@ -55,12 +56,20 @@ code-coverage requirement.
 
 ## Commit & Pull Request Guidelines
 
-Prefer concise Conventional Commit subjects: `feat: add ...`, `fix: correct ...`,
-or scoped forms such as `test(e2e): cover ...`; use lowercase, action-oriented
-text without a trailing period. Complete the PR template's **Summary** and
-**Changes** sections, mention validation performed, link relevant issues, and
-include before/after screenshots for visible changes. Ensure `pnpm check` passes
-before requesting review.
+Use concise Conventional Commit subjects: `feat: add ...`, `fix: correct ...`,
+or scoped forms such as `test(e2e): cover ...`; use lowercase, action oriented
+text without a trailing period. Lefthook validates commit messages locally, and
+CI validates every new pull request commit, the pull request title, and commits
+pushed directly to `main`. Complete the PR template's **Summary**, **Changes**,
+and **Validation** sections, link relevant issues, and include before and after
+screenshots for visible changes. Ensure `pnpm check` passes before requesting
+review.
+
+After each successful production audit, release automation evaluates the
+Conventional Commits. Breaking changes create major versions, `feat` creates
+minor versions, and `fix` or `perf` creates patch versions. Other commit types
+are recorded in Git and deployment history but do not create a version by
+themselves.
 
 ## Security & Configuration
 

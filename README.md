@@ -43,15 +43,16 @@ pnpm test                # desktop and mobile browser, integrity, and Axe tests
 pnpm lighthouse          # local Lighthouse audit against a production server
 pnpm format:check        # formatting validation
 pnpm lint                # JavaScript and TypeScript linting
-pnpm check               # all of the checks above
+pnpm commitlint --last   # validate the latest commit message
+pnpm check               # format, lint, build, browser tests, and Lighthouse
 pnpm cv:build            # regenerate the hosted CV PDF
 pnpm site-icons:build    # regenerate browser and install icons
 pnpm social-image:build  # regenerate the social preview image
 ```
 
 `pnpm lighthouse:production` audits the deployed site and requires network
-access. A Git hook runs the formatting and lint checks. Install it by running
-`pnpm install` or `pnpm prepare`.
+access. Git hooks run formatting, linting, and Conventional Commit checks.
+Install them by running `pnpm install` or `pnpm prepare`.
 
 ## Repository structure
 
@@ -82,8 +83,23 @@ that exact validated artifact to the GitHub Pages deployment branch.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three
-samples. Dependencies and pinned GitHub Actions are checked weekly by
-Dependabot.
+samples. The deployment job also records the source commit and public URL in
+GitHub's `production` environment.
+
+Every pull request commit and title must follow Conventional Commits. CI also
+validates commits pushed directly to `main` before allowing deployment. After a
+production revision passes the live audit, Semantic Release analyzes the
+commits since the previous version and creates a `vX.Y.Z` tag and GitHub
+Release. Breaking changes create major versions, `feat` creates minor versions,
+and `fix` or `perf` creates patch versions. Repository documentation, tests,
+tooling, and CI changes remain visible in Git and deployment history but do not
+create a release by themselves. This repository does not publish an npm package,
+and release automation does not commit generated version files.
+
+GitHub Releases provide durable version notes. GitHub deployment history, the
+workflow run, and the live `build-revision` metadata remain the source of truth
+for the exact commit currently shipped. Dependencies and pinned GitHub Actions
+are checked weekly by Dependabot.
 
 ## License
 

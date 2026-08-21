@@ -1,6 +1,5 @@
 {
   "name": "vladan-portfolio",
-  "version": "1.0.0",
   "private": true,
   "description": "Vladan Petrovic portfolio site built with Hugo",
   "license": "MIT",
@@ -8,6 +7,7 @@
     "dev": "hugo server --renderToMemory --disableFastRender --noHTTPCache --bind 127.0.0.1 --baseURL http://127.0.0.1:1313/",
     "build": "hugo --environment production --minify --gc --cleanDestinationDir --panicOnWarning --printPathWarnings --printUnusedTemplates",
     "check": "pnpm format:check && pnpm lint && pnpm build && pnpm test && pnpm lighthouse",
+    "commitlint": "commitlint",
     "cv:build": "node scripts/generate-cv.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
@@ -19,17 +19,21 @@
     "lint:fix": "oxlint --fix",
     "lighthouse": "node scripts/lighthouse.mjs",
     "lighthouse:production": "node scripts/lighthouse.mjs https://vladan.dev/",
+    "release": "semantic-release",
     "site-icons:build": "node scripts/generate-site-icons.mjs",
     "social-image:build": "node scripts/generate-social-image.mjs",
     "prepare": "lefthook install"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
+    "@commitlint/cli": "21.2.2",
+    "@commitlint/config-conventional": "21.2.2",
     "@playwright/test": "1.62.1",
     "lefthook": "2.1.10",
     "lighthouse": "13.4.1",
     "oxfmt": "0.64.0",
-    "oxlint": "1.79.0"
+    "oxlint": "1.79.0",
+    "semantic-release": "25.0.9"
   },
   "engines": {
     "node": ">=24.19.0 <25"
