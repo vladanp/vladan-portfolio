@@ -86,7 +86,7 @@ test.describe("generated site integrity", () => {
     expect(errors).toEqual([]);
   });
 
-  test("applies the compact layout without narrow-screen overflow", async ({
+  test("applies the compact layout without overflow on narrow screens", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 320, height: 568 });

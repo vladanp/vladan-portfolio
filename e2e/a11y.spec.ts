@@ -8,7 +8,7 @@ const routes = [
 
 test.describe("accessibility", () => {
   for (const route of routes) {
-    test(`${route.name} has no detected WCAG 2.2 AA or best-practice violations`, async ({
+    test(`${route.name} has no detected WCAG 2.2 AA or best practice violations`, async ({
       page,
     }) => {
       await page.goto(route.path);

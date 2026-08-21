@@ -13,7 +13,7 @@ test.describe("homepage", () => {
     await expect(page.locator("main")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveText("Vladan Petrović");
     await expect(page.locator(".intro-section__summary")).toContainText(
-      "Full-stack development",
+      "Full stack development",
     );
     await expect(page.locator(".social-links")).toBeVisible();
     await expect(page.locator(".skills")).toBeVisible();

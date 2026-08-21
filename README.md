@@ -5,7 +5,7 @@
 
 Source for [vladan.dev](https://vladan.dev/), the portfolio of Vladan
 Petrovic, a Senior Software Engineer. It is a lightweight Hugo site with no
-client-side JavaScript or third-party runtime dependencies.
+JavaScript sent to the browser and no external runtime dependencies.
 
 ## Technology
 
@@ -31,8 +31,9 @@ pnpm dev
 ```
 
 The site is available at <http://127.0.0.1:1313/>. Alternatively, run
-`docker compose up`; the container exposes the same loopback-only address and
-mounts only the Hugo source directories.
+`docker compose up`; the container exposes the site at the same address,
+restricts host access to the loopback interface, and mounts only the Hugo
+source directories.
 
 ## Build and validation
 
@@ -46,19 +47,19 @@ pnpm check               # all of the checks above
 ```
 
 `pnpm lighthouse:production` audits the deployed site and requires network
-access. A pre-commit hook runs the formatting and lint checks; install it with
+access. A Git hook runs the formatting and lint checks. Install it by running
 `pnpm install` or `pnpm prepare`.
 
 ## Repository structure
 
-- `config/_default/` — Hugo site settings and factual portfolio data
-- `content/` — visible Markdown content
-- `layouts/` — base template, page layouts, partials, and `robots.txt`
-- `assets/` — CSS and fingerprinted images processed by Hugo Pipes
-- `static/` — the custom domain, web manifest assets, and install icons
-- `e2e/` — Playwright and Axe validation of generated pages and endpoints
-- `scripts/` — the direct Lighthouse threshold runner
-- `.github/workflows/` — validation, deployment, and deployed-site auditing
+- `config/_default/`: Hugo site settings and factual portfolio data
+- `content/`: visible Markdown content
+- `layouts/`: base template, page layouts, partials, and `robots.txt`
+- `assets/`: CSS and fingerprinted images processed by Hugo Pipes
+- `static/`: the custom domain, web manifest assets, and install icons
+- `e2e/`: Playwright and Axe validation of generated pages and endpoints
+- `scripts/`: the direct Lighthouse threshold runner
+- `.github/workflows/`: validation, deployment, and production auditing
 
 Contact details, headings, skills, and external links live in
 `config/_default/params.toml`. The homepage summary is in `content/_index.md`.
@@ -70,11 +71,12 @@ appropriate.
 Pull requests to `main` run formatting, linting, dependency audit, a strict
 production Hugo build, Playwright/Axe tests, endpoint and resource integrity
 checks, and Lighthouse thresholds. Pushes to `main` run the same validation,
-then deploy that exact validated artifact to the existing `gh-pages` branch.
+then deploy that exact validated artifact to the GitHub Pages deployment branch.
 
 After deployment, a separate workflow waits until the matching commit revision
-is live at `vladan.dev` and runs a three-sample production Lighthouse audit.
-Dependencies and pinned GitHub Actions are checked weekly by Dependabot.
+is live at `vladan.dev` and runs a production Lighthouse audit with three
+samples. Dependencies and pinned GitHub Actions are checked weekly by
+Dependabot.
 
 ## License
 

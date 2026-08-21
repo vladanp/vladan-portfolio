@@ -2,7 +2,7 @@
   "name": "vladan-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Vladan Petrovic personal portfolio site - Hugo static site",
+  "description": "Vladan Petrovic portfolio site built with Hugo",
   "license": "MIT",
   "scripts": {
     "dev": "hugo server --renderToMemory --disableFastRender --noHTTPCache --bind 127.0.0.1 --baseURL http://127.0.0.1:1313/",
