@@ -2,40 +2,79 @@ name: Production Audit
 
 on:
   workflow_run:
-    workflows: ["Deploy Hugo Site and Create Release"]
-    types:
-      - completed
+    workflows: [CI and Deployment]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-audit
+  cancel-in-progress: true
 
 jobs:
   audit:
+    name: Verify deployed revision
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-24.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    timeout-minutes: 5
-    permissions: {}
+    timeout-minutes: 10
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - name: Checkout deployed revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+        with:
+          version: 11.22.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "24"
-          cache: "pnpm"
+          node-version: 24.19.0
+          cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Run Lighthouse against production
-        run: pnpm exec lhci autorun --config=./lighthouserc.prod.json
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
 
-      - name: Upload Lighthouse report on failure
+      - name: Wait for GitHub Pages to publish this revision
+        env:
+          EXPECTED_REVISION: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent --show-error --location --max-time 10 \
+              --header 'Cache-Control: no-cache' \
+              "https://vladan.dev/?revision=${EXPECTED_REVISION}-${attempt}" \
+              | grep --fixed-strings "$EXPECTED_REVISION" > /dev/null; then
+              echo "GitHub Pages is serving revision $EXPECTED_REVISION"
+              exit 0
+            fi
+            sleep 5
+          done
+
+          echo "GitHub Pages did not publish revision $EXPECTED_REVISION in time" >&2
+          exit 1
+
+      - name: Audit the deployed site
+        run: pnpm lighthouse:production
+        env:
+          LIGHTHOUSE_RUNS: 3
+
+      - name: Upload Lighthouse reports on failure
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: lighthouse-prod-report
+          name: lighthouse-production-${{ github.event.workflow_run.id }}
           path: .lighthouseci/
+          if-no-files-found: ignore
+          include-hidden-files: true
           retention-days: 7

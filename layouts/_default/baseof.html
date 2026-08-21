@@ -1,212 +1,108 @@
+{{- $is404 := eq .Kind "404" -}}
+{{- $pageTitle := .Site.Title -}}
+{{- if $is404 -}}
+  {{- $pageTitle = printf "Page Not Found | %s" .Site.Title -}}
+{{- else if not .IsHome -}}
+  {{- $pageTitle = printf "%s | %s" .Title .Site.Title -}}
+{{- end -}}
+{{- $description := .Description | default .Site.Params.description | plainify | htmlUnescape | strings.TrimSpace -}}
+{{- if $is404 -}}
+  {{- $description = "The page you requested could not be found." -}}
+{{- end -}}
+{{- $author := .Params.author | default .Site.Params.author | strings.TrimSpace -}}
 <!doctype html>
-<html lang="en-US">
+<html lang="{{ .Site.Language.Locale | default "en-US" }}">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {{ if .IsHome }}
-        {{ .Site.Title }}
-      {{ else if eq .Kind "404" }}
-        Page Not Found |
-        {{ .Site.Title }}
-      {{ else }}
-        {{ .Title }} |
-        {{ .Site.Title }}
-      {{ end }}
-    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ $pageTitle }}</title>
 
-    <!-- Inline all CSS to eliminate render-blocking requests -->
-    {{ $cssFiles := resources.Match "css/*.css" }}
-    {{ $combinedCSS := $cssFiles
-      | resources.Concat "css/combined.css" | minify
-    }}
+    {{- $cssPaths := slice "css/style.css" "css/footer.css" }}
+    {{- if $is404 }}
+      {{- $cssPaths = $cssPaths | append "css/error-page.css" }}
+    {{- else }}
+      {{- $cssPaths = $cssPaths | append
+        "css/intro-section.css"
+        "css/social-links.css"
+        "css/skills.css"
+      }}
+    {{- end }}
+    {{- $cssFiles := slice }}
+    {{- range $cssPaths }}
+      {{- $cssFiles = $cssFiles | append (resources.Get .) }}
+    {{- end }}
+    {{- $cssTarget := cond $is404 "css/error.css" "css/home.css" }}
+    {{- $combinedCSS := $cssFiles | resources.Concat $cssTarget | minify }}
     <style>
-      {{ $combinedCSS.Content | safeCSS }}</style>
+      {{ $combinedCSS.Content | safeCSS }}
+    </style>
 
-    <!-- SEO Meta Tags -->
-    <meta
-      name="description"
-      content="{{ if .Description }}
-        {{ .Description }}
-      {{ else if eq .Kind "404" }}
-        The page you are looking for does not exist.
-      {{ else }}
-        {{ .Site.Params.description }}
-      {{ end }}"
-    />
-    <meta
-      name="keywords"
-      content="{{ if .Params.keywords }}
-        {{ delimit
-          .Params.keywords ", "
-        }}
-      {{ else }}
-        {{ delimit .Site.Params.keywords ", " }}
-      {{ end }}"
-    />
-    <meta
-      name="author"
-      content="{{ if .Params.author }}
-        {{ .Params.author }}
-      {{ else }}
-        {{ .Site.Params.author }}
-      {{ end }}"
-    />
-    <meta
-      name="robots"
-      content="{{ if or (.Params.noindex) (eq .Kind "404") }}
-        noindex, nofollow
-      {{ else }}
-        index, follow
-      {{ end }}
-      "
-    />
+    <meta name="description" content="{{ $description }}" />
+    <meta name="author" content="{{ $author }}" />
+    {{- if or .Params.noindex $is404 }}
+      <meta name="robots" content="noindex" />
+    {{- end }}
+    {{- with .Site.Params.buildRevision }}
+      <meta name="build-revision" content="{{ . }}" />
+    {{- end }}
 
-    <!-- Twitter Card Meta Tags -->
-    {{ $ogImage := resources.Get "images/og-image.webp" | fingerprint }}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="{{ if .IsHome }}
-        {{ .Site.Params.ogTitle | default .Site.Title }}
-      {{ else if eq .Kind "404" }}
-        Page Not Found |
-        {{ .Site.Title }}
-      {{ else }}
-        {{ .Title }} |
-        {{ .Site.Title }}
-      {{ end }}"
-    />
-    <meta
-      name="twitter:description"
-      content="{{ if .Description }}
-        {{ .Description }}
-      {{ else if eq .Kind "404" }}
-        The page you are looking for does not exist.
-      {{ else }}
-        {{ .Site.Params.ogDescription }}
-      {{ end }}"
-    />
-    <meta name="twitter:image" content="{{ $ogImage.Permalink }}" />
+    {{- if not $is404 }}
+      {{- $socialImage := resources.Get "images/og-image.webp" | fingerprint }}
+      <link rel="canonical" href="{{ .Permalink }}" />
 
-    <!-- Open Graph Meta Tags -->
-    <meta
-      property="og:title"
-      content="{{ if .IsHome }}
-        {{ .Site.Params.ogTitle | default .Site.Title }}
-      {{ else if eq .Kind "404" }}
-        Page Not Found |
-        {{ .Site.Title }}
-      {{ else }}
-        {{ .Title }} |
-        {{ .Site.Title }}
-      {{ end }}"
-    />
-    <meta
-      property="og:description"
-      content="{{ if .Description }}
-        {{ .Description }}
-      {{ else if eq .Kind "404" }}
-        The page you are looking for does not exist.
-      {{ else }}
-        {{ .Site.Params.ogDescription }}
-      {{ end }}"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ .Permalink }}" />
-    <meta property="og:image" content="{{ $ogImage.Permalink }}" />
-    <meta property="og:site_name" content="{{ .Site.Title }}" />
-    <meta
-      property="og:locale"
-      content="{{ .Site.Params.locale | default "en_US" }}"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="{{ .Site.Params.ogTitle | default .Site.Title }}"
-    />
+      <meta property="og:title" content="{{ $pageTitle }}" />
+      <meta property="og:description" content="{{ $description }}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="{{ .Permalink }}" />
+      <meta property="og:site_name" content="{{ .Site.Title }}" />
+      <meta property="og:locale" content="{{ replace (.Site.Language.Locale | default "en-US") "-" "_" }}" />
+      <meta property="og:image" content="{{ $socialImage.Permalink }}" />
+      <meta property="og:image:type" content="image/webp" />
+      <meta property="og:image:width" content="{{ $socialImage.Width }}" />
+      <meta property="og:image:height" content="{{ $socialImage.Height }}" />
+      <meta property="og:image:alt" content="{{ .Site.Params.socialImageAlt }}" />
 
-    <!-- Canonical Link -->
-    <link rel="canonical" href="{{ .Permalink }}" />
-    {{ $manifestData := readFile "static/manifest.json" | base64Encode }}
-    <link
-      rel="manifest"
-      href="{{ print "data:application/manifest+json;base64," $manifestData | safeURL }}"
-    />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content="{{ $pageTitle }}" />
+      <meta name="twitter:description" content="{{ $description }}" />
+      <meta name="twitter:image" content="{{ $socialImage.Permalink }}" />
+      <meta name="twitter:image:alt" content="{{ .Site.Params.socialImageAlt }}" />
+    {{- end }}
+
+    <link rel="manifest" href="{{ "manifest.json" | relURL }}" />
     <meta name="theme-color" content="#202124" />
 
-    <!-- Favicon -->
-    {{ $favicon16 := resources.Get "images/favicon-16x16.png" | fingerprint }}
-    <link
-      rel="icon"
-      href="{{ $favicon16.RelPermalink }}"
-      sizes="16x16"
-      type="image/png"
-    />
+    {{- $favicon16 := resources.Get "images/favicon-16x16.png" | fingerprint }}
+    <link rel="icon" href="{{ $favicon16.RelPermalink }}" sizes="16x16" type="image/png" />
 
-    {{ $favicon32 := resources.Get "images/favicon-32x32.png" | fingerprint }}
-    <link
-      rel="icon"
-      href="{{ $favicon32.RelPermalink }}"
-      sizes="32x32"
-      type="image/png"
-    />
+    {{- $favicon32 := resources.Get "images/favicon-32x32.png" | fingerprint }}
+    <link rel="icon" href="{{ $favicon32.RelPermalink }}" sizes="32x32" type="image/png" />
 
-    {{ $faviconSVG := resources.Get "images/favicon.svg" | fingerprint }}
-    <link
-      rel="icon"
-      href="{{ $faviconSVG.RelPermalink }}"
-      type="image/svg+xml"
-    />
+    {{- $faviconSVG := resources.Get "images/favicon.svg" | fingerprint }}
+    <link rel="icon" href="{{ $faviconSVG.RelPermalink }}" type="image/svg+xml" />
 
-    <!-- Apple Touch Icon -->
-    {{ $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint }}
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="{{ $appleIcon.RelPermalink }}"
-    />
+    {{- $appleIcon := resources.Get "images/apple-touch-icon.png" | fingerprint }}
+    <link rel="apple-touch-icon" href="{{ $appleIcon.RelPermalink }}" sizes="180x180" />
+    <link rel="icon" href="{{ "android-chrome-192x192.png" | relURL }}" sizes="192x192" type="image/png" />
+    <link rel="icon" href="{{ "android-chrome-512x512.png" | relURL }}" sizes="512x512" type="image/png" />
 
-    <!-- Android Chrome Icons -->
-    {{ $androidIcon192 := resources.Get "images/android-chrome-192x192.png" |
-      fingerprint
-    }}
-    <link
-      rel="icon"
-      href="{{ $androidIcon192.RelPermalink }}"
-      sizes="192x192"
-      type="image/png"
-    />
-
-    {{ $androidIcon512 := resources.Get "images/android-chrome-512x512.png" |
-      fingerprint
-    }}
-    <link
-      rel="icon"
-      href="{{ $androidIcon512.RelPermalink }}"
-      sizes="512x512"
-      type="image/png"
-    />
-
-    <!-- Structured Data -->
-    {{ if .IsHome }}
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "{{ .Site.Params.author }}",
-        "jobTitle": "{{ .Site.Params.jobTitle }}",
-        "url": "{{ .Site.Home.Permalink }}",
-        "sameAs": [
-          {{ range $index, $link := .Site.Params.socialLinks }}{{ if $index }},{{ end }}"{{ $link.url }}"
-          {{ end }}
-        ]
-      }
-    </script>
-    {{ end }}
+    {{- if .IsHome }}
+      {{- $sameAs := slice }}
+      {{- range .Site.Params.socialLinks }}
+        {{- $sameAs = $sameAs | append .url }}
+      {{- end }}
+      {{- $person := dict
+        "@context" "https://schema.org"
+        "@type" "Person"
+        "name" .Site.Params.name
+        "alternateName" .Site.Params.author
+        "jobTitle" .Site.Params.jobTitle
+        "url" .Site.Home.Permalink
+        "sameAs" $sameAs
+      }}
+      <script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+    {{- end }}
   </head>
-
   <body>
     {{ block "main" . }}{{ end }}
     {{ partial "footer.html" . }}

@@ -1,31 +1,10 @@
 author = "Vladan Petrovic"
 email = "vladanpetrovic89@gmail.com"
-description = "The official portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, Node.js, React, Angular, and modern web development."
-keywords = [
-  "Vladan Petrovic",
-  "Vladan Petrović",
-  "Vladan Petrovic Software Engineer",
-  "Senior Software Engineer",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Angular",
-  "Node.js",
-  "Full Stack Developer",
-  "Frontend Developer",
-  "Web Development",
-  "Software Engineer",
-  "Portfolio",
-  "Developer Portfolio",
-]
-
-# Open Graph (OG) Meta Tags for social media sharing
-locale = "en_US"
-ogDescription = "Explore the portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, Node.js, React, Angular, and modern web development."
-ogTitle = "Vladan Petrovic - Senior Software Engineer"
+description = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, TypeScript, React, Angular, Node.js, and modern web development."
 
 jobTitle = "Senior Software Engineer"
 name = "Vladan Petrović"
+socialImageAlt = "Illustration of a computer monitor displaying code"
 
 # Section Titles
 connectTitle = "Connect with me"
@@ -35,35 +14,30 @@ skillsTitle = "My Skills"
 [[skills]]
 image200 = "images/javascript-logo-200.webp"
 image400 = "images/javascript-logo-400.webp"
-image800 = "images/javascript-logo-800.webp"
 name = "JavaScript"
 url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
 
 [[skills]]
 image200 = "images/typescript-logo-200.webp"
 image400 = "images/typescript-logo-400.webp"
-image800 = "images/typescript-logo-800.webp"
 name = "TypeScript"
 url = "https://www.typescriptlang.org/"
 
 [[skills]]
 image200 = "images/react-logo-200.webp"
 image400 = "images/react-logo-400.webp"
-image800 = "images/react-logo-800.webp"
 name = "React"
-url = "https://reactjs.org/"
+url = "https://react.dev/"
 
 [[skills]]
 image200 = "images/angular-logo-200.webp"
 image400 = "images/angular-logo-400.webp"
-image800 = "images/angular-logo-800.webp"
 name = "Angular"
-url = "https://angular.io/"
+url = "https://angular.dev/"
 
 [[skills]]
 image200 = "images/nodejs-logo-200.webp"
 image400 = "images/nodejs-logo-400.webp"
-image800 = "images/nodejs-logo-800.webp"
 name = "Node.js"
 url = "https://nodejs.org/"
 
@@ -71,13 +45,11 @@ url = "https://nodejs.org/"
 [[socialLinks]]
 image200 = "images/linkedin-logo-200.webp"
 image400 = "images/linkedin-logo-400.webp"
-image800 = "images/linkedin-logo-800.webp"
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/vladanpet"
 
 [[socialLinks]]
 image200 = "images/github-logo-200.webp"
 image400 = "images/github-logo-400.webp"
-image800 = "images/github-logo-800.webp"
 name = "GitHub"
 url = "https://github.com/vladanp"

@@ -1,42 +1,38 @@
-import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { expect, test } from "@playwright/test";
+
+const routes = [
+  { name: "homepage", path: "/" },
+  { name: "404 page", path: "/not-a-real-page" },
+];
 
 test.describe("accessibility", () => {
-  test("homepage has no critical or serious a11y violations", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    const results = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .analyze();
+  for (const route of routes) {
+    test(`${route.name} has no detected WCAG 2.2 AA or best-practice violations`, async ({
+      page,
+    }) => {
+      await page.goto(route.path);
+      const results = await new AxeBuilder({ page })
+        .withTags([
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22aa",
+          "best-practice",
+        ])
+        .options({
+          rules: {
+            "label-content-name-mismatch": { enabled: true },
+            "target-size": { enabled: true },
+          },
+        })
+        .analyze();
 
-    const violations = results.violations.filter(
-      (v) => v.impact === "critical" || v.impact === "serious",
-    );
-
-    if (violations.length > 0) {
-      console.log("A11y violations:", JSON.stringify(violations, null, 2));
-    }
-
-    expect(violations).toEqual([]);
-  });
-
-  test("404 page has no critical or serious a11y violations", async ({
-    page,
-  }) => {
-    await page.goto("/nonexistent-page");
-    const results = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .analyze();
-
-    const violations = results.violations.filter(
-      (v) => v.impact === "critical" || v.impact === "serious",
-    );
-
-    if (violations.length > 0) {
-      console.log("A11y violations:", JSON.stringify(violations, null, 2));
-    }
-
-    expect(violations).toEqual([]);
-  });
+      expect(
+        results.violations,
+        JSON.stringify(results.violations, null, 2),
+      ).toEqual([]);
+    });
+  }
 });

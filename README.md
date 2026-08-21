@@ -1,109 +1,81 @@
 # Vladan Petrovic Portfolio
 
-[![Deploy](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/deploy.yml)
+[![CI and Deployment](https://github.com/vladanp/vladan-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/ci.yml)
+[![Production Audit](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml)
 
-[![E2E Tests](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/e2e.yml)
+Source for [vladan.dev](https://vladan.dev/), the portfolio of Vladan
+Petrovic, a Senior Software Engineer. It is a lightweight Hugo site with no
+client-side JavaScript or third-party runtime dependencies.
 
-[![SEO Audit](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml/badge.svg)](https://github.com/vladanp/vladan-portfolio/actions/workflows/audit.yml)
+## Technology
 
-This is the source code for the portfolio of Vladan Petrovic, a Senior Software Engineer. The site is built using [Hugo](https://gohugo.io/), a fast and flexible static site generator.
+The site is built with Hugo and uses Node.js tooling only for repository
+validation. Playwright, Axe, and Lighthouse cover browser behavior,
+accessibility, and performance; oxfmt and oxlint provide formatting and
+linting.
 
-## Table of Contents
-
-[Project Structure](#project-structure)
-
-[How to Run the Project Locally](#how-to-run-the-project-locally)
-
-[How to Run the Project Locally with Docker](#how-to-run-the-project-locally-with-docker)
-
-[Running Tests](#running-tests)
-
-[Code Quality](#code-quality)
-
-[Deployment](#deployment)
-
-[License](#license)
-
-## Project Structure
-
-- **config/\_default/**: Hugo configuration files (hugo.toml, params.toml, sitemap.toml).
-- **content/**: Markdown files for each page on the site.
-- **layouts/**: Custom HTML templates and partials for the site.
-- **assets/**: CSS and images processed by Hugo Pipes.
-- **static/**: Static files served as-is (CNAME, robots.txt).
-
-## How to Run the Project Locally
-
-This project uses [mise](https://mise.jdx.dev/) to manage tool versions. The `.mise.toml` file pins Hugo, Node.js, and pnpm.
-
-**Prerequisites:** Hugo 0.161.1, Node.js 24, pnpm 11
+The supported toolchain is defined in `.mise.toml`, `package.json`, and the
+pnpm lockfile. With [mise](https://mise.jdx.dev/) installed:
 
 ```bash
-git clone https://github.com/vladanp/vladan-portfolio.git
-cd vladan-portfolio
-
-# If using mise:
-mise trust && mise install
-
-# Install test dependencies
+mise trust
+mise install
 pnpm install
-
-# Start the Hugo dev server
-hugo server --baseURL http://localhost:1313 --disableFastRender --noHTTPCache
+pnpm exec playwright install chromium
 ```
 
-Open [http://localhost:1313](http://localhost:1313) to view the site.
-
-## How to Run the Project Locally with Docker
-
-No local toolchain required.
+## Local development
 
 ```bash
-git clone https://github.com/vladanp/vladan-portfolio.git
-cd vladan-portfolio
-docker compose up
+pnpm dev
 ```
 
-Open [http://localhost:1313](http://localhost:1313) to view the site.
+The site is available at <http://127.0.0.1:1313/>. Alternatively, run
+`docker compose up`; the container exposes the same loopback-only address and
+mounts only the Hugo source directories.
 
-## Running Tests
-
-End-to-end tests use [Playwright](https://playwright.dev/). The Hugo dev server starts and stops automatically.
+## Build and validation
 
 ```bash
-pnpm install                     # first time only
-pnpm exec playwright install chromium  # first time only
-
-pnpm test                        # run all tests
-pnpm test:headed                 # watch the browser
-pnpm test:ui                     # interactive UI mode
+pnpm build               # strict, minified production build in public/
+pnpm test                # desktop and mobile browser, integrity, and Axe tests
+pnpm lighthouse          # local Lighthouse audit against a production server
+pnpm format:check        # formatting validation
+pnpm lint                # JavaScript and TypeScript linting
+pnpm check               # all of the checks above
 ```
 
-Tests run automatically on pull requests to `main` via GitHub Actions.
+`pnpm lighthouse:production` audits the deployed site and requires network
+access. A pre-commit hook runs the formatting and lint checks; install it with
+`pnpm install` or `pnpm prepare`.
 
-## Code Quality
+## Repository structure
 
-This project uses **Prettier** with `prettier-plugin-go-template` for consistent formatting across all file types including Hugo templates. A **lefthook** pre-commit hook runs `prettier --check` on every commit, and the same check runs in CI.
+- `config/_default/` — Hugo site settings and factual portfolio data
+- `content/` — visible Markdown content
+- `layouts/` — base template, page layouts, partials, and `robots.txt`
+- `assets/` — CSS and fingerprinted images processed by Hugo Pipes
+- `static/` — the custom domain, web manifest assets, and install icons
+- `e2e/` — Playwright and Axe validation of generated pages and endpoints
+- `scripts/` — the direct Lighthouse threshold runner
+- `.github/workflows/` — validation, deployment, and deployed-site auditing
 
-```bash
-pnpm format         # format all files
-pnpm format:check   # check formatting (CI + pre-commit)
-```
+Contact details, headings, skills, and external links live in
+`config/_default/params.toml`. The homepage summary is in `content/_index.md`.
+Changing these files updates both visible content and generated metadata where
+appropriate.
 
-## Deployment
+## CI and deployment
 
-The site is automatically deployed to GitHub Pages via GitHub Actions whenever changes are merged into the main branch.
+Pull requests to `main` run formatting, linting, dependency audit, a strict
+production Hugo build, Playwright/Axe tests, endpoint and resource integrity
+checks, and Lighthouse thresholds. Pushes to `main` run the same validation,
+then deploy that exact validated artifact to the existing `gh-pages` branch.
 
-1. Push your changes to a feature branch:
-
-   ```bash
-   git push origin <branch-name>
-   ```
-
-2. Open a pull request against the main branch.
-
-3. Once merged, GitHub Actions will automatically build and deploy the site to the gh-pages branch, which is configured to serve the site.
+After deployment, a separate workflow waits until the matching commit revision
+is live at `vladan.dev` and runs a three-sample production Lighthouse audit.
+Dependencies and pinned GitHub Actions are checked weekly by Dependabot.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+Licensed under the [MIT License](./LICENSE).

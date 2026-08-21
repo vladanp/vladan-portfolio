@@ -1,13 +1,8 @@
 baseURL = "https://vladan.dev/"
-enableEmoji = true
-enableGitInfo = true
 enableRobotsTXT = true
-hasCJKLanguage = false
-locale = "en-us"
-disableKinds = ["taxonomy", "term"]
+locale = "en-US"
+disableKinds = ["taxonomy", "term", "rss"]
 title = "Vladan Petrovic | Senior Software Engineer"
 
-[markup]
-[markup.goldmark]
-[markup.goldmark.renderer]
-unsafe = true
+[module.hugoVersion]
+min = "0.165.0"

@@ -1,39 +1,30 @@
 <section class="social-links" aria-labelledby="social-links-heading">
-  <h3 id="social-links-heading" class="social-links__heading">
+  <h2 id="social-links-heading" class="social-links__heading">
     {{ .Site.Params.connectTitle }}
-  </h3>
+  </h2>
   <ul>
-    {{ range $index, $link := .Site.Params.socialLinks }}
+    {{ range .Site.Params.socialLinks }}
       <li>
         <a
           href="{{ .url }}"
           class="social-links__link"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Visit my {{ .name }} profile"
+          aria-label="Visit my {{ .name }} profile (opens in a new tab)"
         >
           {{ $image200 := resources.Get .image200 | fingerprint }}
-          {{ $image400 :=
-            resources.Get .image400 | fingerprint
-          }}
-          {{ $image800 := resources.Get
-            .image800 | fingerprint
-          }}
+          {{ $image400 := resources.Get .image400 | fingerprint }}
           <img
             src="{{ $image200.RelPermalink }}"
             srcset="
-              {{ $image200.RelPermalink }} 1x,
-              {{ $image400.RelPermalink }} 2x,
-              {{ $image800.RelPermalink }} 3x
+              {{ $image200.RelPermalink }} 200w,
+              {{ $image400.RelPermalink }} 400w
             "
+            sizes="56px"
             alt=""
             width="56"
             height="56"
-            fetchpriority="{{ if eq $index 0 }}
-              high
-            {{ else }}
-              auto
-            {{ end }}"
+            decoding="async"
           />
         </a>
       </li>
@@ -42,23 +33,22 @@
       <a
         href="mailto:{{ .Site.Params.email }}"
         class="social-links__link"
-        aria-label="Send me an email"
+        aria-label="Email {{ .Site.Params.name }} at {{ .Site.Params.email }}"
         title="{{ .Site.Params.email }}"
       >
         {{ $email200 := resources.Get "images/email-logo-200.webp" | fingerprint }}
         {{ $email400 := resources.Get "images/email-logo-400.webp" | fingerprint }}
-        {{ $email800 := resources.Get "images/email-logo-800.webp" | fingerprint }}
         <img
           src="{{ $email200.RelPermalink }}"
           srcset="
-            {{ $email200.RelPermalink }} 1x,
-            {{ $email400.RelPermalink }} 2x,
-            {{ $email800.RelPermalink }} 3x
+            {{ $email200.RelPermalink }} 200w,
+            {{ $email400.RelPermalink }} 400w
           "
+          sizes="56px"
           alt=""
           width="56"
           height="56"
-          loading="lazy"
+          decoding="async"
         />
       </a>
     </li>
