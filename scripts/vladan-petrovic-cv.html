@@ -3,17 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Curriculum vitae of Vladan Petrović, Senior Software Engineer"
+    />
     <title>Vladan Petrović | Senior Software Engineer | CV</title>
     <style>
       @page {
         size: A4;
-        margin: 10mm 12mm;
+        margin: 13mm;
       }
 
       :root {
         color-scheme: light;
-        --accent: #8e3f2d;
-        --muted: #55514b;
+        --accent: #813826;
+        --muted: #4f4b46;
         --rule: #c8c1b5;
         --text: #17181a;
       }
@@ -24,8 +28,8 @@
 
       html {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 9.5pt;
-        line-height: 1.38;
+        font-size: 10pt;
+        line-height: 1.22;
       }
 
       body {
@@ -38,7 +42,7 @@
       a {
         color: inherit;
         text-decoration-color: var(--accent);
-        text-underline-offset: 0.15em;
+        text-underline-offset: 0.14em;
       }
 
       h1,
@@ -50,75 +54,68 @@
       }
 
       h1 {
-        margin-bottom: 1.5mm;
-        font-size: 25pt;
-        letter-spacing: -0.045em;
-        line-height: 0.98;
+        margin-bottom: 1.2mm;
+        font-size: 22pt;
+        letter-spacing: -0.035em;
+        line-height: 1;
       }
 
       h2 {
-        margin-bottom: 3mm;
+        margin-bottom: 1.8mm;
         color: var(--accent);
-        font-size: 7.5pt;
-        letter-spacing: 0.1em;
+        font-size: 10pt;
+        letter-spacing: 0.08em;
+        line-height: 1.2;
         text-transform: uppercase;
       }
 
       h3 {
         margin-bottom: 0.5mm;
-        font-size: 10pt;
+        font-size: 11pt;
         line-height: 1.2;
       }
 
       p {
-        margin-bottom: 2mm;
+        margin-bottom: 1.3mm;
       }
 
       ul {
         margin-bottom: 0;
-        padding-left: 4.2mm;
+        padding-left: 4.8mm;
       }
 
       li {
-        margin-bottom: 0.7mm;
-        padding-left: 0.7mm;
+        margin-bottom: 0.55mm;
+        padding-left: 0.5mm;
       }
 
       header {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 8mm;
-        align-items: end;
         border-bottom: 0.35mm solid var(--text);
-        padding-bottom: 4mm;
+        padding-bottom: 2.8mm;
       }
 
       .role {
-        margin-bottom: 0;
+        margin-bottom: 1.5mm;
         color: var(--muted);
-        font-size: 11pt;
+        font-size: 11.5pt;
         font-weight: 700;
       }
 
       .contact {
-        margin: 0;
-        font-size: 8.3pt;
-        line-height: 1.55;
-        list-style: none;
-        text-align: right;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8mm 2.3mm;
+        margin-bottom: 0;
+        font-size: 10pt;
       }
 
-      .contact li {
-        margin: 0;
-        padding: 0;
+      .contact__separator {
+        color: var(--rule);
       }
 
       section {
-        display: grid;
-        grid-template-columns: 26mm minmax(0, 1fr);
-        gap: 5mm;
         border-bottom: 0.2mm solid var(--rule);
-        padding-block: 4mm;
+        padding-block: 2.7mm;
       }
 
       section:last-child {
@@ -126,157 +123,331 @@
         padding-bottom: 0;
       }
 
-      .summary p {
+      .summary p:last-child,
+      .skills p:last-child {
         margin-bottom: 0;
-        font-size: 9.7pt;
       }
 
       .entry {
-        break-inside: avoid;
-        margin-bottom: 3.6mm;
+        margin-bottom: 2.6mm;
       }
 
       .entry:last-child {
         margin-bottom: 0;
       }
 
+      .entry--new-page {
+        break-before: page;
+      }
+
       .entry__heading {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1mm 2mm;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 1mm;
+        break-after: avoid;
       }
 
-      .entry__company {
-        margin-bottom: 0;
+      .entry__meta {
+        margin-bottom: 0.9mm;
         color: var(--muted);
-        font-size: 8.5pt;
+        font-size: 10pt;
         font-weight: 700;
       }
 
-      .current {
-        color: var(--accent);
-        font-size: 7pt;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .entry__separator {
+        margin-inline: 0.4mm;
+        color: var(--rule);
       }
 
-      .skills {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.3mm 6mm;
+      .entry__dates {
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      .entry li {
+        break-inside: avoid;
       }
 
       .skills p {
-        margin-bottom: 0;
+        margin-bottom: 0.8mm;
       }
 
       .skills strong {
         color: var(--muted);
       }
+
+      .education p {
+        margin-bottom: 0;
+      }
     </style>
   </head>
   <body>
     <header>
-      <div>
-        <h1>Vladan Petrović</h1>
-        <p class="role">Senior Software Engineer</p>
-      </div>
-      <ul class="contact" aria-label="Contact details">
-        <li>Belgrade, Serbia</li>
-        <li><a href="mailto:vladanpetrovic89@gmail.com">vladanpetrovic89@gmail.com</a></li>
-        <li><a href="https://vladan.dev/">vladan.dev</a></li>
-        <li><a href="https://www.linkedin.com/in/vladanpet">linkedin.com/in/vladanpet</a></li>
-        <li><a href="https://github.com/vladanp">github.com/vladanp</a></li>
-      </ul>
+      <h1>Vladan Petrović</h1>
+      <p class="role">Senior Software Engineer</p>
+      <p class="contact">
+        <a
+          href="mailto:vladanpetrovic89@gmail.com"
+          target="_blank"
+          rel="noopener"
+        >
+          vladanpetrovic89@gmail.com
+        </a>
+        <span class="contact__separator" aria-hidden="true">|</span>
+        <a href="https://vladan.dev/" target="_blank" rel="noopener">
+          vladan.dev
+        </a>
+        <span class="contact__separator" aria-hidden="true">|</span>
+        <a
+          href="https://linkedin.com/in/vladanpet"
+          target="_blank"
+          rel="noopener"
+        >
+          linkedin.com/in/vladanpet
+        </a>
+        <span class="contact__separator" aria-hidden="true">|</span>
+        <a
+          href="https://github.com/vladanp"
+          target="_blank"
+          rel="noopener"
+        >
+          github.com/vladanp
+        </a>
+        <span class="contact__separator" aria-hidden="true">|</span>
+        <span>Belgrade, Serbia</span>
+      </p>
     </header>
 
     <main>
       <section class="summary" aria-labelledby="summary-heading">
-        <h2 id="summary-heading">Profile</h2>
+        <h2 id="summary-heading">Professional Summary</h2>
         <p>
-          Senior Software Engineer with more than 10 years of experience building and improving products across medical software, ecommerce, and scheduling. Deep frontend expertise with full stack capability across product development, architecture, continuous integration, developer experience, automation, tooling, and maintenance. I value strong teams, clear systems, and technology that improves products and engineering workflows. I use AI tooling to implement clearly defined intent while retaining ownership of architecture and engineering decisions.
+          Senior Software Engineer with 11+ years of experience building and
+          scaling production software across automotive, SaaS, ecommerce,
+          scheduling, and healthcare industries.
+        </p>
+        <p>
+          Strong frontend expertise is paired with full stack capability across
+          modern web applications, backend services, cloud infrastructure,
+          CI/CD, and platform engineering. Experienced in customer facing
+          products, internal applications, monorepos, developer tooling,
+          experimentation platforms, and business critical workflows used at
+          scale.
+        </p>
+        <p>
+          Experienced with AI assisted software engineering and agentic
+          development, integrating AI coding tools and agents into everyday
+          engineering for codebase exploration, solution design,
+          implementation, refactoring, testing, debugging, code review, and
+          developer productivity.
         </p>
       </section>
 
-      <section aria-labelledby="experience-heading">
-        <h2 id="experience-heading">Experience</h2>
-        <div>
-          <article class="entry">
-            <div class="entry__heading">
-              <div>
-                <h3>Senior Software Engineer</h3>
-                <p class="entry__company">Rivian</p>
-              </div>
-              <span class="current">Current role</span>
-            </div>
-          </article>
-
-          <article class="entry">
-            <div class="entry__heading">
-              <div>
-                <h3>Frontend Tech Lead</h3>
-                <p class="entry__company">TX Services / Doodle AG</p>
-              </div>
-            </div>
-            <ul>
-              <li>Led frontend engineering in a cross functional Product Growth team, contributing to conversion improvements and growth from CHF 1 million to CHF 10 million ARR.</li>
-              <li>Managed more than 100 A/B experiments across their full lifecycle on a platform used by more than 30 million people.</li>
-              <li>Advocated for and helped deliver migrations to TypeScript, Next.js, and an Nx monorepo through technical talks, consultation, and implementation.</li>
-              <li>Built subscription products and complex end to end features, and supported platform incidents, tracking, analytics, and engineering interviews.</li>
-            </ul>
-          </article>
-
-          <article class="entry">
-            <div class="entry__heading">
-              <div>
-                <h3>Frontend Developer</h3>
-                <p class="entry__company">Commerce Connector GmbH</p>
-              </div>
-            </div>
-            <ul>
-              <li>Built consumer widgets and an enterprise administration platform for SaaS ecommerce products.</li>
-              <li>Delivered custom widget work that supported contracts worth about EUR 2 million with global brands.</li>
-              <li>Maintained a reusable vanilla JavaScript widget and delivered reporting across AWS integrations and frontend administration tools.</li>
-            </ul>
-          </article>
-
-          <article class="entry">
-            <div class="entry__heading">
-              <div>
-                <h3>Software Developer</h3>
-                <p class="entry__company">Comtrade Group</p>
-              </div>
-            </div>
-            <ul>
-              <li>Developed a cardiac care platform used by hospitals in Europe and the United States for monitoring, reporting, and early detection of cardiac risks.</li>
-              <li>Built two mobile applications and supported encrypted real time communication between doctors and patients.</li>
-              <li>Used TDD and documentation for regulated medical software, and helped establish automated cross browser testing.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
       <section aria-labelledby="skills-heading">
-        <h2 id="skills-heading">Skills</h2>
+        <h2 id="skills-heading">Technical Skills</h2>
         <div class="skills">
-          <p><strong>Product:</strong> End to end development, architecture, developer experience, automation, accessibility, experimentation</p>
-          <p><strong>Frontend:</strong> JavaScript, TypeScript, React, Next.js, Angular, Ionic, design systems, Contentful</p>
-          <p><strong>Backend and cloud:</strong> Node.js, REST APIs, AWS, Docker, Kubernetes</p>
-          <p><strong>Quality and delivery:</strong> GitHub Actions, Jenkins, Playwright, WebDriverIO, Jest, TDD, monorepos</p>
-          <p><strong>Communication:</strong> WebRTC, encrypted real time systems</p>
-          <p><strong>AI tooling:</strong> Claude Code, Devin, Cursor, cloud agents</p>
+          <p>
+            <strong>Languages and Web:</strong> TypeScript, JavaScript, Java,
+            HTML, CSS
+          </p>
+          <p>
+            <strong>Frontend:</strong> React, Next.js, Remix, Angular, Tailwind
+            CSS, Design Systems, WebRTC
+          </p>
+          <p>
+            <strong>Backend, Cloud and Infrastructure:</strong> Node.js, REST
+            APIs, Redis, AWS, AWS Lambda, DynamoDB, Amazon S3, Terraform,
+            Infrastructure as Code, Docker, Kubernetes
+          </p>
+          <p>
+            <strong>Architecture and Developer Experience:</strong> Software
+            Architecture, System Design, Monorepos, Developer Experience,
+            Developer Tooling, Scalability, Performance Optimization
+          </p>
+          <p>
+            <strong>Delivery, Testing and Tooling:</strong> Git, GitHub Actions,
+            GitLab CI, CI/CD, Trunk Based Development, Vite, Webpack, Nx,
+            Storybook, Oxc, Playwright, Jest, React Testing Library, Test Driven
+            Development, Accessibility
+          </p>
+          <p>
+            <strong>AI Assisted Engineering:</strong> Claude Code, Cursor,
+            Devin, AI Agents, Agentic Development
+          </p>
+          <p>
+            <strong>Product Engineering:</strong> A/B Testing, Experimentation,
+            Analytics, Tracking, Consent Management, SaaS
+          </p>
         </div>
       </section>
 
-      <section aria-labelledby="education-heading">
+      <section aria-labelledby="experience-heading">
+        <h2 id="experience-heading">Professional Experience</h2>
+        <article class="entry">
+          <div class="entry__heading">
+            <h3>Senior Software Engineer</h3>
+            <p class="entry__meta">
+              <span>Rivian | Belgrade, Serbia</span>
+              <span class="entry__separator">|</span>
+              <span class="entry__dates">Jan 2026 to Present</span>
+            </p>
+          </div>
+          <ul>
+            <li>
+              Shipped the complete vehicle return journey from vehicle intake
+              through sale for trade ins, lease returns, and buybacks. Own
+              ongoing delivery across customer facing applications, internal
+              tools, backend services, automated testing, CI/CD, Terraform, AWS
+              resources, and deployment.
+            </li>
+            <li>
+              Serve as one of the core maintainers of an internal frontend
+              monorepo containing multiple employee applications. Develop
+              features for the primary internal web application while improving
+              shared architecture, libraries, tooling, dependencies, build
+              processes, workflows, and engineering standards.
+            </li>
+            <li>
+              Improve developer experience through stack modernization, tooling
+              and CI improvements, dependency management, automation, and
+              platform engineering.
+            </li>
+            <li>
+              Use Claude Code, Cursor, Devin, and AI agents for codebase
+              exploration, solution design, implementation, refactoring,
+              testing, debugging, and code review while retaining ownership of
+              technical decisions and production quality.
+            </li>
+          </ul>
+        </article>
+
+        <article class="entry entry--new-page">
+          <div class="entry__heading">
+            <h3>Tech Lead</h3>
+            <p class="entry__meta">
+              <span>TX Services / Doodle AG | Belgrade, Serbia</span>
+              <span class="entry__separator">|</span>
+              <span class="entry__dates">Dec 2018 to Jan 2026</span>
+            </p>
+          </div>
+          <ul>
+            <li>
+              Led software engineering efforts within a cross functional
+              Product Growth team, contributing during the company's growth
+              from approximately CHF 1 million to CHF 10 million in annual
+              recurring revenue.
+            </li>
+            <li>
+              Designed and delivered more than 100 A/B tests and product
+              experiments, owning the lifecycle from ideation and technical
+              planning through implementation, data collection, analysis, and
+              deployment to a platform serving more than 30 million users.
+            </li>
+            <li>
+              Led the migration of every frontend team to a shared monorepo,
+              improving development and maintenance efficiency, deployment
+              speed, and quality control. Drove adoption of TypeScript and
+              Next.js through hands on implementation, technical consultation,
+              internal technical talks, and collaboration across teams.
+            </li>
+            <li>
+              Built and maintained SaaS products used by millions of users,
+              including billing and payment integrations, timezone handling,
+              analytics and tracking, experimentation infrastructure, and
+              premium subscriptions that supported the company's move toward a
+              SaaS model.
+            </li>
+            <li>
+              Solved platform wide engineering problems and responded to
+              production incidents, improving reliability, maintainability,
+              performance, and developer experience.
+            </li>
+            <li>
+              Partnered with product, engineering, data, and leadership teams on
+              company wide initiatives, analytics, consent management,
+              technical interviews, mentoring, and knowledge sharing.
+            </li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__heading">
+            <h3>Frontend Developer</h3>
+            <p class="entry__meta">
+              <span>Commerce Connector GmbH | Stuttgart, Germany</span>
+              <span class="entry__separator">|</span>
+              <span class="entry__dates">Jul 2017 to Dec 2018</span>
+            </p>
+          </div>
+          <ul>
+            <li>
+              Built and maintained SaaS ecommerce applications, including B2C
+              widgets and an enterprise administration platform.
+            </li>
+            <li>
+              Implemented custom widget solutions that contributed to securing
+              contracts worth approximately EUR 2 million with major
+              international brands.
+            </li>
+            <li>
+              Developed and maintained the reusable JavaScript platform used to
+              integrate and customize widgets across different websites,
+              applications, and technology stacks.
+            </li>
+            <li>
+              Delivered reporting systems, AWS integrations, backend services,
+              and internal administration applications while contributing to
+              DevOps practices that improved delivery and collaboration.
+            </li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__heading">
+            <h3>Software Developer</h3>
+            <p class="entry__meta">
+              <span>Comtrade Group | Kragujevac, Serbia</span>
+              <span class="entry__separator">|</span>
+              <span class="entry__dates">Nov 2014 to Jul 2017</span>
+            </p>
+          </div>
+          <ul>
+            <li>
+              Developed a healthcare platform used by cardiologists to monitor
+              patient data, generate reports, and identify cardiac risks for
+              European Union and United States markets. The platform was
+              approved through independent third party audits.
+            </li>
+            <li>
+              Built, published, and maintained two mobile applications used by
+              hospital staff for secure real time communication with patients
+              and documentation of patient needs.
+            </li>
+            <li>
+              Applied Test Driven Development, automated testing, and
+              engineering documentation to meet regulatory requirements for
+              healthcare software across multiple markets.
+            </li>
+            <li>
+              Collaborated with the QA team to establish automated testing
+              infrastructure, including parallel cross browser testing,
+              improving test coverage and engineering efficiency.
+            </li>
+            <li>
+              Developed proof of concept applications and technical
+              demonstrations for enterprise customers, including an electrical
+              device monitoring platform.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="education" aria-labelledby="education-heading">
         <h2 id="education-heading">Education</h2>
-        <div>
-          <h3>Bachelor of Applied Science in Informatics</h3>
-        </div>
+        <h3>Bachelor of Applied Science (B.A.Sc.) in Informatics</h3>
+        <p>
+          Technical College of Vocational Studies
+          <span class="entry__separator">|</span>
+          <span class="entry__dates">2016</span>
+        </p>
       </section>
     </main>
   </body>

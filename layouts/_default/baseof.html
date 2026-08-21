@@ -97,6 +97,7 @@
         "@type" "Person"
         "name" .Site.Params.name
         "alternateName" .Site.Params.alternateName
+        "description" $description
         "jobTitle" .Site.Params.jobTitle
         "url" .Site.Home.Permalink
         "sameAs" $sameAs
@@ -107,6 +108,7 @@
         "@context" "https://schema.org"
         "@type" "ProfilePage"
         "name" $pageTitle
+        "description" $description
         "url" .Site.Home.Permalink
         "mainEntity" $person
       }}

@@ -2,30 +2,15 @@
 hero_statement: I build products end to end and improve the systems teams use to build them.
 hero_summary: My work spans product development, architecture, implementation, continuous integration, developer experience, and ongoing maintenance.
 systems:
-  - number: "01"
-    company: Comtrade Group · Software Developer
-    title: Cardiac care platform
-    summary: Developed a medical platform for cardiologists to monitor patient data, generate reports, and identify cardiac risks. Built two mobile apps for hospital staff and supported encrypted real time communication between doctors and patients.
-    scope:
-      - Medical software
-      - Web and mobile
-      - TDD and regulated delivery
-  - number: "02"
-    company: Commerce Connector GmbH · Frontend Developer
+  - company: Comtrade Group · Software Developer
+    title: Cardiac care software
+    summary: Built a medical platform for cardiologists to monitor patient data, generate reports, and identify cardiac risks, plus two mobile applications used by hospital staff to communicate with patients and document their needs.
+  - company: Commerce Connector GmbH · Frontend Developer
     title: Where to buy commerce
-    summary: Built client applications for SaaS ecommerce solutions, including where to buy widgets and an enterprise administration platform. Custom widget work helped secure contracts worth about €2 million with global brands.
-    scope:
-      - Reusable JavaScript
-      - AWS integrations
-      - Frontend and backend delivery
-  - number: "03"
-    company: TX Services / Doodle AG · Frontend Tech Lead
-    title: Scheduling at scale
-    summary: Led frontend engineering in a cross functional Product Growth team. Ran more than 100 experiments, helped build subscription products on a platform used by more than 30 million people, and guided migrations to TypeScript, Next.js, and a monorepo.
-    scope:
-      - Product experiments
-      - Platform modernization
-      - Consumer and B2B products
+    summary: Built consumer where to buy widgets, a reusable JavaScript integration platform, an enterprise administration application, and full stack reporting with AWS integrations.
+  - company: TX Services / Doodle AG · Tech Lead
+    title: Scheduling products
+    summary: Built and maintained scheduling and subscription products, billing and payment integrations, timezone handling, analytics, tracking, experimentation infrastructure, and shared platform architecture.
 practice_intro: Architecture, implementation, CI, developer experience, and maintenance are parts of the same system. I work across those boundaries so software stays understandable and teams can keep moving.
 practice:
   - title: End to end product development
@@ -37,7 +22,7 @@ practice:
   - title: Developer experience
     summary: Reduce friction through automation, better tooling, and maintenance that keeps paying off.
 ai_title: AI follows intent. Engineering owns the result.
-ai_summary: I use Claude Code, Cursor, Devin, and cloud agents to help implement systems I have already envisioned, keeping my attention on architecture and how the product fits together across the stack.
+ai_summary: I use AI assisted workflows for exploration, solution design, implementation, refactoring, testing, debugging, and review. I retain ownership of architecture, technical decisions, and production quality.
 toolsets:
   - label: Core
     items: JavaScript · TypeScript · React · Angular · Node.js

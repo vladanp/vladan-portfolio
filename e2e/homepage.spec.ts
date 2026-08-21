@@ -25,16 +25,26 @@ test.describe("homepage", () => {
     await expect(page.locator("main section")).toHaveCount(4);
     await expect(page.locator(".system-entry")).toHaveCount(3);
     await expect(page.locator(".system-entry__title")).toHaveText([
-      "Cardiac care platform",
+      "Cardiac care software",
       "Where to buy commerce",
-      "Scheduling at scale",
+      "Scheduling products",
     ]);
     await expect(page.locator("#work")).toContainText("Comtrade Group");
     await expect(page.locator("#work")).toContainText(
       "Commerce Connector GmbH",
     );
     await expect(page.locator("#work")).toContainText("Doodle AG");
+    await expect(page.locator(".system-entry__number")).toHaveCount(0);
+    await expect(page.locator(".section-heading__number")).toHaveCount(0);
+    await expect(page.locator("#work")).not.toContainText(/CHF|EUR|million/);
     await expect(page.locator("#experience")).toHaveCount(0);
+
+    const rivianLink = page.getByRole("link", {
+      name: "Rivian company website, opens in a new tab",
+    });
+    await expect(rivianLink).toHaveAttribute("href", "https://rivian.com/");
+    await expect(rivianLink).toHaveAttribute("target", "_blank");
+    await expect(rivianLink).toHaveAttribute("rel", "external noopener");
   });
 
   test("hosts the CV locally and links it from useful places", async ({
@@ -51,6 +61,18 @@ test.describe("homepage", () => {
         links.map((link) => link.getAttribute("type")),
       ),
     ).toEqual(["application/pdf", "application/pdf", "application/pdf"]);
+    expect(
+      await cvLinks.evaluateAll((links) =>
+        links.map((link) => ({
+          rel: link.getAttribute("rel"),
+          target: link.getAttribute("target"),
+        })),
+      ),
+    ).toEqual([
+      { rel: "noopener", target: "_blank" },
+      { rel: "noopener", target: "_blank" },
+      { rel: "noopener", target: "_blank" },
+    ]);
 
     const response = await request.get("/vladan-petrovic-cv.pdf");
     expect(response.status()).toBe(200);
@@ -67,7 +89,7 @@ test.describe("homepage", () => {
       page.locator('a[href="mailto:vladanpetrovic89@gmail.com"]'),
     ).toHaveText(/Email/);
 
-    const profileLinks = page.locator(".contact-links a[rel='me']");
+    const profileLinks = page.locator(".contact-links a[rel~='me']");
     await expect(profileLinks).toHaveCount(2);
     await expect(profileLinks).toContainText(["LinkedIn", "GitHub"]);
     expect(
@@ -78,8 +100,11 @@ test.describe("homepage", () => {
         })),
       ),
     ).toEqual([
-      { href: "https://www.linkedin.com/in/vladanpet", target: null },
-      { href: "https://github.com/vladanp", target: null },
+      {
+        href: "https://www.linkedin.com/in/vladanpet",
+        target: "_blank",
+      },
+      { href: "https://github.com/vladanp", target: "_blank" },
     ]);
   });
 
@@ -161,6 +186,8 @@ test.describe("homepage", () => {
       mainEntity: {
         "@type": "Person",
         alternateName: "Vladan Petrovic",
+        description:
+          "Vladan Petrović is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
         jobTitle: "Senior Software Engineer",
         knowsAbout: [
           "Full stack software development",
@@ -181,6 +208,8 @@ test.describe("homepage", () => {
           sameAs: "https://rivian.com/",
         },
       },
+      description:
+        "Vladan Petrović is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
       name: "Vladan Petrovic | Senior Software Engineer",
       url: "http://127.0.0.1:1313/",
     });
@@ -191,6 +220,7 @@ test.describe("homepage", () => {
 
     const visibleText = await page.locator("body").innerText();
     expect(visibleText).not.toContain("Senior Full Stack Software Engineer");
+    expect(visibleText).not.toMatch(/Claude Code|Cursor|Devin/);
     expect(visibleText).not.toMatch(/\b(?:19|20)\d{2}\b/);
     expect(visibleText).not.toMatch(/[A-Za-z][\u2013\u2014-][A-Za-z]/);
   });

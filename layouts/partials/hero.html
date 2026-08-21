@@ -12,23 +12,38 @@
       <p class="hero__summary">{{ .Params.hero_summary }}</p>
       <div class="hero__actions" aria-label="Introductory links">
         <a class="text-link" href="#work">View selected work</a>
-        <a class="text-link" href="{{ .Site.Params.cvPath | relURL }}" type="application/pdf">View CV</a>
+        <a
+          class="text-link"
+          href="{{ .Site.Params.cvPath | relURL }}"
+          type="application/pdf"
+          target="_blank"
+          rel="noopener"
+          aria-label="View CV, PDF, opens in a new tab"
+        >View CV</a>
       </div>
       <div class="current-role">
         <p class="eyebrow">Currently</p>
         <p class="current-role__position">
-          <span>{{ .Site.Params.currentJobTitle }}</span>
-          <span class="current-role__at">at</span>
-          <span class="employer-wordmark">
-            <span class="employer-wordmark__name">{{ .Site.Params.currentEmployer }}</span>
-            <img
-              class="current-role__logo"
-              src="{{ $employerLogo.RelPermalink }}"
-              width="409"
-              height="56"
-              alt=""
-              decoding="async"
-            />
+          <span class="current-role__title">{{ .Site.Params.currentJobTitle }}</span>
+          <span class="current-role__employer">
+            <span class="current-role__at">at</span>
+            <a
+              class="employer-wordmark"
+              href="{{ .Site.Params.currentEmployerUrl }}"
+              aria-label="Rivian company website, opens in a new tab"
+              target="_blank"
+              rel="external noopener"
+            >
+              <span class="employer-wordmark__name">{{ .Site.Params.currentEmployer }}</span>
+              <img
+                class="current-role__logo"
+                src="{{ $employerLogo.RelPermalink }}"
+                width="409"
+                height="56"
+                alt=""
+                decoding="async"
+              />
+            </a>
           </span>
         </p>
       </div>

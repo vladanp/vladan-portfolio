@@ -13,7 +13,15 @@
       <ul class="site-nav__list">
         <li><a href="{{ $sectionPrefix }}#work">Work</a></li>
         <li><a href="{{ $sectionPrefix }}#practice">Practice</a></li>
-        <li><a href="{{ .Site.Params.cvPath | relURL }}" type="application/pdf">CV</a></li>
+        <li>
+          <a
+            href="{{ .Site.Params.cvPath | relURL }}"
+            type="application/pdf"
+            target="_blank"
+            rel="noopener"
+            aria-label="CV, PDF, opens in a new tab"
+          >CV</a>
+        </li>
         <li><a href="{{ $sectionPrefix }}#contact">Contact</a></li>
       </ul>
     </nav>
