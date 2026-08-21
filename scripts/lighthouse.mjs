@@ -14,6 +14,10 @@ const runCount = Number.parseInt(
   process.env.LIGHTHOUSE_RUNS ?? (requestedURL ? "3" : "1"),
   10,
 );
+const chromeFlags = [
+  "--headless=new",
+  ...(process.env.CI ? ["--no-sandbox"] : []),
+].join(" ");
 const thresholds = {
   performance: 0.9,
   accessibility: 1,
@@ -111,7 +115,7 @@ async function collectAuditScores(chromePath, scores, runNumber = 1) {
       targetURL.href,
       "--quiet",
       "--locale=en-US",
-      "--chrome-flags=--headless=new",
+      `--chrome-flags=${chromeFlags}`,
       "--only-categories=performance,accessibility,best-practices,seo",
       "--output=json",
       `--output-path=${reportPath}`,
