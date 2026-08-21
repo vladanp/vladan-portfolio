@@ -36,7 +36,7 @@ This is the source code for the portfolio of Vladan Petrovic, a Senior Software 
 
 This project uses [mise](https://mise.jdx.dev/) to manage tool versions. The `.mise.toml` file pins Hugo, Node.js, and pnpm.
 
-**Prerequisites:** Hugo 0.161.1, Node.js 24, pnpm 11
+**Prerequisites:** Hugo 0.165.0, Node.js 24, pnpm 11
 
 ```bash
 git clone https://github.com/vladanp/vladan-portfolio.git
@@ -83,11 +83,15 @@ Tests run automatically on pull requests to `main` via GitHub Actions.
 
 ## Code Quality
 
-This project uses **Prettier** with `prettier-plugin-go-template` for consistent formatting across all file types including Hugo templates. A **lefthook** pre-commit hook runs `prettier --check` on every commit, and the same check runs in CI.
+This project uses **oxfmt** for formatting and **oxlint** for linting. A **lefthook** pre-commit hook runs both on every commit, and the same checks run in CI.
+
+> Note: Hugo's Go-template `.html` layouts are not auto-formatted, as oxfmt does not support Go template syntax.
 
 ```bash
 pnpm format         # format all files
 pnpm format:check   # check formatting (CI + pre-commit)
+pnpm lint           # lint all files
+pnpm lint:fix       # lint and auto-fix
 ```
 
 ## Deployment
