@@ -17,19 +17,22 @@ test.describe("homepage", () => {
 
   test("social links have correct attributes", async ({ page }) => {
     await page.goto("/");
-    const links = page.locator(".social-links__link");
-    const count = await links.count();
-    expect(count).toBeGreaterThanOrEqual(2);
+    const links = await page.locator(".social-links__link").evaluateAll((els) =>
+      els.map((el) => ({
+        href: el.getAttribute("href"),
+        target: el.getAttribute("target"),
+        rel: el.getAttribute("rel"),
+      })),
+    );
+    expect(links.length).toBeGreaterThanOrEqual(2);
 
-    for (let i = 0; i < count; i++) {
-      const link = links.nth(i);
-      const href = await link.getAttribute("href");
-      if (href?.startsWith("mailto:")) {
+    for (const link of links) {
+      if (link.href?.startsWith("mailto:")) {
         continue;
       }
-      await expect(link).toHaveAttribute("target", "_blank");
-      await expect(link).toHaveAttribute("rel", "noopener noreferrer");
-      expect(href).toMatch(/^https?:\/\//);
+      expect(link.target).toBe("_blank");
+      expect(link.rel).toBe("noopener noreferrer");
+      expect(link.href).toMatch(/^https?:\/\//);
     }
   });
 

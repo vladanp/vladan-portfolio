@@ -1,7 +1,7 @@
 <section class="social-links" aria-labelledby="social-links-heading">
-  <h3 id="social-links-heading" class="social-links__heading">
+  <h2 id="social-links-heading" class="social-links__heading">
     {{ .Site.Params.connectTitle }}
-  </h3>
+  </h2>
   <ul>
     {{ range $index, $link := .Site.Params.socialLinks }}
       <li>
@@ -29,11 +29,7 @@
             alt=""
             width="56"
             height="56"
-            fetchpriority="{{ if eq $index 0 }}
-              high
-            {{ else }}
-              auto
-            {{ end }}"
+            fetchpriority="{{ if eq $index 0 }}high{{ else }}auto{{ end }}"
           />
         </a>
       </li>

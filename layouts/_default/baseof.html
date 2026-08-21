@@ -54,12 +54,7 @@
     />
     <meta
       name="robots"
-      content="{{ if or (.Params.noindex) (eq .Kind "404") }}
-        noindex, nofollow
-      {{ else }}
-        index, follow
-      {{ end }}
-      "
+      content="{{ if or (.Params.noindex) (eq .Kind "404") }}noindex, nofollow{{ else }}index, follow{{ end }}"
     />
 
     <!-- Twitter Card Meta Tags -->
@@ -126,14 +121,11 @@
       property="og:image:alt"
       content="{{ .Site.Params.ogTitle | default .Site.Title }}"
     />
+    <meta property="og:image:type" content="image/webp" />
 
     <!-- Canonical Link -->
     <link rel="canonical" href="{{ .Permalink }}" />
-    {{ $manifestData := readFile "static/manifest.json" | base64Encode }}
-    <link
-      rel="manifest"
-      href="{{ print "data:application/manifest+json;base64," $manifestData | safeURL }}"
-    />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#202124" />
 
     <!-- Favicon -->
@@ -169,22 +161,15 @@
     />
 
     <!-- Android Chrome Icons -->
-    {{ $androidIcon192 := resources.Get "images/android-chrome-192x192.png" |
-      fingerprint
-    }}
     <link
       rel="icon"
-      href="{{ $androidIcon192.RelPermalink }}"
+      href="/android-chrome-192x192.png"
       sizes="192x192"
       type="image/png"
     />
-
-    {{ $androidIcon512 := resources.Get "images/android-chrome-512x512.png" |
-      fingerprint
-    }}
     <link
       rel="icon"
-      href="{{ $androidIcon512.RelPermalink }}"
+      href="/android-chrome-512x512.png"
       sizes="512x512"
       type="image/png"
     />

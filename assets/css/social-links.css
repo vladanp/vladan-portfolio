@@ -9,6 +9,7 @@
 
 .social-links__heading {
   margin-bottom: var(--space-2x);
+  font-size: 1.17em;
 }
 
 .social-links ul {

@@ -5,6 +5,7 @@
 
 .skills__heading {
   margin-bottom: var(--space-2x);
+  font-size: 1.17em;
 }
 
 .skills-container__link:hover img {
