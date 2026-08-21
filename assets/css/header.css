@@ -11,9 +11,8 @@
 }
 
 .site-header__identity {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: inline-flex;
+  align-items: center;
   min-height: 2.75rem;
   width: fit-content;
   text-decoration: none;
@@ -23,12 +22,6 @@
   font-weight: 750;
   letter-spacing: -0.025em;
   line-height: 1.25;
-}
-
-.site-header__role {
-  color: var(--color-muted);
-  font-size: 0.75rem;
-  line-height: 1.35;
 }
 
 .site-nav__list {

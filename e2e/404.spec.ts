@@ -8,6 +8,14 @@ test.describe("404 page", () => {
 
     expect(response?.status()).toBe(404);
     await expect(page.locator("main")).toHaveCount(1);
+    await expect(page.locator(".site-header__identity")).toHaveText(
+      "Vladan Petrović",
+    );
+    await expect(page.locator(".site-header__identity")).toHaveAttribute(
+      "href",
+      "/",
+    );
+    await expect(page.locator(".site-header__role")).toHaveCount(0);
     await expect(page.locator("h1")).toHaveText("Page Not Found");
     await expect(page.locator(".error-page__code")).toHaveText("404");
     await expect(page.locator(".error-page__code")).toHaveAttribute(

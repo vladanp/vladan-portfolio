@@ -11,6 +11,10 @@ test.describe("homepage", () => {
       "Vladan Petrovic | Senior Software Engineer",
     );
     await expect(page.locator(".site-header")).toHaveCount(1);
+    await expect(page.locator(".site-header__identity")).toHaveText(
+      "Vladan Petrović",
+    );
+    await expect(page.locator(".site-header__role")).toHaveCount(0);
     await expect(page.locator("main")).toHaveCount(1);
     await expect(page.locator("footer")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveText("Vladan Petrović");
