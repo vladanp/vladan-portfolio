@@ -2,35 +2,33 @@
   <h2 id="skills-heading" class="skills__heading">
     {{ .Site.Params.skillsTitle }}
   </h2>
-  <div class="skills-container">
+  <ul class="skills-container">
     {{ range .Site.Params.skills }}
-      <div class="skills-container__skill">
+      <li class="skills-container__skill">
         <a
           href="{{ .url }}"
           target="_blank"
           rel="noopener noreferrer"
           class="skills-container__link"
-          aria-label="Learn more about {{ .name }}"
+          aria-label="Learn more about {{ .name }} (opens in a new tab)"
         >
           {{ $skillImage200 := resources.Get .image200 | fingerprint }}
           {{ $skillImage400 := resources.Get .image400 | fingerprint }}
-          {{ $skillImage800 := resources.Get .image800 | fingerprint }}
           <img
             src="{{ $skillImage200.RelPermalink }}"
             srcset="
-              {{ $skillImage200.RelPermalink }} 1x,
-              {{ $skillImage400.RelPermalink }} 2x,
-              {{ $skillImage800.RelPermalink }} 3x
+              {{ $skillImage200.RelPermalink }} 200w,
+              {{ $skillImage400.RelPermalink }} 400w
             "
+            sizes="80px"
             alt=""
             width="80"
             height="80"
-            loading="lazy"
             decoding="async"
           />
-          <p>{{ .name }}</p>
+          <span class="skills-container__name">{{ .name }}</span>
         </a>
-      </div>
+      </li>
     {{ end }}
-  </div>
+  </ul>
 </section>

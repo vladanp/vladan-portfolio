@@ -14,9 +14,12 @@
   --space-3x: calc(3 * var(--space));
   --space-4x: calc(4 * var(--space));
   --space-6x: calc(6 * var(--space));
+}
 
-  /* Breakpoints */
-  --mobile-breakpoint: 768px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
@@ -34,7 +37,6 @@ body {
   line-height: 1.5;
   background-color: var(--background-color);
   color: var(--font-color);
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -55,7 +57,7 @@ button:focus-visible,
   gap: var(--space-6x);
 }
 
-@media (max-width: var(--mobile-breakpoint)) {
+@media (max-width: 48rem) {
   .main-container {
     gap: var(--space-3x);
   }

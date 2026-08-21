@@ -1,8 +1,13 @@
 {
   "name": "vladan-portfolio",
   "version": "1.0.0",
+  "private": true,
   "description": "Vladan Petrovic personal portfolio site - Hugo static site",
+  "license": "MIT",
   "scripts": {
+    "dev": "hugo server --renderToMemory --disableFastRender --noHTTPCache --bind 127.0.0.1 --baseURL http://127.0.0.1:1313/",
+    "build": "hugo --environment production --minify --gc --cleanDestinationDir --panicOnWarning --printPathWarnings --printUnusedTemplates",
+    "check": "pnpm format:check && pnpm lint && pnpm build && pnpm test && pnpm lighthouse",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
@@ -11,16 +16,20 @@
     "format:check": "oxfmt --check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "lhci": "lhci autorun",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "lighthouse:production": "node scripts/lighthouse.mjs https://vladan.dev/",
     "prepare": "lefthook install"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
-    "@lhci/cli": "0.15.1",
     "@playwright/test": "1.62.1",
     "lefthook": "2.1.10",
+    "lighthouse": "13.4.1",
     "oxfmt": "0.64.0",
     "oxlint": "1.79.0"
+  },
+  "engines": {
+    "node": ">=24.19.0 <25"
   },
   "packageManager": "pnpm@11.22.0"
 }

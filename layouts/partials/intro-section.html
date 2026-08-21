@@ -5,4 +5,7 @@
   <p class="intro-section__job-title">
     {{ .Site.Params.jobTitle }}
   </p>
+  {{ with .Content }}
+    <div class="intro-section__summary">{{ . }}</div>
+  {{ end }}
 </section>

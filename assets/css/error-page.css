@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 50vh;
+  flex: 1;
   padding: 0 var(--space-2x);
 }
 
@@ -36,9 +36,6 @@
   opacity: 0.9;
 }
 
-.error-page__actions {
-}
-
 .error-page__home-link {
   display: inline-block;
   padding: var(--space-2x) var(--space-4x);
@@ -49,7 +46,6 @@
   border-radius: 4px;
   font-size: 1rem;
   font-weight: 500;
-  transition: all 0.3s ease;
   cursor: pointer;
 }
 
@@ -57,10 +53,9 @@
 .error-page__home-link:focus-visible {
   background-color: var(--font-color);
   color: var(--background-color);
-  outline: var(--focus-outline);
 }
 
-@media (max-width: var(--mobile-breakpoint)) {
+@media (max-width: 48rem) {
   .error-page__code {
     font-size: 6rem;
   }

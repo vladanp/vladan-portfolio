@@ -11,7 +11,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : 1,
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
-    baseURL: "http://localhost:1313",
+    baseURL: "http://127.0.0.1:1313",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
@@ -27,9 +27,9 @@ export default defineConfig({
   ],
   webServer: {
     command:
-      "hugo server --port 1313 --baseURL http://localhost:1313 --disableFastRender --noHTTPCache",
-    url: "http://localhost:1313",
-    reuseExistingServer: true,
+      "hugo server --environment production --renderToMemory --disableLiveReload --disableFastRender --noHTTPCache --bind 127.0.0.1 --port 1313 --baseURL http://127.0.0.1:1313/",
+    url: "http://127.0.0.1:1313",
+    reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },
   outputDir: "./e2e-results",

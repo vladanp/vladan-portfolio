@@ -1,80 +1,131 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("homepage", () => {
-  test("responds HTTP 200 with correct title", async ({ page }) => {
+  test("responds successfully with the expected semantic structure", async ({
+    page,
+  }) => {
     const response = await page.goto("/");
+
     expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle(/Vladan/i);
-  });
-
-  test("key sections are visible", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.locator(".main-container")).toBeVisible();
-    await expect(page.locator(".intro-section")).toBeVisible();
-    await expect(page.locator(".expertise-section")).toBeVisible();
+    await expect(page).toHaveTitle(
+      "Vladan Petrovic | Senior Software Engineer",
+    );
+    await expect(page.locator("main")).toHaveCount(1);
+    await expect(page.locator("h1")).toHaveText("Vladan Petrović");
+    await expect(page.locator(".intro-section__summary")).toContainText(
+      "Full-stack development",
+    );
     await expect(page.locator(".social-links")).toBeVisible();
+    await expect(page.locator(".skills")).toBeVisible();
+    const inlineCSS = await page.locator("style").textContent();
+    expect(inlineCSS).toContain(".intro-section");
+    expect(inlineCSS).not.toContain(".error-page");
+    expect(
+      await page
+        .locator(".skills-container")
+        .evaluate((element) => element.tagName),
+    ).toBe("UL");
   });
 
-  test("social links have correct attributes", async ({ page }) => {
+  test("external profile and skill links are protected and named", async ({
+    page,
+  }) => {
     await page.goto("/");
-    const links = await page.locator(".social-links__link").evaluateAll((els) =>
+    const links = await page.locator('a[target="_blank"]').evaluateAll((els) =>
       els.map((el) => ({
         href: el.getAttribute("href"),
-        target: el.getAttribute("target"),
+        label: el.getAttribute("aria-label"),
         rel: el.getAttribute("rel"),
       })),
     );
-    expect(links.length).toBeGreaterThanOrEqual(2);
 
+    expect(links).toHaveLength(7);
     for (const link of links) {
-      if (link.href?.startsWith("mailto:")) {
-        continue;
-      }
-      expect(link.target).toBe("_blank");
+      expect(link.href).toMatch(/^https:\/\//);
+      expect(link.label).toContain("opens in a new tab");
       expect(link.rel).toBe("noopener noreferrer");
-      expect(link.href).toMatch(/^https?:\/\//);
     }
   });
 
-  test("has SEO metadata and structured data", async ({ page }) => {
+  test("serves compact responsive images with intrinsic dimensions", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const images = await page.locator("main img").evaluateAll((elements) =>
+      elements.map((image) => ({
+        height: image.getAttribute("height"),
+        loading: image.getAttribute("loading"),
+        sizes: image.getAttribute("sizes"),
+        srcset: image.getAttribute("srcset"),
+        width: image.getAttribute("width"),
+      })),
+    );
+
+    expect(images).toHaveLength(8);
+    for (const image of images) {
+      expect(image.width).toMatch(/^(56|80)$/);
+      expect(image.height).toBe(image.width);
+      expect(image.loading).toBeNull();
+      expect(image.sizes).toMatch(/^(56|80)px$/);
+      expect(image.srcset).toContain("200w");
+      expect(image.srcset).toContain("400w");
+      expect(image.srcset).not.toContain("800");
+    }
+  });
+
+  test("has consistent search and social metadata", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
-      "content",
-      /Vladan/i,
-    );
-    await expect(page.locator('meta[name="author"]')).toHaveAttribute(
-      "content",
-      /Vladan/i,
-    );
-
-    // Open Graph
-    await expect(page.locator('meta[property="og:title"]')).toBeAttached();
-    await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
-      "content",
-      "website",
-    );
-    await expect(page.locator('meta[property="og:image"]')).toBeAttached();
-
-    // Twitter card
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute("content");
+    expect(description).toContain("Senior Software Engineer");
+    expect(description).toBe(description?.trim());
+    await expect(page.locator('meta[name="keywords"]')).toHaveCount(0);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
       "content",
-      "summary_large_image",
+      "summary",
+    );
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "http://127.0.0.1:1313/",
     );
 
-    // Canonical URL (dev server uses localhost; production uses vladan.dev)
-    await expect(page.locator('link[rel="canonical"]')).toBeAttached();
+    await Promise.all(
+      [
+        'meta[property="og:description"]',
+        'meta[name="twitter:description"]',
+      ].map((selector) =>
+        expect(page.locator(selector)).toHaveAttribute("content", description!),
+      ),
+    );
 
-    // Structured data
-    const ldJson = page.locator('script[type="application/ld+json"]');
-    await expect(ldJson).toBeAttached();
-    const raw = await ldJson.textContent();
-    const parsed = JSON.parse(raw!);
-    expect(parsed["@type"]).toBe("Person");
-    expect(parsed.name).toBeTruthy();
-    expect(parsed.jobTitle).toBeTruthy();
-    expect(parsed.url).toMatch(/^https?:\/\/.+/);
-    expect(Array.isArray(parsed.sameAs)).toBe(true);
-    expect(parsed.sameAs.length).toBeGreaterThanOrEqual(1);
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+      "content",
+      "Illustration of a computer monitor displaying code",
+    );
+    await expect(
+      page.locator('meta[name="twitter:image:alt"]'),
+    ).toHaveAttribute(
+      "content",
+      "Illustration of a computer monitor displaying code",
+    );
+
+    const rawStructuredData = await page
+      .locator('script[type="application/ld+json"]')
+      .textContent();
+    const person = JSON.parse(rawStructuredData!);
+    expect(person).toEqual({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      alternateName: "Vladan Petrovic",
+      jobTitle: "Senior Software Engineer",
+      name: "Vladan Petrović",
+      sameAs: [
+        "https://www.linkedin.com/in/vladanpet",
+        "https://github.com/vladanp",
+      ],
+      url: "http://127.0.0.1:1313/",
+    });
   });
 });

@@ -16,3 +16,14 @@
   margin: 0;
   opacity: 0.8;
 }
+
+.intro-section__summary {
+  max-width: 42rem;
+  margin: var(--space-3x) auto 0;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  opacity: 0.8;
+}
+
+.intro-section__summary p {
+  margin: 0;
+}

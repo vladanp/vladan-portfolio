@@ -1,8 +1,8 @@
 pre-commit:
   commands:
     format-check:
-      glob: "*.{ts,js,css,json,yml,yaml,md,toml}"
-      run: npx oxfmt --check
+      glob: "*.{ts,js,mjs,css,json,yml,yaml,md,toml}"
+      run: pnpm format:check
     lint:
-      glob: "*.{ts,js}"
-      run: npx oxlint
+      glob: "*.{ts,js,mjs}"
+      run: pnpm lint
