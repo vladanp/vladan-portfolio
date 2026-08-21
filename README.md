@@ -80,4 +80,12 @@ Dependabot.
 
 ## License
 
-Licensed under the [MIT License](./LICENSE).
+The original source code and project materials in this repository are licensed
+under the [MIT License](./LICENSE), provided the copyright and license notices
+are retained. The MIT License includes an express disclaimer of warranties and
+limitation of liability.
+
+The portfolio text, personal details, photographs, names, logos, trademarks,
+and other assets owned by third parties are not licensed by this notice unless
+explicitly stated otherwise. Obtain any permissions needed for those materials
+before reusing them.
