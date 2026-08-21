@@ -15,21 +15,28 @@ const outputs = [
 const browser = await chromium.launch();
 
 try {
-  await Promise.all(
+  const results = await Promise.allSettled(
     outputs.map(async ([size, relativePath]) => {
       const page = await browser.newPage({
         deviceScaleFactor: 1,
         viewport: { height: size, width: size },
       });
-      await page.goto(pathToFileURL(sourcePath).href, { waitUntil: "load" });
-      await page.screenshot({
-        omitBackground: true,
-        path: resolve(projectRoot, relativePath),
-        type: "png",
-      });
-      await page.close();
+
+      try {
+        await page.goto(pathToFileURL(sourcePath).href, { waitUntil: "load" });
+        await page.screenshot({
+          omitBackground: true,
+          path: resolve(projectRoot, relativePath),
+          type: "png",
+        });
+      } finally {
+        await page.close();
+      }
     }),
   );
+
+  const failure = results.find((result) => result.status === "rejected");
+  if (failure) throw failure.reason;
 } finally {
   await browser.close();
 }

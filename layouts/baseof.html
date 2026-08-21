@@ -9,7 +9,7 @@
 {{- if $is404 -}}
   {{- $description = "The page you requested could not be found." -}}
 {{- end -}}
-{{- $author := .Params.author | default .Site.Params.author | strings.TrimSpace -}}
+{{- $author := .Params.author | default .Site.Params.searchName | strings.TrimSpace -}}
 <!doctype html>
 <html lang="{{ .Site.Language.Locale | default "en-US" }}">
   <head>
@@ -95,8 +95,7 @@
       }}
       {{- $person := dict
         "@type" "Person"
-        "name" .Site.Params.name
-        "alternateName" .Site.Params.alternateName
+        "name" .Site.Params.searchName
         "description" $description
         "jobTitle" .Site.Params.jobTitle
         "url" .Site.Home.Permalink

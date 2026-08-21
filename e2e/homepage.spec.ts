@@ -136,7 +136,12 @@ test.describe("homepage", () => {
       .getAttribute("content");
     expect(description).toContain("Senior Software Engineer");
     expect(description).toContain("Rivian");
+    expect(description).toContain("Vladan Petrovic");
     expect(description).toBe(description?.trim());
+    await expect(page.locator('meta[name="author"]')).toHaveAttribute(
+      "content",
+      "Vladan Petrovic",
+    );
     await expect(page.locator('meta[name="keywords"]')).toHaveCount(0);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
       "content",
@@ -189,9 +194,8 @@ test.describe("homepage", () => {
       "@type": "ProfilePage",
       mainEntity: {
         "@type": "Person",
-        alternateName: "Vladan Petrovic",
         description:
-          "Vladan Petrović is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
+          "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
         jobTitle: "Senior Software Engineer",
         knowsAbout: [
           "Full stack software development",
@@ -200,7 +204,7 @@ test.describe("homepage", () => {
           "Developer experience",
           "AI assisted software development",
         ],
-        name: "Vladan Petrović",
+        name: "Vladan Petrovic",
         sameAs: [
           "https://www.linkedin.com/in/vladanpet",
           "https://github.com/vladanp",
@@ -213,7 +217,7 @@ test.describe("homepage", () => {
         },
       },
       description:
-        "Vladan Petrović is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
+        "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
       name: "Vladan Petrovic | Senior Software Engineer",
       url: "http://127.0.0.1:1313/",
     });

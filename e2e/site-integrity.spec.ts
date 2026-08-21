@@ -27,7 +27,7 @@ test.describe("generated site integrity", () => {
       display: "standalone",
       id: "./",
       lang: "en-US",
-      name: "Vladan Petrovic | Senior Software Engineer",
+      name: "Vladan Petrović | Senior Software Engineer",
       scope: "./",
       start_url: "./",
       theme_color: "#f5f1e8",

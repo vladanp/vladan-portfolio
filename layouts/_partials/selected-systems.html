@@ -1,6 +1,6 @@
 <section id="work" class="indexed-section" aria-labelledby="work-heading">
   <div class="site-shell indexed-section__grid">
-    {{ partial "section-heading.html" (dict "id" "work" "title" "Selected previous work") }}
+    {{ partial "section-heading.html" (dict "id" "work" "title" .Params.work_section_title) }}
     <div class="systems-list">
       {{ range .Params.systems }}
         <article class="system-entry">

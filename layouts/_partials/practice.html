@@ -1,8 +1,8 @@
 <section id="practice" class="indexed-section" aria-labelledby="practice-heading">
   <div class="site-shell indexed-section__grid">
-    {{ partial "section-heading.html" (dict "id" "practice" "title" "Engineering practice") }}
+    {{ partial "section-heading.html" (dict "id" "practice" "title" .Params.practice_section_title) }}
     <div>
-      <p class="section-lede">The work spans the whole product.</p>
+      <p class="section-lede">{{ .Params.practice_lede }}</p>
       <p class="practice__intro">{{ .Params.practice_intro }}</p>
       <div class="practice-list">
         {{ range .Params.practice }}
@@ -13,7 +13,7 @@
         {{ end }}
       </div>
       <article class="ai-practice">
-        <p class="eyebrow">AI assisted engineering</p>
+        <p class="eyebrow">{{ .Params.ai_label }}</p>
         <h3>{{ .Params.ai_title }}</h3>
         <p>{{ .Params.ai_summary }}</p>
       </article>

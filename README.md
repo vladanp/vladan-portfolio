@@ -9,10 +9,10 @@ JavaScript sent to the browser and no external runtime dependencies.
 
 ## Technology
 
-The site is built with Hugo and uses Node.js tooling only for repository
-validation. Playwright, Axe, and Lighthouse cover browser behavior,
-accessibility, and performance; oxfmt and oxlint provide formatting and
-linting.
+The site is built with Hugo. Node.js tooling handles committed asset generation
+and repository validation. Playwright, Axe, and Lighthouse cover browser
+behavior, accessibility, and performance; Oxfmt and Oxlint provide formatting
+and linting.
 
 The supported toolchain is defined in `.mise.toml`, `package.json`, and the
 pnpm lockfile. With [mise](https://mise.jdx.dev/) installed:
@@ -66,11 +66,11 @@ access. A Git hook runs the formatting and lint checks. Install it by running
 
 Public identity, contact details, current role data, and external links live in
 `config/_default/params.toml`. Homepage copy and selected work live in
-`content/_index.md`. The editable CV and social image sources are in `scripts/`;
-their generated files are committed so production builds stay static and do
-not require a browser. When professional details change, update the public
-configuration, homepage content, and CV source together, then regenerate the
-affected assets.
+`content/_index.md`. The editable CV, site icon, and social image sources are in
+`scripts/`; their generated files are committed so production builds stay
+static and do not require a browser. When professional details change, update
+the public configuration, homepage content, CV source, social image source, and
+web manifest as applicable, then regenerate the affected assets.
 
 ## CI and deployment
 

@@ -1,6 +1,6 @@
 <section id="contact" class="indexed-section" aria-labelledby="contact-heading">
   <div class="site-shell indexed-section__grid">
-    {{ partial "section-heading.html" (dict "id" "contact" "title" "About and contact") }}
+    {{ partial "section-heading.html" (dict "id" "contact" "title" .Params.contact_section_title) }}
     <div class="contact__content">
       <h3>{{ .Params.about_title }}</h3>
       <p class="contact__about">{{ .Params.about_summary }}</p>
@@ -23,7 +23,7 @@
             href="mailto:{{ .Site.Params.email }}"
             target="_blank"
             rel="noopener"
-            aria-label="Email Vladan Petrović, opens an email composer"
+            aria-label="Email {{ .Site.Params.name }}, opens an email composer"
           >
             <span>Email</span>
             <span aria-hidden="true">↗</span>

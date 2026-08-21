@@ -1,6 +1,11 @@
 ---
 hero_statement: I build products end to end and improve the systems teams use to build them.
 hero_summary: My work spans product development, architecture, implementation, continuous integration, developer experience, and ongoing maintenance.
+profile_label: Profile
+work_action_label: View selected work
+cv_action_label: View CV
+current_role_label: Currently
+work_section_title: Selected previous work
 systems:
   - company: Comtrade Group · Software Developer
     title: Cardiac care software
@@ -12,6 +17,8 @@ systems:
     title: Scheduling products
     summary: Built and maintained scheduling and subscription products, billing and payment integrations, timezone handling, analytics, tracking, experimentation infrastructure, and shared platform architecture.
 practice_intro: Architecture, implementation, CI, developer experience, and maintenance are parts of the same system. I work across those boundaries so software stays understandable and teams can keep moving.
+practice_section_title: Engineering practice
+practice_lede: The work spans the whole product.
 practice:
   - title: End to end product development
     summary: From product constraints and interfaces to services, delivery, and operation.
@@ -23,6 +30,7 @@ practice:
     summary: Reduce friction through automation, better tooling, and maintenance that keeps paying off.
 ai_title: AI follows intent. Engineering owns the result.
 ai_summary: I use AI assisted workflows for exploration, solution design, implementation, refactoring, testing, debugging, and review. I retain ownership of architecture, technical decisions, and production quality.
+ai_label: AI assisted engineering
 toolsets:
   - label: Core
     items: JavaScript · TypeScript · React · Angular · Node.js
@@ -32,5 +40,6 @@ toolsets:
     items: Coding agents · LLM workflows · Cloud agents
 about_title: I care about the craft behind the software.
 about_summary: I am most useful where product and engineering meet, within strong teams that care about quality. I understand the full system, improve how it is built, and explore better tools without adopting novelty for its own sake.
+contact_section_title: About and contact
 contact_summary: View my CV for the complete background, or send me a note to talk about product engineering, architecture, developer experience, or better ways to build.
 ---
