@@ -1,29 +1,39 @@
 import { spawn } from "node:child_process";
-import { access, mkdir, readFile } from "node:fs/promises";
+import { access, mkdir, readFile, rm } from "node:fs/promises";
 import { once } from "node:events";
-import path from "node:path";
+import path, { dirname } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
+import { fileURLToPath } from "node:url";
 
 import { chromium } from "@playwright/test";
 
 const localURL = "http://127.0.0.1:4173/";
 const requestedURL = process.argv[2];
 const targetURL = new URL(requestedURL ?? localURL);
-const reportDirectory = path.resolve(".lighthouseci");
-const runCount = Number.parseInt(
+const projectRoot = path.resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const reportDirectory = path.join(projectRoot, ".lighthouseci");
+const runCount = Number(
   process.env.LIGHTHOUSE_RUNS ?? (requestedURL ? "3" : "1"),
-  10,
 );
+const shutdownController = new AbortController();
+let interruptedSignal;
 const chromeFlags = [
   "--headless=new",
   ...(process.env.CI ? ["--no-sandbox"] : []),
 ].join(" ");
 const thresholds = {
-  performance: 0.9,
+  performance: 1,
   accessibility: 1,
-  "best-practices": 0.95,
+  "best-practices": 1,
   seo: 1,
 };
+
+for (const signal of ["SIGINT", "SIGTERM"]) {
+  process.once(signal, () => {
+    interruptedSignal ??= signal;
+    shutdownController.abort();
+  });
+}
 
 if (!["http:", "https:"].includes(targetURL.protocol)) {
   throw new Error("The Lighthouse target must use HTTP or HTTPS.");
@@ -39,7 +49,11 @@ if (!Number.isInteger(runCount) || runCount < 1 || runCount > 5) {
 
 function run(command, args, options = {}) {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, { stdio: "inherit", ...options });
+    const child = spawn(command, args, {
+      stdio: "inherit",
+      ...options,
+      signal: shutdownController.signal,
+    });
     child.once("error", reject);
     child.once("exit", (code, signal) => {
       if (code === 0) {
@@ -57,8 +71,12 @@ function run(command, args, options = {}) {
 }
 
 async function waitForServer(url, server, deadline = Date.now() + 30_000) {
-  if (server.exitCode !== null) {
-    throw new Error(`Hugo exited with code ${server.exitCode} before startup.`);
+  if (shutdownController.signal.aborted) {
+    throw new Error("Lighthouse was interrupted before Hugo started.");
+  }
+
+  if (server.exitCode !== null || server.signalCode !== null) {
+    throw new Error("Hugo exited before startup.");
   }
 
   try {
@@ -77,7 +95,7 @@ async function waitForServer(url, server, deadline = Date.now() + 30_000) {
 }
 
 async function stopServer(server) {
-  if (!server || server.exitCode !== null) return;
+  if (!server || server.exitCode !== null || server.signalCode !== null) return;
 
   server.kill("SIGTERM");
   await Promise.race([once(server, "exit"), delay(5_000)]);
@@ -135,6 +153,9 @@ async function main() {
   let server;
 
   try {
+    await rm(reportDirectory, { force: true, recursive: true });
+    await mkdir(reportDirectory, { recursive: true });
+
     if (!requestedURL) {
       server = spawn(
         "hugo",
@@ -160,7 +181,6 @@ async function main() {
       await waitForServer(localURL, server);
     }
 
-    await mkdir(reportDirectory, { recursive: true });
     const chromePath =
       process.env.CHROME_PATH ?? (await playwrightChromePath());
     const scores = Object.fromEntries(
@@ -186,7 +206,14 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+main()
+  .catch((error) => {
+    if (interruptedSignal) return;
+
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  })
+  .finally(() => {
+    if (interruptedSignal === "SIGINT") process.exitCode = 130;
+    if (interruptedSignal === "SIGTERM") process.exitCode = 143;
+  });

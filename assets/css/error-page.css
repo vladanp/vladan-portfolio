@@ -1,75 +1,39 @@
 .error-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex: 1;
-  padding: 0 var(--space-2x);
+  display: grid;
+  place-items: center;
+  padding: var(--space-16) var(--gutter);
 }
 
 .error-page__content {
-  max-width: 600px;
-  width: 100%;
+  width: min(100%, 42rem);
 }
 
 .error-page__code {
-  font-size: 8rem;
-  font-weight: bold;
-  margin: 0 0 var(--space-2x) 0;
-  line-height: 1;
-  color: var(--font-color);
-  opacity: 0.8;
+  margin-bottom: var(--space-4);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 
 .error-page__title {
-  font-size: 2rem;
-  margin: 0 0 var(--space-3x) 0;
-  color: var(--font-color);
+  margin-bottom: var(--space-6);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  text-wrap: balance;
 }
 
 .error-page__message {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0 0 var(--space-4x) 0;
-  color: var(--font-color);
-  opacity: 0.9;
+  max-width: 42ch;
+  margin-bottom: var(--space-8);
+  color: var(--color-muted);
+  font-size: 1.125rem;
 }
 
 .error-page__home-link {
-  display: inline-block;
-  padding: var(--space-2x) var(--space-4x);
-  background-color: transparent;
-  color: var(--font-color);
-  text-decoration: none;
-  border: 2px solid var(--font-color);
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.error-page__home-link:hover,
-.error-page__home-link:focus-visible {
-  background-color: var(--font-color);
-  color: var(--background-color);
-}
-
-@media (max-width: 48rem) {
-  .error-page__code {
-    font-size: 6rem;
-  }
-
-  .error-page__title {
-    font-size: 1.5rem;
-  }
-
-  .error-page__message {
-    font-size: 1rem;
-  }
-
-  .error-page__home-link {
-    padding: var(--space-2x) var(--space-3x);
-    font-size: 0.9rem;
-  }
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 650;
 }

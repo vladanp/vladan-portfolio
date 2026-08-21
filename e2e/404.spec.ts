@@ -8,6 +8,14 @@ test.describe("404 page", () => {
 
     expect(response?.status()).toBe(404);
     await expect(page.locator("main")).toHaveCount(1);
+    await expect(page.locator(".site-header__identity")).toHaveText(
+      "Vladan Petrović",
+    );
+    await expect(page.locator(".site-header__identity")).toHaveAttribute(
+      "href",
+      "/",
+    );
+    await expect(page.locator(".site-header__role")).toHaveCount(0);
     await expect(page.locator("h1")).toHaveText("Page Not Found");
     await expect(page.locator(".error-page__code")).toHaveText("404");
     await expect(page.locator(".error-page__code")).toHaveAttribute(
@@ -16,7 +24,7 @@ test.describe("404 page", () => {
     );
     const inlineCSS = await page.locator("style").textContent();
     expect(inlineCSS).toContain(".error-page");
-    expect(inlineCSS).not.toContain(".intro-section");
+    expect(inlineCSS).not.toContain(".hero__title");
   });
 
   test("home link has matching visible and accessible text", async ({
@@ -28,7 +36,7 @@ test.describe("404 page", () => {
     await expect(homeLink).toHaveAttribute("href", "/");
     await homeLink.click();
     await expect(page).toHaveURL("/");
-    await expect(page.locator(".main-container")).toBeVisible();
+    await expect(page.locator("#main-content")).toBeVisible();
   });
 
   test("is excluded from indexing and does not claim a canonical page", async ({

@@ -8,6 +8,7 @@
     "dev": "hugo server --renderToMemory --disableFastRender --noHTTPCache --bind 127.0.0.1 --baseURL http://127.0.0.1:1313/",
     "build": "hugo --environment production --minify --gc --cleanDestinationDir --panicOnWarning --printPathWarnings --printUnusedTemplates",
     "check": "pnpm format:check && pnpm lint && pnpm build && pnpm test && pnpm lighthouse",
+    "cv:build": "node scripts/generate-cv.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
@@ -18,6 +19,8 @@
     "lint:fix": "oxlint --fix",
     "lighthouse": "node scripts/lighthouse.mjs",
     "lighthouse:production": "node scripts/lighthouse.mjs https://vladan.dev/",
+    "site-icons:build": "node scripts/generate-site-icons.mjs",
+    "social-image:build": "node scripts/generate-social-image.mjs",
     "prepare": "lefthook install"
   },
   "devDependencies": {

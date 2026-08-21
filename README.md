@@ -9,10 +9,10 @@ JavaScript sent to the browser and no external runtime dependencies.
 
 ## Technology
 
-The site is built with Hugo and uses Node.js tooling only for repository
-validation. Playwright, Axe, and Lighthouse cover browser behavior,
-accessibility, and performance; oxfmt and oxlint provide formatting and
-linting.
+The site is built with Hugo. Node.js tooling handles committed asset generation
+and repository validation. Playwright, Axe, and Lighthouse cover browser
+behavior, accessibility, and performance; Oxfmt and Oxlint provide formatting
+and linting.
 
 The supported toolchain is defined in `.mise.toml`, `package.json`, and the
 pnpm lockfile. With [mise](https://mise.jdx.dev/) installed:
@@ -44,6 +44,9 @@ pnpm lighthouse          # local Lighthouse audit against a production server
 pnpm format:check        # formatting validation
 pnpm lint                # JavaScript and TypeScript linting
 pnpm check               # all of the checks above
+pnpm cv:build            # regenerate the hosted CV PDF
+pnpm site-icons:build    # regenerate browser and install icons
+pnpm social-image:build  # regenerate the social preview image
 ```
 
 `pnpm lighthouse:production` audits the deployed site and requires network
@@ -55,23 +58,27 @@ access. A Git hook runs the formatting and lint checks. Install it by running
 - `config/_default/`: Hugo site settings and factual portfolio data
 - `content/`: visible Markdown content
 - `layouts/`: base template, page layouts, partials, and `robots.txt`
-- `assets/`: CSS and fingerprinted images processed by Hugo Pipes
-- `static/`: the custom domain, web manifest assets, and install icons
+- `assets/`: CSS and fingerprinted brand and social images processed by Hugo
+- `static/`: the custom domain, web manifest, install icons, and hosted CV
 - `e2e/`: Playwright and Axe validation of generated pages and endpoints
-- `scripts/`: the direct Lighthouse threshold runner
+- `scripts/`: Lighthouse validation and source templates for generated assets
 - `.github/workflows/`: validation, deployment, and production auditing
 
-Contact details, headings, skills, and external links live in
-`config/_default/params.toml`. The homepage summary is in `content/_index.md`.
-Changing these files updates both visible content and generated metadata where
-appropriate.
+Public identity, contact details, current role data, and external links live in
+`config/_default/params.toml`. Homepage copy and selected work live in
+`content/_index.md`. The editable CV, site icon, and social image sources are in
+`scripts/`; their generated files are committed so production builds stay
+static and do not require a browser. When professional details change, update
+the public configuration, homepage content, CV source, social image source, and
+web manifest as applicable, then regenerate the affected assets.
 
 ## CI and deployment
 
 Pull requests to `main` run formatting, linting, dependency audit, a strict
 production Hugo build, Playwright/Axe tests, endpoint and resource integrity
-checks, and Lighthouse thresholds. Pushes to `main` run the same validation,
-then deploy that exact validated artifact to the GitHub Pages deployment branch.
+checks, and perfect Lighthouse thresholds across performance, accessibility,
+best practices, and SEO. Pushes to `main` run the same validation, then deploy
+that exact validated artifact to the GitHub Pages deployment branch.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three
@@ -80,4 +87,12 @@ Dependabot.
 
 ## License
 
-Licensed under the [MIT License](./LICENSE).
+The original source code and project materials in this repository are licensed
+under the [MIT License](./LICENSE), provided the copyright and license notices
+are retained. The MIT License includes an express disclaimer of warranties and
+limitation of liability.
+
+The portfolio text, personal details, photographs, names, logos, trademarks,
+and other assets owned by third parties are not licensed by this notice unless
+explicitly stated otherwise. Obtain any permissions needed for those materials
+before reusing them.

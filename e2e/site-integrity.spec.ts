@@ -21,11 +21,16 @@ test.describe("generated site integrity", () => {
     expect(manifestResponse.status()).toBe(200);
     const manifest = await manifestResponse.json();
     expect(manifest).toMatchObject({
+      background_color: "#f5f1e8",
+      description:
+        "Portfolio of Vladan Petrovic, Senior Software Engineer at Rivian.",
       display: "standalone",
       id: "./",
       lang: "en-US",
+      name: "Vladan Petrović | Senior Software Engineer",
       scope: "./",
       start_url: "./",
+      theme_color: "#f5f1e8",
     });
     expect(manifest.icons).toHaveLength(2);
     await Promise.all(
@@ -48,10 +53,6 @@ test.describe("generated site integrity", () => {
       const values = new Set<string>();
       for (const image of document.querySelectorAll("img")) {
         if (image.src) values.add(image.src);
-        for (const candidate of image.srcset.split(",")) {
-          const source = candidate.trim().split(/\s+/)[0];
-          if (source) values.add(new URL(source, document.baseURI).href);
-        }
       }
       for (const link of document.querySelectorAll<HTMLLinkElement>(
         'link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]',
@@ -63,7 +64,7 @@ test.describe("generated site integrity", () => {
       );
     });
 
-    expect(references.length).toBeGreaterThan(20);
+    expect(references.length).toBeGreaterThanOrEqual(8);
     await Promise.all(
       references.map(async (reference) => {
         const response = await request.get(reference);
@@ -86,23 +87,52 @@ test.describe("generated site integrity", () => {
     expect(errors).toEqual([]);
   });
 
-  test("applies the compact layout without overflow on narrow screens", async ({
+  test("uses the compact mobile layout without horizontal overflow", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 320, height: 568 });
     await page.goto("/");
 
-    await expect
-      .poll(() =>
-        page
-          .locator(".main-container")
-          .evaluate((element) => getComputedStyle(element).gap),
-      )
-      .toBe("24px");
+    const columnCount = await page
+      .locator(".hero__inner")
+      .evaluate(
+        (element) =>
+          getComputedStyle(element).gridTemplateColumns.split(" ").length,
+      );
+    expect(columnCount).toBe(1);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
       ),
     ).toBe(true);
+  });
+
+  test("provides a working keyboard skip link", async ({ page }) => {
+    await page.goto("/");
+
+    await page.keyboard.press("Tab");
+    await expect(page.locator(".skip-link")).toBeFocused();
+    await expect(page.locator(".skip-link")).toBeVisible();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#main-content")).toBeFocused();
+  });
+
+  test("removes optional motion when reduced motion is requested", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+
+    expect(
+      await page.evaluate(
+        () => getComputedStyle(document.documentElement).scrollBehavior,
+      ),
+    ).toBe("auto");
+    expect(
+      await page
+        .locator(".text-link")
+        .first()
+        .evaluate((element) => getComputedStyle(element).transitionDuration),
+    ).toBe("0s");
   });
 });
