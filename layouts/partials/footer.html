@@ -1,7 +1,6 @@
 <footer class="site-footer">
-  <p class="site-footer__copyright">
-    &copy;
-    {{ now.Format "2006" }}
-    {{ .Site.Params.author }}
-  </p>
+  <div class="site-shell site-footer__inner">
+    <p>&copy; {{ .Site.Params.author }}</p>
+    <a href="#top">Back to top</a>
+  </div>
 </footer>

@@ -44,6 +44,9 @@ pnpm lighthouse          # local Lighthouse audit against a production server
 pnpm format:check        # formatting validation
 pnpm lint                # JavaScript and TypeScript linting
 pnpm check               # all of the checks above
+pnpm cv:build            # regenerate the hosted CV PDF
+pnpm site-icons:build    # regenerate browser and install icons
+pnpm social-image:build  # regenerate the social preview image
 ```
 
 `pnpm lighthouse:production` audits the deployed site and requires network
@@ -55,16 +58,19 @@ access. A Git hook runs the formatting and lint checks. Install it by running
 - `config/_default/`: Hugo site settings and factual portfolio data
 - `content/`: visible Markdown content
 - `layouts/`: base template, page layouts, partials, and `robots.txt`
-- `assets/`: CSS and fingerprinted images processed by Hugo Pipes
-- `static/`: the custom domain, web manifest assets, and install icons
+- `assets/`: CSS and fingerprinted brand and social images processed by Hugo
+- `static/`: the custom domain, web manifest, install icons, and hosted CV
 - `e2e/`: Playwright and Axe validation of generated pages and endpoints
-- `scripts/`: the direct Lighthouse threshold runner
+- `scripts/`: Lighthouse validation and source templates for generated assets
 - `.github/workflows/`: validation, deployment, and production auditing
 
-Contact details, headings, skills, and external links live in
-`config/_default/params.toml`. The homepage summary is in `content/_index.md`.
-Changing these files updates both visible content and generated metadata where
-appropriate.
+Public identity, contact details, current role data, and external links live in
+`config/_default/params.toml`. Homepage copy and selected work live in
+`content/_index.md`. The editable CV and social image sources are in `scripts/`;
+their generated files are committed so production builds stay static and do
+not require a browser. When professional details change, update the public
+configuration, homepage content, and CV source together, then regenerate the
+affected assets.
 
 ## CI and deployment
 

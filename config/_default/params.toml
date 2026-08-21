@@ -1,55 +1,30 @@
-author = "Vladan Petrovic"
+author = "Vladan Petrović"
+alternateName = "Vladan Petrovic"
 email = "vladanpetrovic89@gmail.com"
-description = "Portfolio of Vladan Petrovic, a Senior Software Engineer specializing in JavaScript, TypeScript, React, Angular, Node.js, and modern web development."
+description = "Vladan Petrović is a Senior Software Engineer who builds products end to end and currently works at Rivian."
 
-jobTitle = "Senior Software Engineer"
 name = "Vladan Petrović"
-socialImageAlt = "Illustration of a computer monitor displaying code"
+jobTitle = "Senior Software Engineer"
+location = "Belgrade, Serbia"
+currentJobTitle = "Senior Software Engineer"
+currentEmployer = "Rivian"
+currentEmployerUrl = "https://rivian.com/"
+currentEmployerLogo = "images/rivian-wordmark.svg"
+cvPath = "vladan-petrovic-cv.pdf"
+socialImageAlt = "Vladan Petrović, Senior Software Engineer, currently at Rivian"
 
-# Section Titles
-connectTitle = "Connect with me"
-skillsTitle = "My Skills"
+knowsAbout = [
+  "Full stack software development",
+  "Software architecture",
+  "Continuous integration",
+  "Developer experience",
+  "AI assisted software development",
+]
 
-# Skills
-[[skills]]
-image200 = "images/javascript-logo-200.webp"
-image400 = "images/javascript-logo-400.webp"
-name = "JavaScript"
-url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-
-[[skills]]
-image200 = "images/typescript-logo-200.webp"
-image400 = "images/typescript-logo-400.webp"
-name = "TypeScript"
-url = "https://www.typescriptlang.org/"
-
-[[skills]]
-image200 = "images/react-logo-200.webp"
-image400 = "images/react-logo-400.webp"
-name = "React"
-url = "https://react.dev/"
-
-[[skills]]
-image200 = "images/angular-logo-200.webp"
-image400 = "images/angular-logo-400.webp"
-name = "Angular"
-url = "https://angular.dev/"
-
-[[skills]]
-image200 = "images/nodejs-logo-200.webp"
-image400 = "images/nodejs-logo-400.webp"
-name = "Node.js"
-url = "https://nodejs.org/"
-
-# Social Links
 [[socialLinks]]
-image200 = "images/linkedin-logo-200.webp"
-image400 = "images/linkedin-logo-400.webp"
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/vladanpet"
 
 [[socialLinks]]
-image200 = "images/github-logo-200.webp"
-image400 = "images/github-logo-400.webp"
 name = "GitHub"
 url = "https://github.com/vladanp"

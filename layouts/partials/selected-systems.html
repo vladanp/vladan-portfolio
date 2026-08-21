@@ -1,0 +1,24 @@
+<section id="work" class="indexed-section" aria-labelledby="work-heading">
+  <div class="site-shell indexed-section__grid">
+    {{ partial "section-heading.html" (dict "id" "work" "number" "01" "title" "Selected previous work") }}
+    <div class="systems-list">
+      {{ range .Params.systems }}
+        <article class="system-entry">
+          <header class="system-entry__header">
+            <p class="system-entry__number" aria-hidden="true">{{ .number }}</p>
+            <div>
+              <p class="eyebrow">{{ .company }}</p>
+              <h3 class="system-entry__title">{{ .title }}</h3>
+            </div>
+          </header>
+          <p class="system-entry__summary">{{ .summary }}</p>
+          <ul class="scope-list" aria-label="Engineering scope">
+            {{ range .scope }}
+              <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>

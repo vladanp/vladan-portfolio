@@ -29,8 +29,19 @@ Follow `.editorconfig`: UTF-8, LF endings, final newlines, spaces, and two-space
 indentation. Oxfmt uses an 80-column target; run `pnpm format` before committing.
 Oxlint treats correctness, suspicious, and performance findings as errors. Use
 kebab-case filenames for Hugo partials and CSS, BEM-style CSS classes such as
-`intro-section__person-name`, and `*.spec.ts` for tests. Follow existing template
-formatting because Oxfmt excludes HTML.
+`system-entry__title`, and `*.spec.ts` for tests. Follow existing template
+formatting because Oxfmt excludes HTML. Regenerate the hosted CV with
+`pnpm cv:build`, site icons with `pnpm site-icons:build`, and the social preview
+with `pnpm social-image:build`; do not hand-edit their generated outputs.
+
+In public facing prose and portfolio copy, do not use em dashes or hyphens
+between words. Rewrite with plain words or punctuation instead. This prose rule
+does not change required code syntax or filename conventions.
+
+Apply YAGNI and prefer simple, direct coding patterns. Add abstractions,
+dependencies, or runtime behavior only when a demonstrated requirement
+justifies them. Favor clear, maintainable solutions that reflect professional
+senior engineering judgment.
 
 ## Testing Guidelines
 

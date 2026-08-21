@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vladan Petrović | Senior Software Engineer | CV</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 10mm 12mm;
+      }
+
+      :root {
+        color-scheme: light;
+        --accent: #8e3f2d;
+        --muted: #55514b;
+        --rule: #c8c1b5;
+        --text: #17181a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.38;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: #fff;
+        print-color-adjust: exact;
+      }
+
+      a {
+        color: inherit;
+        text-decoration-color: var(--accent);
+        text-underline-offset: 0.15em;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 1.5mm;
+        font-size: 25pt;
+        letter-spacing: -0.045em;
+        line-height: 0.98;
+      }
+
+      h2 {
+        margin-bottom: 3mm;
+        color: var(--accent);
+        font-size: 7.5pt;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      h3 {
+        margin-bottom: 0.5mm;
+        font-size: 10pt;
+        line-height: 1.2;
+      }
+
+      p {
+        margin-bottom: 2mm;
+      }
+
+      ul {
+        margin-bottom: 0;
+        padding-left: 4.2mm;
+      }
+
+      li {
+        margin-bottom: 0.7mm;
+        padding-left: 0.7mm;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8mm;
+        align-items: end;
+        border-bottom: 0.35mm solid var(--text);
+        padding-bottom: 4mm;
+      }
+
+      .role {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 11pt;
+        font-weight: 700;
+      }
+
+      .contact {
+        margin: 0;
+        font-size: 8.3pt;
+        line-height: 1.55;
+        list-style: none;
+        text-align: right;
+      }
+
+      .contact li {
+        margin: 0;
+        padding: 0;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: 26mm minmax(0, 1fr);
+        gap: 5mm;
+        border-bottom: 0.2mm solid var(--rule);
+        padding-block: 4mm;
+      }
+
+      section:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .summary p {
+        margin-bottom: 0;
+        font-size: 9.7pt;
+      }
+
+      .entry {
+        break-inside: avoid;
+        margin-bottom: 3.6mm;
+      }
+
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .entry__heading {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 2mm;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1mm;
+      }
+
+      .entry__company {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 700;
+      }
+
+      .current {
+        color: var(--accent);
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.3mm 6mm;
+      }
+
+      .skills p {
+        margin-bottom: 0;
+      }
+
+      .skills strong {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Vladan Petrović</h1>
+        <p class="role">Senior Software Engineer</p>
+      </div>
+      <ul class="contact" aria-label="Contact details">
+        <li>Belgrade, Serbia</li>
+        <li><a href="mailto:vladanpetrovic89@gmail.com">vladanpetrovic89@gmail.com</a></li>
+        <li><a href="https://vladan.dev/">vladan.dev</a></li>
+        <li><a href="https://www.linkedin.com/in/vladanpet">linkedin.com/in/vladanpet</a></li>
+        <li><a href="https://github.com/vladanp">github.com/vladanp</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <section class="summary" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Profile</h2>
+        <p>
+          Senior Software Engineer with more than 10 years of experience building and improving products across medical software, ecommerce, and scheduling. Deep frontend expertise with full stack capability across product development, architecture, continuous integration, developer experience, automation, tooling, and maintenance. I value strong teams, clear systems, and technology that improves products and engineering workflows. I use AI tooling to implement clearly defined intent while retaining ownership of architecture and engineering decisions.
+        </p>
+      </section>
+
+      <section aria-labelledby="experience-heading">
+        <h2 id="experience-heading">Experience</h2>
+        <div>
+          <article class="entry">
+            <div class="entry__heading">
+              <div>
+                <h3>Senior Software Engineer</h3>
+                <p class="entry__company">Rivian</p>
+              </div>
+              <span class="current">Current role</span>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="entry__heading">
+              <div>
+                <h3>Frontend Tech Lead</h3>
+                <p class="entry__company">TX Services / Doodle AG</p>
+              </div>
+            </div>
+            <ul>
+              <li>Led frontend engineering in a cross functional Product Growth team, contributing to conversion improvements and growth from CHF 1 million to CHF 10 million ARR.</li>
+              <li>Managed more than 100 A/B experiments across their full lifecycle on a platform used by more than 30 million people.</li>
+              <li>Advocated for and helped deliver migrations to TypeScript, Next.js, and an Nx monorepo through technical talks, consultation, and implementation.</li>
+              <li>Built subscription products and complex end to end features, and supported platform incidents, tracking, analytics, and engineering interviews.</li>
+            </ul>
+          </article>
+
+          <article class="entry">
+            <div class="entry__heading">
+              <div>
+                <h3>Frontend Developer</h3>
+                <p class="entry__company">Commerce Connector GmbH</p>
+              </div>
+            </div>
+            <ul>
+              <li>Built consumer widgets and an enterprise administration platform for SaaS ecommerce products.</li>
+              <li>Delivered custom widget work that supported contracts worth about EUR 2 million with global brands.</li>
+              <li>Maintained a reusable vanilla JavaScript widget and delivered reporting across AWS integrations and frontend administration tools.</li>
+            </ul>
+          </article>
+
+          <article class="entry">
+            <div class="entry__heading">
+              <div>
+                <h3>Software Developer</h3>
+                <p class="entry__company">Comtrade Group</p>
+              </div>
+            </div>
+            <ul>
+              <li>Developed a cardiac care platform used by hospitals in Europe and the United States for monitoring, reporting, and early detection of cardiac risks.</li>
+              <li>Built two mobile applications and supported encrypted real time communication between doctors and patients.</li>
+              <li>Used TDD and documentation for regulated medical software, and helped establish automated cross browser testing.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills</h2>
+        <div class="skills">
+          <p><strong>Product:</strong> End to end development, architecture, developer experience, automation, accessibility, experimentation</p>
+          <p><strong>Frontend:</strong> JavaScript, TypeScript, React, Next.js, Angular, Ionic, design systems, Contentful</p>
+          <p><strong>Backend and cloud:</strong> Node.js, REST APIs, AWS, Docker, Kubernetes</p>
+          <p><strong>Quality and delivery:</strong> GitHub Actions, Jenkins, Playwright, WebDriverIO, Jest, TDD, monorepos</p>
+          <p><strong>Communication:</strong> WebRTC, encrypted real time systems</p>
+          <p><strong>AI tooling:</strong> Claude Code, Devin, Cursor, cloud agents</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="education-heading">
+        <h2 id="education-heading">Education</h2>
+        <div>
+          <h3>Bachelor of Applied Science in Informatics</h3>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

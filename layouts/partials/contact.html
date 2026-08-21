@@ -1,0 +1,32 @@
+<section id="contact" class="indexed-section" aria-labelledby="contact-heading">
+  <div class="site-shell indexed-section__grid">
+    {{ partial "section-heading.html" (dict "id" "contact" "number" "03" "title" "About and contact") }}
+    <div class="contact__content">
+      <h3>{{ .Params.about_title }}</h3>
+      <p class="contact__about">{{ .Params.about_summary }}</p>
+      <p class="contact__prompt">{{ .Params.contact_summary }}</p>
+      <ul class="contact-links" aria-label="Contact and professional profiles">
+        <li>
+          <a href="{{ .Site.Params.cvPath | relURL }}" type="application/pdf">
+            <span>CV, PDF</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:{{ .Site.Params.email }}">
+            <span>Email</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+        {{ range .Site.Params.socialLinks }}
+          <li>
+            <a href="{{ .url }}" rel="me">
+              <span>{{ .name }}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>

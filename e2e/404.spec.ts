@@ -16,7 +16,7 @@ test.describe("404 page", () => {
     );
     const inlineCSS = await page.locator("style").textContent();
     expect(inlineCSS).toContain(".error-page");
-    expect(inlineCSS).not.toContain(".intro-section");
+    expect(inlineCSS).not.toContain(".hero__title");
   });
 
   test("home link has matching visible and accessible text", async ({
@@ -28,7 +28,7 @@ test.describe("404 page", () => {
     await expect(homeLink).toHaveAttribute("href", "/");
     await homeLink.click();
     await expect(page).toHaveURL("/");
-    await expect(page.locator(".main-container")).toBeVisible();
+    await expect(page.locator("#main-content")).toBeVisible();
   });
 
   test("is excluded from indexing and does not claim a canonical page", async ({
