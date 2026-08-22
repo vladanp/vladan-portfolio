@@ -16,10 +16,10 @@ systems:
   - company: Comtrade Group · Software Developer
     title: Cardiac care software
     summary: Built a medical platform for cardiologists to monitor patient data, generate reports, and identify cardiac risks, plus two mobile applications used by hospital staff to communicate with patients and document their needs.
-practice_intro: Architecture, implementation, CI, developer experience, and maintenance are parts of the same system. I work across those boundaries so software stays understandable and teams can keep moving.
-practice_section_title: Engineering practice
-practice_lede: The work spans the whole product.
-practice:
+approach_intro: Architecture, implementation, CI, developer experience, and maintenance are parts of the same system. I work across those boundaries so software stays understandable and teams can keep moving.
+approach_section_title: Approach
+approach_lede: The work spans the whole product.
+approach:
   - title: End to end product development
     summary: From product constraints and interfaces to services, delivery, and operation.
   - title: Architecture
@@ -33,7 +33,7 @@ ai_summary: I use AI assisted workflows for exploration, solution design, implem
 ai_label: AI assisted engineering
 toolsets:
   - label: Core
-    items: JavaScript · TypeScript · React · Angular · Node.js
+    items: JavaScript · TypeScript · React · Next.js · Remix · Node.js
   - label: Focus
     items: Architecture · CI/CD · Automation · Developer experience
   - label: Exploring
@@ -41,5 +41,4 @@ toolsets:
 about_title: I care about the craft behind the software.
 about_summary: I am most useful where product and engineering meet, within strong teams that care about quality. I understand the full system, improve how it is built, and explore better tools without adopting novelty for its own sake.
 contact_section_title: About and contact
-contact_summary: View my CV for the complete background, or send me a note to talk about product engineering, architecture, developer experience, or better ways to build.
 ---
