@@ -7,15 +7,15 @@ cv_action_label: View CV
 current_role_label: Currently
 work_section_title: Selected previous work
 systems:
-  - company: Comtrade Group · Software Developer
-    title: Cardiac care software
-    summary: Built a medical platform for cardiologists to monitor patient data, generate reports, and identify cardiac risks, plus two mobile applications used by hospital staff to communicate with patients and document their needs.
-  - company: Commerce Connector GmbH · Frontend Developer
-    title: Where to buy commerce
-    summary: Built consumer where to buy widgets, a reusable JavaScript integration platform, an enterprise administration application, and full stack reporting with AWS integrations.
   - company: TX Services / Doodle AG · Tech Lead
     title: Scheduling products
     summary: Built and maintained scheduling and subscription products, billing and payment integrations, timezone handling, analytics, tracking, experimentation infrastructure, and shared platform architecture.
+  - company: Commerce Connector GmbH · Frontend Developer
+    title: Where to buy commerce
+    summary: Built consumer where to buy widgets, a reusable JavaScript integration platform, an enterprise administration application, and full stack reporting with AWS integrations.
+  - company: Comtrade Group · Software Developer
+    title: Cardiac care software
+    summary: Built a medical platform for cardiologists to monitor patient data, generate reports, and identify cardiac risks, plus two mobile applications used by hospital staff to communicate with patients and document their needs.
 practice_intro: Architecture, implementation, CI, developer experience, and maintenance are parts of the same system. I work across those boundaries so software stays understandable and teams can keep moving.
 practice_section_title: Engineering practice
 practice_lede: The work spans the whole product.
