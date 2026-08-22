@@ -107,7 +107,15 @@ test.describe("generated site integrity", () => {
     ).toBe(true);
   });
 
-  test("provides a working keyboard skip link", async ({ page }) => {
+  test("provides a working keyboard skip link", async ({
+    page,
+    browserName,
+  }) => {
+    test.skip(
+      browserName === "webkit",
+      "WebKit does not move focus on synthetic Tab keypresses",
+    );
+
     await page.goto("/");
 
     await page.keyboard.press("Tab");

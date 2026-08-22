@@ -21,7 +21,7 @@ pnpm lockfile. With [mise](https://mise.jdx.dev/) installed:
 mise trust
 mise install
 pnpm install
-pnpm exec playwright install chromium
+pnpm exec playwright install chromium webkit
 ```
 
 ## Local development
@@ -39,7 +39,7 @@ source directories.
 
 ```bash
 pnpm build               # strict, minified production build in public/
-pnpm test                # desktop and mobile browser, integrity, and Axe tests
+pnpm test                # Chromium and WebKit desktop and mobile, integrity, and Axe tests
 pnpm lighthouse          # local Lighthouse audit against a production server
 pnpm format:check        # formatting validation
 pnpm lint                # JavaScript and TypeScript linting
@@ -75,11 +75,12 @@ web manifest as applicable, then regenerate the affected assets.
 
 ## CI and deployment
 
-Pull requests to `main` run formatting, linting, dependency audit, a strict
-production Hugo build, Playwright/Axe tests, endpoint and resource integrity
-checks, and perfect Lighthouse thresholds across performance, accessibility,
-best practices, and SEO. Pushes to `main` run the same validation, then deploy
-that exact validated artifact to the GitHub Pages deployment branch.
+Pull requests to `main` run CodeQL static analysis, formatting, linting,
+dependency audit, a strict production Hugo build, parallel Playwright/Axe tests
+across Chromium and WebKit, endpoint and resource integrity checks, and perfect
+Lighthouse thresholds across performance, accessibility, best practices, and
+SEO. Pushes to `main` run the same validation, then deploy that exact validated
+artifact to the GitHub Pages deployment branch.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three
@@ -98,17 +99,10 @@ and release automation does not commit generated version files.
 
 GitHub Releases provide durable version notes. GitHub deployment history, the
 workflow run, and the live `build-revision` metadata remain the source of truth
-for the exact commit currently shipped. Dependencies and pinned GitHub Actions
-are checked weekly by Dependabot.
+for the exact commit currently shipped. Renovate keeps dependencies and
+SHA pinned GitHub Actions current, waiting seven days after release before
+proposing updates.
 
 ## License
 
-The original source code and project materials in this repository are licensed
-under the [MIT License](./LICENSE), provided the copyright and license notices
-are retained. The MIT License includes an express disclaimer of warranties and
-limitation of liability.
-
-The portfolio text, personal details, photographs, names, logos, trademarks,
-and other assets owned by third parties are not licensed by this notice unless
-explicitly stated otherwise. Obtain any permissions needed for those materials
-before reusing them.
+Licensed under the [MIT License](./LICENSE).

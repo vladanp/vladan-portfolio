@@ -15,8 +15,71 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  test:
+    name: Browser tests (${{ matrix.browser }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - browser: chromium
+            project_flags: "--project=desktop-chrome --project=mobile-chrome"
+          - browser: webkit
+            project_flags: "--project=desktop-webkit --project=mobile-webkit"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+        with:
+          version: 11.22.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+          cache: pnpm
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@2752ce1d29631191ea3f27c23495fa06139a5b78 # v3.2.1
+        with:
+          hugo-version: 0.165.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run browser, integrity, and accessibility tests
+        run: pnpm exec playwright test ${{ matrix.project_flags }}
+
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports-${{ matrix.browser }}-${{ github.run_id }}
+          path: |
+            e2e-results/
+            playwright-report/
+          if-no-files-found: ignore
+          include-hidden-files: true
+          retention-days: 7
+
   validate:
     name: Validate production site
+    needs: test
     runs-on: ubuntu-24.04
     timeout-minutes: 15
 
@@ -80,11 +143,14 @@ jobs:
         env:
           HUGO_PARAMS_BUILDREVISION: ${{ github.sha }}
 
+      - name: Cache Playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('pnpm-lock.yaml') }}
+
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
-
-      - name: Run browser, integrity, and accessibility tests
-        run: pnpm test
 
       - name: Run local Lighthouse audit
         run: pnpm lighthouse
@@ -105,8 +171,6 @@ jobs:
           name: validation-reports-${{ github.run_id }}
           path: |
             .lighthouseci/
-            e2e-results/
-            playwright-report/
           if-no-files-found: ignore
           include-hidden-files: true
           retention-days: 7

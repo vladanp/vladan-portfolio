@@ -24,6 +24,14 @@ export default defineConfig({
       name: "mobile-chrome",
       use: { ...devices["Pixel 5"] },
     },
+    {
+      name: "desktop-webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+    {
+      name: "mobile-webkit",
+      use: { ...devices["iPhone 13"] },
+    },
   ],
   webServer: {
     command:
