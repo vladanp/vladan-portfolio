@@ -21,7 +21,7 @@ pnpm lockfile. With [mise](https://mise.jdx.dev/) installed:
 mise trust
 mise install
 pnpm install
-pnpm exec playwright install chromium
+pnpm exec playwright install chromium webkit
 ```
 
 ## Local development

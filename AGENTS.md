@@ -14,7 +14,7 @@ runner is in `scripts/`. Do not hand-edit generated `public/`, `resources/`,
 
 Use the versions pinned in `.mise.toml` (Hugo 0.165.0, Node 24.19.0, and pnpm
 11.22.0). Run `mise trust`, `mise install`, `pnpm install`, and
-`pnpm exec playwright install chromium` for initial setup.
+`pnpm exec playwright install chromium webkit` for initial setup.
 
 - `pnpm dev` serves the site at `http://127.0.0.1:1313/`.
 - `pnpm build` creates a strict, minified production build in `public/`.
