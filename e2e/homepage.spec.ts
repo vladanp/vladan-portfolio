@@ -29,9 +29,9 @@ test.describe("homepage", () => {
     await expect(page.locator("main section")).toHaveCount(4);
     await expect(page.locator(".system-entry")).toHaveCount(3);
     await expect(page.locator(".system-entry__title")).toHaveText([
-      "Cardiac care software",
-      "Where to buy commerce",
       "Scheduling products",
+      "Where to buy commerce",
+      "Cardiac care software",
     ]);
     await expect(page.locator("#work")).toContainText("Comtrade Group");
     await expect(page.locator("#work")).toContainText(
