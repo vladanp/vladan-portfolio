@@ -1,5 +1,5 @@
 ---
-hero_statement: I build products end to end and improve the systems teams use to build them.
+hero_statement: I build products end to end and improve how teams build them.
 hero_summary: My work spans product development, architecture, implementation, continuous integration, developer experience, and ongoing maintenance.
 profile_label: Profile
 work_action_label: View selected work
