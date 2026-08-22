@@ -100,7 +100,7 @@ and release automation does not commit generated version files.
 GitHub Releases provide durable version notes. GitHub deployment history, the
 workflow run, and the live `build-revision` metadata remain the source of truth
 for the exact commit currently shipped. Renovate keeps dependencies and
-SHA-pinned GitHub Actions current, waiting seven days after release before
+SHA pinned GitHub Actions current, waiting seven days after release before
 proposing updates.
 
 ## License
