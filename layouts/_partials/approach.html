@@ -1,18 +1,18 @@
-<section id="practice" class="indexed-section" aria-labelledby="practice-heading">
+<section id="approach" class="indexed-section" aria-labelledby="approach-heading">
   <div class="site-shell indexed-section__grid">
-    {{ partial "section-heading.html" (dict "id" "practice" "title" .Params.practice_section_title) }}
+    {{ partial "section-heading.html" (dict "id" "approach" "title" .Params.approach_section_title) }}
     <div>
-      <p class="section-lede">{{ .Params.practice_lede }}</p>
-      <p class="practice__intro">{{ .Params.practice_intro }}</p>
-      <div class="practice-list">
-        {{ range .Params.practice }}
-          <article class="practice-item">
+      <p class="section-lede">{{ .Params.approach_lede }}</p>
+      <p class="approach__intro">{{ .Params.approach_intro }}</p>
+      <div class="approach-list">
+        {{ range .Params.approach }}
+          <article class="approach-item">
             <h3>{{ .title }}</h3>
             <p>{{ .summary }}</p>
           </article>
         {{ end }}
       </div>
-      <article class="ai-practice">
+      <article class="ai-approach">
         <p class="eyebrow">{{ .Params.ai_label }}</p>
         <h3>{{ .Params.ai_title }}</h3>
         <p>{{ .Params.ai_summary }}</p>
