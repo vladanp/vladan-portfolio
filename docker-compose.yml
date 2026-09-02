@@ -1,6 +1,8 @@
 services:
   hugo:
     image: hugomods/hugo:debian-std-0.165.0
+    environment:
+      HUGO_ENABLEGITINFO: "false"
     ports:
       - "127.0.0.1:1313:1313"
     volumes:

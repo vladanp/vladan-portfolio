@@ -15,7 +15,13 @@ test.describe("generated site integrity", () => {
     const sitemap = await sitemapResponse.text();
     expect(sitemap).toContain("<urlset");
     expect(sitemap).toContain("<loc>http://127.0.0.1:1313/</loc>");
-    expect(sitemap.match(/<loc>/g)).toHaveLength(1);
+    expect(sitemap).toContain(
+      "<loc>http://127.0.0.1:1313/vladan-petrovic-cv.pdf</loc>",
+    );
+    expect(sitemap.match(/<loc>/g)).toHaveLength(2);
+    expect(sitemap).toMatch(
+      /<lastmod>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})<\/lastmod>/,
+    );
 
     const manifestResponse = await request.get("/manifest.json");
     expect(manifestResponse.status()).toBe(200);

@@ -37,6 +37,8 @@
     <meta name="author" content="{{ $author }}" />
     {{- if or .Params.noindex $is404 }}
       <meta name="robots" content="noindex" />
+    {{- else }}
+      <meta name="robots" content="index, follow, max-image-preview:large" />
     {{- end }}
     {{- with .Site.Params.buildRevision }}
       <meta name="build-revision" content="{{ . }}" />
@@ -84,6 +86,9 @@
     <link rel="icon" href="{{ "android-chrome-512x512.png" | relURL }}" sizes="512x512" type="image/png" />
 
     {{- if .IsHome }}
+      {{- $homeURL := .Site.Home.Permalink }}
+      {{- $websiteID := printf "%s#website" $homeURL }}
+      {{- $personID := printf "%s#person" $homeURL }}
       {{- $sameAs := slice }}
       {{- range .Site.Params.socialLinks }}
         {{- $sameAs = $sameAs | append .url }}
@@ -91,28 +96,46 @@
       {{- $organization := dict
         "@type" "Organization"
         "name" .Site.Params.currentEmployer
-        "sameAs" .Site.Params.currentEmployerUrl
+        "url" .Site.Params.currentEmployerUrl
       }}
       {{- $person := dict
+        "@id" $personID
         "@type" "Person"
-        "name" .Site.Params.searchName
+        "name" .Site.Params.name
+        "alternateName" .Site.Params.searchName
         "description" $description
         "jobTitle" .Site.Params.jobTitle
-        "url" .Site.Home.Permalink
+        "url" $homeURL
         "email" .Site.Params.email
+        "homeLocation" (dict "@type" "Place" "name" .Site.Params.location)
         "sameAs" $sameAs
         "worksFor" $organization
         "knowsAbout" .Site.Params.knowsAbout
       }}
+      {{- $website := dict
+        "@id" $websiteID
+        "@type" "WebSite"
+        "name" .Site.Params.name
+        "alternateName" .Site.Params.alternateNames
+        "url" $homeURL
+        "inLanguage" (.Site.Language.Locale | default "en-US")
+      }}
       {{- $profilePage := dict
-        "@context" "https://schema.org"
         "@type" "ProfilePage"
         "name" $pageTitle
         "description" $description
-        "url" .Site.Home.Permalink
+        "url" $homeURL
+        "dateCreated" (.Date.Format "2006-01-02T15:04:05Z07:00")
+        "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+        "inLanguage" (.Site.Language.Locale | default "en-US")
+        "isPartOf" (dict "@id" $websiteID)
         "mainEntity" $person
       }}
-      <script type="application/ld+json">{{ $profilePage | jsonify | safeJS }}</script>
+      {{- $structuredData := dict
+        "@context" "https://schema.org"
+        "@graph" (slice $website $profilePage)
+      }}
+      <script type="application/ld+json">{{ $structuredData | jsonify | safeJS }}</script>
     {{- end }}
   </head>
   <body id="top">
