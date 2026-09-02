@@ -6,7 +6,11 @@ const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const sourcePath = resolve(projectRoot, "scripts/vladan-petrovic-cv.html");
 const outputPath = resolve(projectRoot, "static/vladan-petrovic-cv.pdf");
 
-const browser = await chromium.launch();
+const browser = await chromium.launch(
+  process.env.CHROME_PATH
+    ? { executablePath: process.env.CHROME_PATH }
+    : undefined,
+);
 
 try {
   const page = await browser.newPage();

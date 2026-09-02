@@ -1,5 +1,6 @@
 baseURL = "https://vladan.dev/"
 enableRobotsTXT = true
+enableGitInfo = true
 locale = "en-US"
 disableKinds = ["taxonomy", "term", "rss"]
 title = "Vladan Petrovic | Senior Software Engineer"

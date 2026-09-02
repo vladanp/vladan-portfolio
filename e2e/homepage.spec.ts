@@ -21,6 +21,10 @@ test.describe("homepage", () => {
     await expect(page.locator(".hero__role")).toHaveText(
       "Senior Software Engineer",
     );
+    await expect(page.locator(".hero__actions")).toHaveAttribute(
+      "role",
+      "group",
+    );
     await expect(page.locator(".current-role")).toContainText(
       "Senior Software Engineer",
     );
@@ -142,6 +146,10 @@ test.describe("homepage", () => {
       "content",
       "Vladan Petrovic",
     );
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      "content",
+      "index, follow, max-image-preview:large",
+    );
     await expect(page.locator('meta[name="keywords"]')).toHaveCount(0);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
       "content",
@@ -188,14 +196,37 @@ test.describe("homepage", () => {
     const rawStructuredData = await page
       .locator('script[type="application/ld+json"]')
       .textContent();
-    const profilePage = JSON.parse(rawStructuredData!);
-    expect(profilePage).toMatchObject({
+    const structuredData = JSON.parse(rawStructuredData!);
+    expect(structuredData).toMatchObject({
       "@context": "https://schema.org",
+      "@graph": expect.arrayContaining([
+        {
+          "@id": "http://127.0.0.1:1313/#website",
+          "@type": "WebSite",
+          alternateName: ["Vladan Petrovic", "vladan.dev"],
+          inLanguage: "en-US",
+          name: "Vladan Petrović",
+          url: "http://127.0.0.1:1313/",
+        },
+      ]),
+    });
+
+    const profilePage = structuredData["@graph"].find(
+      (item: { "@type": string }) => item["@type"] === "ProfilePage",
+    );
+    expect(profilePage).toMatchObject({
       "@type": "ProfilePage",
+      dateCreated: "2024-08-19T11:56:48+02:00",
       mainEntity: {
+        "@id": "http://127.0.0.1:1313/#person",
         "@type": "Person",
+        alternateName: "Vladan Petrovic",
         description:
           "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
+        homeLocation: {
+          "@type": "Place",
+          name: "Belgrade, Serbia",
+        },
         jobTitle: "Senior Software Engineer",
         knowsAbout: [
           "Full stack software development",
@@ -204,7 +235,7 @@ test.describe("homepage", () => {
           "Developer experience",
           "AI assisted software development",
         ],
-        name: "Vladan Petrovic",
+        name: "Vladan Petrović",
         sameAs: [
           "https://www.linkedin.com/in/vladanpet",
           "https://github.com/vladanp",
@@ -213,14 +244,22 @@ test.describe("homepage", () => {
         worksFor: {
           "@type": "Organization",
           name: "Rivian",
-          sameAs: "https://rivian.com/",
+          url: "https://rivian.com/",
         },
       },
       description:
         "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
+      inLanguage: "en-US",
+      isPartOf: {
+        "@id": "http://127.0.0.1:1313/#website",
+      },
       name: "Vladan Petrovic | Senior Software Engineer",
       url: "http://127.0.0.1:1313/",
     });
+    expect(Date.parse(profilePage.dateModified)).not.toBeNaN();
+    expect(Date.parse(profilePage.dateModified)).toBeGreaterThanOrEqual(
+      Date.parse(profilePage.dateCreated),
+    );
   });
 
   test("keeps the public positioning concise and current", async ({ page }) => {

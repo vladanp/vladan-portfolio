@@ -1,4 +1,5 @@
 ---
+date: 2024-08-19T11:56:48+02:00
 hero_statement: I build products end to end and improve how teams build them.
 hero_summary: My work spans product development, architecture, implementation, continuous integration, developer experience, and ongoing maintenance.
 profile_label: Profile
