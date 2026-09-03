@@ -10,5 +10,8 @@
   {{- end }}
   <url>
     <loc>{{ .Site.Params.cvPath | absURL }}</loc>
+    {{- with .Site.Params.cvLastmod }}
+      <lastmod>{{ . | safeHTML }}</lastmod>
+    {{- end }}
   </url>
 </urlset>
