@@ -1,7 +1,7 @@
 author = "Vladan Petrović"
 searchName = "Vladan Petrovic"
 email = "vladanpetrovic89@gmail.com"
-description = "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian."
+description = "Vladan Petrovic is a Senior Software Engineer at Rivian specializing in TypeScript, React, Node.js, software architecture, and developer experience."
 
 name = "Vladan Petrović"
 alternateNames = ["Vladan Petrovic", "vladan.dev"]
@@ -12,6 +12,7 @@ currentEmployer = "Rivian"
 currentEmployerUrl = "https://rivian.com/"
 currentEmployerLogo = "images/rivian-wordmark.svg"
 cvPath = "vladan-petrovic-cv.pdf"
+cvLastmod = "2026-09-02T17:00:52Z"
 socialImageAlt = "Vladan Petrović, Senior Software Engineer, currently at Rivian"
 
 knowsAbout = [

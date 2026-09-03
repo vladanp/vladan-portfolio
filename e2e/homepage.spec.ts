@@ -141,6 +141,8 @@ test.describe("homepage", () => {
     expect(description).toContain("Senior Software Engineer");
     expect(description).toContain("Rivian");
     expect(description).toContain("Vladan Petrovic");
+    expect(description).toContain("TypeScript");
+    expect(description).toContain("software architecture");
     expect(description).toBe(description?.trim());
     await expect(page.locator('meta[name="author"]')).toHaveAttribute(
       "content",
@@ -222,7 +224,7 @@ test.describe("homepage", () => {
         "@type": "Person",
         alternateName: "Vladan Petrovic",
         description:
-          "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
+          "Vladan Petrovic is a Senior Software Engineer at Rivian specializing in TypeScript, React, Node.js, software architecture, and developer experience.",
         homeLocation: {
           "@type": "Place",
           name: "Belgrade, Serbia",
@@ -248,7 +250,7 @@ test.describe("homepage", () => {
         },
       },
       description:
-        "Vladan Petrovic is a Senior Software Engineer who builds products end to end and currently works at Rivian.",
+        "Vladan Petrovic is a Senior Software Engineer at Rivian specializing in TypeScript, React, Node.js, software architecture, and developer experience.",
       inLanguage: "en-US",
       isPartOf: {
         "@id": "http://127.0.0.1:1313/#website",

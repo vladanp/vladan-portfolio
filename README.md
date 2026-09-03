@@ -71,7 +71,9 @@ Public identity, contact details, current role data, and external links live in
 `scripts/`; their generated files are committed so production builds stay
 static and do not require a browser. When professional details change, update
 the public configuration, homepage content, CV source, social image source, and
-web manifest as applicable, then regenerate the affected assets.
+web manifest as applicable, then regenerate the affected assets. When the CV
+changes, also update `cvLastmod` in `params.toml` so its sitemap timestamp stays
+accurate.
 
 ## CI and deployment
 
