@@ -12,13 +12,14 @@ runner is in `scripts/`. Do not hand-edit generated `public/`, `resources/`,
 
 ## Build, Test, and Development Commands
 
-Use the versions pinned in `.mise.toml` (Hugo 0.165.0, Node 24.19.0, and pnpm
-11.22.0). Run `mise trust`, `mise install`, `pnpm install`, and
-`pnpm exec playwright install chromium webkit` for initial setup.
+Use the Hugo, Node, and pnpm versions pinned in `.mise.toml`. Run `mise trust`,
+`mise install`, `pnpm install`, and `pnpm exec playwright install chromium
+webkit` for initial setup.
 
 - `pnpm dev` serves the site at `http://127.0.0.1:1313/`.
 - `pnpm build` creates a strict, minified production build in `public/`.
-- `pnpm test` runs Playwright on desktop Chrome and a Pixel 5 profile.
+- `pnpm test` runs Playwright in Chromium and WebKit on desktop and mobile
+  profiles. It starts its own Hugo server, so stop `pnpm dev` first.
 - `pnpm lighthouse` starts and audits a local production Hugo server.
 - `pnpm format:check` and `pnpm lint` run Oxc validation.
 - `pnpm commitlint --last` validates the latest commit message.

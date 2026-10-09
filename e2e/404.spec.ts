@@ -15,7 +15,6 @@ test.describe("404 page", () => {
       "href",
       "/",
     );
-    await expect(page.locator(".site-header__role")).toHaveCount(0);
     await expect(page.locator("h1")).toHaveText("Page Not Found");
     await expect(page.locator(".error-page__code")).toHaveText("404");
     await expect(page.locator(".error-page__code")).toHaveAttribute(

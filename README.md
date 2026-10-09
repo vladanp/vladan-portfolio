@@ -77,12 +77,13 @@ accurate.
 
 ## CI and deployment
 
-Pull requests to `main` run CodeQL static analysis, formatting, linting,
-dependency audit, a strict production Hugo build, parallel Playwright/Axe tests
-across Chromium and WebKit, endpoint and resource integrity checks, and perfect
-Lighthouse thresholds across performance, accessibility, best practices, and
-SEO. Pushes to `main` run the same validation, then deploy that exact validated
-artifact to the GitHub Pages deployment branch.
+Pull requests to `main` run formatting, linting, a strict production Hugo
+build, parallel Playwright/Axe tests across Chromium and WebKit, endpoint and
+resource integrity checks, and perfect Lighthouse thresholds across
+performance, accessibility, best practices, and SEO. Pushes to `main` run the
+same validation, then deploy the production build made in that run to the
+GitHub Pages deployment branch. Browser tests and the local Lighthouse audit
+run against Hugo's server; the deployed files are audited once they are live.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three
@@ -101,9 +102,9 @@ and release automation does not commit generated version files.
 
 GitHub Releases provide durable version notes. GitHub deployment history, the
 workflow run, and the live `build-revision` metadata remain the source of truth
-for the exact commit currently shipped. Renovate keeps dependencies and
-SHA pinned GitHub Actions current, waiting seven days after release before
-proposing updates.
+for the exact commit currently shipped. Dependencies and SHA pinned GitHub
+Actions are updated by hand, and pnpm only installs versions published at least
+seven days earlier.
 
 ## License
 

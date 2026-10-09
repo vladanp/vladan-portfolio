@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
-import { access, mkdir, readFile, rm } from "node:fs/promises";
-import { once } from "node:events";
+import { existsSync } from "node:fs";
+import { mkdir, readFile, rm } from "node:fs/promises";
 import path, { dirname } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
@@ -12,11 +12,14 @@ const requestedURL = process.argv[2];
 const targetURL = new URL(requestedURL ?? localURL);
 const projectRoot = path.resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const reportDirectory = path.join(projectRoot, ".lighthouseci");
+// Node runs the CLI directly because spawning "pnpm" without a shell fails on Windows.
+const lighthouseCLI = path.join(
+  projectRoot,
+  "node_modules/lighthouse/cli/index.js",
+);
 const runCount = Number(
   process.env.LIGHTHOUSE_RUNS ?? (requestedURL ? "3" : "1"),
 );
-const shutdownController = new AbortController();
-let interruptedSignal;
 const chromeFlags = [
   "--headless=new",
   ...(process.env.CI ? ["--no-sandbox"] : []),
@@ -27,13 +30,6 @@ const thresholds = {
   "best-practices": 1,
   seo: 1,
 };
-
-for (const signal of ["SIGINT", "SIGTERM"]) {
-  process.once(signal, () => {
-    interruptedSignal ??= signal;
-    shutdownController.abort();
-  });
-}
 
 if (!["http:", "https:"].includes(targetURL.protocol)) {
   throw new Error("The Lighthouse target must use HTTP or HTTPS.");
@@ -47,12 +43,11 @@ if (!Number.isInteger(runCount) || runCount < 1 || runCount > 5) {
   throw new Error("LIGHTHOUSE_RUNS must be an integer between 1 and 5.");
 }
 
-function run(command, args, options = {}) {
+function runLighthouse(args, env) {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
+    const child = spawn(process.execPath, [lighthouseCLI, ...args], {
       stdio: "inherit",
-      ...options,
-      signal: shutdownController.signal,
+      env,
     });
     child.once("error", reject);
     child.once("exit", (code, signal) => {
@@ -63,7 +58,7 @@ function run(command, args, options = {}) {
 
       reject(
         new Error(
-          `${command} exited with ${signal ? `signal ${signal}` : `code ${code}`}`,
+          `Lighthouse exited with ${signal ? `signal ${signal}` : `code ${code}`}`,
         ),
       );
     });
@@ -71,10 +66,6 @@ function run(command, args, options = {}) {
 }
 
 async function waitForServer(url, server, deadline = Date.now() + 30_000) {
-  if (shutdownController.signal.aborted) {
-    throw new Error("Lighthouse was interrupted before Hugo started.");
-  }
-
   if (server.exitCode !== null || server.signalCode !== null) {
     throw new Error("Hugo exited before startup.");
   }
@@ -94,22 +85,9 @@ async function waitForServer(url, server, deadline = Date.now() + 30_000) {
   return waitForServer(url, server, deadline);
 }
 
-async function stopServer(server) {
-  if (!server || server.exitCode !== null || server.signalCode !== null) return;
-
-  server.kill("SIGTERM");
-  await Promise.race([once(server, "exit"), delay(5_000)]);
-  if (server.exitCode === null) server.kill("SIGKILL");
-}
-
-async function playwrightChromePath() {
+function playwrightChromePath() {
   const executablePath = chromium.executablePath();
-  try {
-    await access(executablePath);
-    return executablePath;
-  } catch {
-    return undefined;
-  }
+  return existsSync(executablePath) ? executablePath : undefined;
 }
 
 function median(values) {
@@ -125,11 +103,8 @@ async function collectAuditScores(chromePath, scores, runNumber = 1) {
     ? { ...process.env, CHROME_PATH: chromePath }
     : process.env;
 
-  await run(
-    "pnpm",
+  await runLighthouse(
     [
-      "exec",
-      "lighthouse",
       targetURL.href,
       "--quiet",
       "--locale=en-US",
@@ -138,7 +113,7 @@ async function collectAuditScores(chromePath, scores, runNumber = 1) {
       "--output=json",
       `--output-path=${reportPath}`,
     ],
-    { env: environment },
+    environment,
   );
 
   const report = JSON.parse(await readFile(reportPath, "utf8"));
@@ -181,8 +156,7 @@ async function main() {
       await waitForServer(localURL, server);
     }
 
-    const chromePath =
-      process.env.CHROME_PATH ?? (await playwrightChromePath());
+    const chromePath = process.env.CHROME_PATH ?? playwrightChromePath();
     const scores = Object.fromEntries(
       Object.keys(thresholds).map((category) => [category, []]),
     );
@@ -202,18 +176,11 @@ async function main() {
       throw new Error(`Lighthouse thresholds failed: ${failures.join(", ")}`);
     }
   } finally {
-    await stopServer(server);
+    server?.kill();
   }
 }
 
-main()
-  .catch((error) => {
-    if (interruptedSignal) return;
-
-    console.error(error instanceof Error ? error.message : error);
-    process.exitCode = 1;
-  })
-  .finally(() => {
-    if (interruptedSignal === "SIGINT") process.exitCode = 130;
-    if (interruptedSignal === "SIGTERM") process.exitCode = 143;
-  });
+main().catch((error) => {
+  console.error(error instanceof Error ? error.message : error);
+  process.exitCode = 1;
+});

@@ -1,3 +1,8 @@
 engineStrict: true
+# Resolve only versions published at least 7 days ago (in minutes).
+minimumReleaseAge: 10080
+# Security fix released 2026-10-05; remove once it is 7 days old.
+minimumReleaseAgeExclude:
+  - handlebars@4.7.10
 allowBuilds:
   lefthook: true

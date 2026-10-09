@@ -37,7 +37,7 @@ export default defineConfig({
     command:
       "hugo server --environment production --renderToMemory --disableLiveReload --disableFastRender --noHTTPCache --bind 127.0.0.1 --port 1313 --baseURL http://127.0.0.1:1313/",
     url: "http://127.0.0.1:1313",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120000,
   },
   outputDir: "./e2e-results",
