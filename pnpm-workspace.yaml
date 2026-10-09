@@ -1,3 +1,5 @@
 engineStrict: true
+# Matches Renovate's minimumReleaseAge: resolve only versions at least 7 days old (in minutes).
+minimumReleaseAge: 10080
 allowBuilds:
   lefthook: true

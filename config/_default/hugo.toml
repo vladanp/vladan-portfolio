@@ -6,4 +6,4 @@ disableKinds = ["taxonomy", "term", "rss"]
 title = "Vladan Petrovic | Senior Software Engineer"
 
 [module.hugoVersion]
-min = "0.165.0"
+min = "0.167.0"
