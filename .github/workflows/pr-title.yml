@@ -1,10 +1,11 @@
 name: Pull Request Title
 
-# Separate from CI so editing a pull request reruns only this check.
+# Separate from CI so editing a pull request reruns only this check. It also
+# runs on new commits because checks belong to the pull request's head commit.
 on:
   pull_request:
     branches: [main]
-    types: [opened, reopened, edited]
+    types: [opened, reopened, synchronize, edited]
 
 permissions:
   contents: read
