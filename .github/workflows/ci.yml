@@ -78,10 +78,16 @@ jobs:
   validate:
     name: Validate production site
     needs: test
+    # A skipped required check counts as passing, so run and fail explicitly.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
 
     steps:
+      - name: Require passing browser tests
+        if: needs.test.result != 'success'
+        run: exit 1
+
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
