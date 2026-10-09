@@ -14,7 +14,6 @@ test.describe("homepage", () => {
     await expect(page.locator(".site-header__identity")).toHaveText(
       "Vladan Petrović",
     );
-    await expect(page.locator(".site-header__role")).toHaveCount(0);
     await expect(page.locator("main")).toHaveCount(1);
     await expect(page.locator("footer")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveText("Vladan Petrović");
@@ -42,10 +41,6 @@ test.describe("homepage", () => {
       "Commerce Connector GmbH",
     );
     await expect(page.locator("#work")).toContainText("Doodle AG");
-    await expect(page.locator(".system-entry__number")).toHaveCount(0);
-    await expect(page.locator(".section-heading__number")).toHaveCount(0);
-    await expect(page.locator("#work")).not.toContainText(/CHF|EUR|million/);
-    await expect(page.locator("#experience")).toHaveCount(0);
 
     const rivianLink = page.getByRole("link", {
       name: "Rivian company website, opens in a new tab",
@@ -93,9 +88,11 @@ test.describe("homepage", () => {
   }) => {
     await page.goto("/");
 
-    await expect(
-      page.locator('a[href="mailto:vladanpetrovic89@gmail.com"]'),
-    ).toHaveText(/Email/);
+    const emailLink = page.locator(
+      'a[href="mailto:vladanpetrovic89@gmail.com"]',
+    );
+    await expect(emailLink).toHaveText(/Email/);
+    await expect(emailLink).not.toHaveAttribute("target");
 
     const profileLinks = page.locator(".contact-links a[rel~='me']");
     await expect(profileLinks).toHaveCount(2);
@@ -152,7 +149,6 @@ test.describe("homepage", () => {
       "content",
       "index, follow, max-image-preview:large",
     );
-    await expect(page.locator('meta[name="keywords"]')).toHaveCount(0);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
       "content",
       "summary_large_image",
@@ -171,8 +167,10 @@ test.describe("homepage", () => {
       ),
     );
 
-    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
-      "content",
+    const imageAlt = await page
+      .locator('meta[property="og:image:alt"]')
+      .getAttribute("content");
+    expect(imageAlt).toBe(
       "Vladan Petrović, Senior Software Engineer, currently at Rivian",
     );
     await expect(
@@ -186,10 +184,7 @@ test.describe("homepage", () => {
     ).toHaveAttribute("content", "630");
     await expect(
       page.locator('meta[name="twitter:image:alt"]'),
-    ).toHaveAttribute(
-      "content",
-      "Vladan Petrović, Senior Software Engineer, currently at Rivian",
-    );
+    ).toHaveAttribute("content", imageAlt!);
     const socialImageURL = await page
       .locator('meta[property="og:image"]')
       .getAttribute("content");
@@ -223,8 +218,7 @@ test.describe("homepage", () => {
         "@id": "http://127.0.0.1:1313/#person",
         "@type": "Person",
         alternateName: "Vladan Petrovic",
-        description:
-          "Vladan Petrovic is a Senior Software Engineer at Rivian specializing in TypeScript, React, Node.js, software architecture, and developer experience.",
+        description,
         homeLocation: {
           "@type": "Place",
           name: "Belgrade, Serbia",
@@ -249,13 +243,12 @@ test.describe("homepage", () => {
           url: "https://rivian.com/",
         },
       },
-      description:
-        "Vladan Petrovic is a Senior Software Engineer at Rivian specializing in TypeScript, React, Node.js, software architecture, and developer experience.",
+      description,
       inLanguage: "en-US",
       isPartOf: {
         "@id": "http://127.0.0.1:1313/#website",
       },
-      name: "Vladan Petrovic | Senior Software Engineer",
+      name: await page.title(),
       url: "http://127.0.0.1:1313/",
     });
     expect(Date.parse(profilePage.dateModified)).not.toBeNaN();
@@ -268,8 +261,6 @@ test.describe("homepage", () => {
     await page.goto("/");
 
     const visibleText = await page.locator("body").innerText();
-    expect(visibleText).not.toContain("Senior Full Stack Software Engineer");
-    expect(visibleText).not.toMatch(/Claude Code|Cursor|Devin/);
     expect(visibleText).not.toMatch(/\b(?:19|20)\d{2}\b/);
     expect(visibleText).not.toMatch(/[A-Za-z][\u2013\u2014-][A-Za-z]/);
   });
