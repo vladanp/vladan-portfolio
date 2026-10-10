@@ -14,6 +14,14 @@ test.describe("homepage", () => {
     await expect(page.locator(".site-header__identity")).toHaveText(
       "Vladan Petrović",
     );
+    await expect(
+      page.getByRole("link", { name: "Vladan Petrović", exact: true }),
+    ).toHaveAttribute("aria-current", "page");
+    // The header shows the mark, so the hero is the only visible name.
+    await expect(page.locator(".site-header__mark")).toBeVisible();
+    expect(
+      (await page.locator(".site-header__name").boundingBox())!.width,
+    ).toBeLessThanOrEqual(1);
     await expect(page.locator("main")).toHaveCount(1);
     await expect(page.locator("footer")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveText("Vladan Petrović");
