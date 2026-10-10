@@ -7,8 +7,8 @@ public profile settings in `config/_default/`, and Hugo HTML templates in
 `layouts/`; reusable templates belong in `layouts/_partials/`. Hugo processes
 CSS and images from `assets/`, while files in `static/` are copied unchanged.
 Browser, accessibility, and integrity tests live in `e2e/`; the Lighthouse
-runner is in `scripts/`. Do not hand-edit generated `public/`, `resources/`,
-`e2e-results/`, `playwright-report/`, or `.lighthouseci/` content.
+runner is in `scripts/`. Do not edit generated `public/`, `resources/`,
+`e2e-results/`, `playwright-report/`, or `.lighthouseci/` content by hand.
 
 ## Build, Test, and Development Commands
 
@@ -27,19 +27,20 @@ webkit` for initial setup.
 
 ## Coding Style & Naming Conventions
 
-Follow `.editorconfig`: UTF-8, LF endings, final newlines, spaces, and two-space
-indentation. Oxfmt uses an 80-column target; run `pnpm format` before committing.
+Follow `.editorconfig`: UTF-8, LF endings, final newlines, and indentation of
+two spaces. Oxfmt wraps at 80 columns; run `pnpm format` before committing.
 Oxlint treats correctness, suspicious, and performance findings as errors. Use
-kebab-case filenames for Hugo partials and CSS, BEM-style CSS classes such as
-`system-entry__title`, and `*.spec.ts` for tests. Follow existing template
-formatting because Oxfmt excludes HTML. Regenerate the hosted CV with
-`pnpm cv:build`, PNG site icons with `pnpm site-icons:build`, and the social
-preview with `pnpm social-image:build`; do not hand-edit the generated PDF or
-PNG outputs.
+lowercase, hyphen separated filenames for Hugo partials and CSS, BEM style CSS
+classes such as `system-entry__title`, and `*.spec.ts` for tests. Follow
+existing template formatting because Oxfmt excludes HTML. Regenerate the hosted
+CV with `pnpm cv:build`, PNG site icons with `pnpm site-icons:build`, and the
+social preview with `pnpm social-image:build`; do not edit the generated PDF or
+PNG outputs by hand.
 
-In public facing prose and portfolio copy, do not use em dashes or hyphens
-between words. Rewrite with plain words or punctuation instead. This prose rule
-does not change required code syntax or filename conventions.
+In public facing prose, portfolio copy, the CV, documentation, and code
+comments, do not use em dashes, en dashes, or hyphens between words. Rewrite
+with plain words or punctuation instead. This prose rule does not change
+required code syntax or filename conventions.
 
 Apply YAGNI and prefer simple, direct coding patterns. Add abstractions,
 dependencies, or runtime behavior only when a demonstrated requirement
@@ -48,12 +49,12 @@ senior engineering judgment.
 
 ## Testing Guidelines
 
-Write behavior-focused Playwright cases under `e2e/`; Playwright starts Hugo
+Write Playwright cases that test behavior under `e2e/`; Playwright starts Hugo
 automatically. Use `pnpm test:ui`, `pnpm test:headed`, or `pnpm test:debug` while
-developing. Accessibility changes must preserve zero Axe WCAG 2.2 AA and best-
+developing. Accessibility changes must preserve zero Axe WCAG 2.2 AA and best
 practice violations. Lighthouse minimums are 100 performance, 100
-accessibility, 100 best practices, and 100 SEO. There is no numeric
-code-coverage requirement.
+accessibility, 100 best practices, and 100 SEO. There is no numeric code
+coverage requirement.
 
 ## Commit & Pull Request Guidelines
 
@@ -76,5 +77,5 @@ themselves.
 
 Never commit `.env` files, private keys, or credentials. Treat changes to
 `config/_default/params.toml` as public because it contains deployed identity,
-contact, and external-link data. Keep `pnpm-lock.yaml` synchronized with
+contact, and external link data. Keep `pnpm-lock.yaml` synchronized with
 dependency changes.
