@@ -63,7 +63,8 @@ Install them by running `pnpm install` or `pnpm prepare`.
 - `static/`: the custom domain, web manifest, install icons, and hosted CV
 - `e2e/`: Playwright and Axe validation of generated pages and endpoints
 - `scripts/`: Lighthouse validation and source templates for generated assets
-- `.github/workflows/`: validation, deployment, and production auditing
+- `.github/workflows/`: validation, deployment, production auditing, and
+  workflow security checks
 
 Public identity, contact details, current role data, and external links live in
 `config/_default/params.toml`. Homepage copy and selected work live in
@@ -77,13 +78,15 @@ accurate.
 
 ## CI and deployment
 
-Pull requests to `main` run formatting, linting, a strict production Hugo
-build, parallel Playwright/Axe tests across Chromium and WebKit, endpoint and
-resource integrity checks, and perfect Lighthouse thresholds across
+Pull requests to `main` run formatting, linting with type checking, a strict
+production Hugo build, parallel Playwright/Axe tests across Chromium and WebKit,
+endpoint and resource integrity checks, and perfect Lighthouse thresholds across
 performance, accessibility, best practices, and SEO. Pushes to `main` run the
-same validation, then deploy the production build made in that run to the
-GitHub Pages deployment branch. Browser tests and the local Lighthouse audit
-run against Hugo's server; the deployed files are audited once they are live.
+same validation, then deploy the production build made in that run to the GitHub
+Pages deployment branch. Browser tests and the local Lighthouse audit run
+against Hugo's server; the deployed files are audited once they are live.
+Changes to workflow files are also audited with zizmor, which checks that every
+pinned action SHA matches its version comment.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three

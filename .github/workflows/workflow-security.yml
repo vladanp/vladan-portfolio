@@ -1,0 +1,36 @@
+name: Workflow Security
+
+# Audits workflow changes with zizmor. Online audits also confirm that each
+# pinned action SHA matches its version comment and is not a known
+# vulnerable release, which matters because actions are updated by hand.
+on:
+  pull_request:
+    branches: [main]
+    paths: [".github/workflows/**"]
+  push:
+    branches: [main]
+    paths: [".github/workflows/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  zizmor:
+    name: Audit workflows
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        run: pipx run --spec zizmor==1.30.1 zizmor --format=github .github/workflows
+        env:
+          GH_TOKEN: ${{ github.token }}
