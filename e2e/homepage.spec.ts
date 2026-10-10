@@ -262,6 +262,15 @@ test.describe("homepage", () => {
 
     const visibleText = await page.locator("body").innerText();
     expect(visibleText).not.toMatch(/\b(?:19|20)\d{2}\b/);
-    expect(visibleText).not.toMatch(/[A-Za-z][\u2013\u2014-][A-Za-z]/);
+
+    const copy = [
+      visibleText,
+      await page.title(),
+      await page.locator('meta[name="description"]').getAttribute("content"),
+      await page
+        .locator('meta[property="og:image:alt"]')
+        .getAttribute("content"),
+    ].join("\n");
+    expect(copy).not.toMatch(/[\u2012-\u2015\u2212]|[\p{L}\d]-\p{L}/u);
   });
 });
