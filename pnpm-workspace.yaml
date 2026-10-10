@@ -3,6 +3,10 @@ engineStrict: true
 saveExact: true
 # Resolve only versions published at least 7 days ago (in minutes).
 minimumReleaseAge: 10080
+# Refuse a version published with weaker provenance than earlier versions,
+# and transitive dependencies from git or tarball URLs.
+trustPolicy: no-downgrade
+blockExoticSubdeps: true
 # Remove each exception once its version is 7 days old.
 minimumReleaseAgeExclude:
   # Security fix released 2026-10-05.
