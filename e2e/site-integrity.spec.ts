@@ -80,6 +80,46 @@ test.describe("generated site integrity", () => {
     );
   });
 
+  test("fragment links point to elements that exist", async ({ context }) => {
+    const paths = ["/", "/not-a-real-page"];
+    const pages = await Promise.all(
+      paths.map(async (path) => {
+        const page = await context.newPage();
+        await page.goto(path);
+        return page;
+      }),
+    );
+    const idsByPath = new Map(
+      await Promise.all(
+        pages.map(async (page, index) => [
+          paths[index],
+          await page.evaluate(() =>
+            [...document.querySelectorAll("[id]")].map((element) => element.id),
+          ),
+        ]),
+      ),
+    );
+    const links = (
+      await Promise.all(
+        pages.map((page) =>
+          page
+            .locator('a[href*="#"]')
+            .evaluateAll((anchors: HTMLAnchorElement[]) =>
+              anchors.map((anchor) => anchor.href),
+            ),
+        ),
+      )
+    ).flat();
+
+    expect(links.length).toBeGreaterThanOrEqual(10);
+    const brokenLinks = links.filter((link) => {
+      const url = new URL(link);
+      const ids = idsByPath.get(url.pathname) ?? [];
+      return ids.filter((id) => id === url.hash.slice(1)).length !== 1;
+    });
+    expect(brokenLinks).toEqual([]);
+  });
+
   test("homepage loads without browser or network errors", async ({ page }) => {
     const errors: string[] = [];
     page.on("console", (message) => {
