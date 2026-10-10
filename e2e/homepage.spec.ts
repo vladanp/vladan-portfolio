@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("homepage", () => {
-  test("presents the current role and selected previous work clearly", async ({
+  test("presents the current role and selected work clearly", async ({
     page,
   }) => {
     const response = await page.goto("/");

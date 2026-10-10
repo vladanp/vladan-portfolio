@@ -6,7 +6,7 @@ profile_label: Profile
 work_action_label: View selected work
 cv_action_label: View CV
 current_role_label: Currently
-work_section_title: Selected previous work
+work_section_title: Selected work
 systems:
   - company: TX Services / Doodle AG · Tech Lead
     title: Scheduling products
