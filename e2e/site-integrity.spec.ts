@@ -62,7 +62,7 @@ test.describe("generated site integrity", () => {
         if (image.src) values.add(image.src);
       }
       for (const link of document.querySelectorAll<HTMLLinkElement>(
-        'link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]',
+        'link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"], link[rel="preload"]',
       )) {
         values.add(link.href);
       }
@@ -71,7 +71,7 @@ test.describe("generated site integrity", () => {
       );
     });
 
-    expect(references.length).toBeGreaterThanOrEqual(8);
+    expect(references.length).toBeGreaterThanOrEqual(9);
     await Promise.all(
       references.map(async (reference) => {
         const response = await request.get(reference);
@@ -118,6 +118,28 @@ test.describe("generated site integrity", () => {
       return ids.filter((id) => id === url.hash.slice(1)).length !== 1;
     });
     expect(brokenLinks).toEqual([]);
+  });
+
+  test("renders text with the self hosted typeface", async ({
+    page,
+    request,
+  }) => {
+    await page.goto("/");
+
+    // The CSS minifier lowercases family names, and matching ignores case.
+    const loadedFamilies = await page.evaluate(async () => {
+      await document.fonts.ready;
+      return [...document.fonts]
+        .filter((font) => font.status === "loaded")
+        .map((font) => font.family.replaceAll('"', "").toLowerCase());
+    });
+    expect(loadedFamilies).toContain("schibsted grotesk");
+    expect(
+      await page
+        .locator("h1")
+        .evaluate((element) => getComputedStyle(element).fontFamily),
+    ).toMatch(/^"?Schibsted Grotesk"?,/);
+    expect((await request.get("/fonts/OFL.txt")).status()).toBe(200);
   });
 
   test("homepage loads without browser or network errors", async ({ page }) => {

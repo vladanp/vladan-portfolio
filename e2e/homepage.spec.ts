@@ -30,12 +30,20 @@ test.describe("homepage", () => {
     await expect(page.locator(".current-role")).toContainText("Rivian");
 
     await expect(page.locator("main section")).toHaveCount(4);
-    await expect(page.locator(".system-entry")).toHaveCount(3);
+    await expect(page.locator(".system-entry")).toHaveCount(4);
     await expect(page.locator(".system-entry__title")).toHaveText([
+      "Vehicle returns",
       "Scheduling products",
       "Where to buy commerce",
       "Cardiac care software",
     ]);
+    await expect(page.locator(".system-entry__outcome")).toHaveText([
+      /vehicle return journey/,
+      /more than 100 A\/B tests/,
+      /EUR 2 million/,
+      /third party audits/,
+    ]);
+    await expect(page.locator("#work")).toContainText("Rivian");
     await expect(page.locator("#work")).toContainText("Comtrade Group");
     await expect(page.locator("#work")).toContainText(
       "Commerce Connector GmbH",

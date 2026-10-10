@@ -14,6 +14,7 @@ try {
     viewport: { height: 630, width: 1200 },
   });
   await page.goto(pathToFileURL(sourcePath).href, { waitUntil: "load" });
+  await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: outputPath, type: "png" });
 } finally {
   await browser.close();
