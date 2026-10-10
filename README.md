@@ -60,8 +60,7 @@ Install them by running `pnpm install` or `pnpm prepare`.
 - `content/`: visible Markdown content
 - `layouts/`: base template, page layouts, partials, and `robots.txt`
 - `assets/`: CSS and fingerprinted brand and social images processed by Hugo
-- `static/`: the custom domain, web manifest, install icons, typeface, and
-  hosted CV
+- `static/`: the web manifest, install icons, typeface, and hosted CV
 - `e2e/`: Playwright and Axe validation of generated pages and endpoints
 - `scripts/`: Lighthouse validation and source templates for generated assets
 - `.github/workflows/`: validation, deployment, production auditing, and
@@ -106,16 +105,19 @@ Pull requests to `main` run formatting, linting with type checking, a strict
 production Hugo build, parallel Playwright/Axe tests across Chromium and WebKit,
 endpoint and resource integrity checks, and perfect Lighthouse thresholds across
 performance, accessibility, best practices, and SEO. Pushes to `main` run the
-same validation, then deploy the production build made in that run to the GitHub
-Pages deployment branch. Browser tests and the local Lighthouse audit run
-against Hugo's server; the deployed files are audited once they are live.
+same validation, then deploy the production build made in that run with
+GitHub's Pages actions, so the deploy job never gets write access to the
+repository. GitHub Pages must use GitHub Actions as its source; the custom
+domain is set in the repository's Pages settings. Browser tests and the local
+Lighthouse audit run against Hugo's server; the deployed files are audited once
+they are live.
 Changes to workflow files are also audited with zizmor, which checks that every
 pinned action SHA matches its version comment.
 
 After deployment, a separate workflow waits until the matching commit revision
 is live at `vladan.dev` and runs a production Lighthouse audit with three
 samples. The deployment job also records the source commit and public URL in
-GitHub's `production` environment.
+GitHub's `github-pages` environment.
 
 Every pull request commit and title must follow Conventional Commits. CI also
 validates commits pushed directly to `main` before allowing deployment. After a
