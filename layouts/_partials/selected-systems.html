@@ -5,7 +5,7 @@
       {{ range .Params.systems }}
         <article class="system-entry">
           <header class="system-entry__header">
-            <p class="eyebrow">{{ .company }}</p>
+            <p class="eyebrow">{{ replace .company " · " "\u00a0· " }}</p>
             <h3 class="system-entry__title">{{ .title }}</h3>
           </header>
           <p class="system-entry__summary">{{ .summary }}</p>

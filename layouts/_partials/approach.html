@@ -21,7 +21,7 @@
         {{ range .Params.toolsets }}
           <div class="toolsets__row">
             <dt>{{ .label }}</dt>
-            <dd>{{ .items }}</dd>
+            <dd>{{ replace .items " · " "\u00a0· " }}</dd>
           </div>
         {{ end }}
       </dl>
