@@ -16,6 +16,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ $pageTitle }}</title>
+    <link
+      rel="preload"
+      href="{{ "fonts/schibsted-grotesk.woff2" | relURL }}"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     {{- $cssPaths := slice "css/style.css" "css/header.css" "css/footer.css" }}
     {{- if $is404 }}

@@ -60,7 +60,8 @@ Install them by running `pnpm install` or `pnpm prepare`.
 - `content/`: visible Markdown content
 - `layouts/`: base template, page layouts, partials, and `robots.txt`
 - `assets/`: CSS and fingerprinted brand and social images processed by Hugo
-- `static/`: the custom domain, web manifest, install icons, and hosted CV
+- `static/`: the custom domain, web manifest, install icons, typeface, and
+  hosted CV
 - `e2e/`: Playwright and Axe validation of generated pages and endpoints
 - `scripts/`: Lighthouse validation and source templates for generated assets
 - `.github/workflows/`: validation, deployment, production auditing, and
@@ -75,6 +76,29 @@ the public configuration, homepage content, CV source, social image source, and
 web manifest as applicable, then regenerate the affected assets. When the CV
 changes, also update `cvLastmod` in `params.toml` so its sitemap timestamp stays
 accurate.
+
+## Typeface
+
+The site and social image use
+[Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk), served
+from `static/fonts/` under the SIL Open Font License in `static/fonts/OFL.txt`.
+The file is the variable font from Google Fonts, limited to weights 400 to 700,
+the Latin 1 range, Serbian Latin letters, common punctuation, and arrows with
+[fontTools](https://github.com/fonttools/fonttools) (`pip install fonttools
+brotli`):
+
+```bash
+fonttools varLib.instancer "SchibstedGrotesk[wght].ttf" wght=400:700 \
+  -o schibsted-grotesk.ttf
+pyftsubset schibsted-grotesk.ttf --flavor=woff2 \
+  --output-file=static/fonts/schibsted-grotesk.woff2 \
+  --layout-features=calt,ccmp,kern,liga,locl,mark,mkmk \
+  --unicodes="U+0000-00FF,U+0106-0107,U+010C-010D,U+0110-0111,U+0131,U+0152-0153,U+0160-0161,U+017D-017E,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2190-2199,U+2212,U+FEFF,U+FFFD"
+```
+
+Characters outside the subset fall back to the system font. The fallback face
+in `assets/css/style.css` scales Arial to the font's metrics to limit layout
+shift while it loads; recalculate it if the font changes.
 
 ## CI and deployment
 
