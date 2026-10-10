@@ -30,10 +30,3 @@
   color: var(--color-muted);
   font-size: 1.125rem;
 }
-
-.error-page__home-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  font-weight: 600;
-}

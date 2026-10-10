@@ -12,7 +12,7 @@ currentEmployer = "Rivian"
 currentEmployerUrl = "https://rivian.com/"
 currentEmployerLogo = "images/rivian-wordmark.svg"
 cvPath = "vladan-petrovic-cv.pdf"
-cvLastmod = "2026-09-02T17:00:52Z"
+cvLastmod = "2026-10-10T05:19:51Z"
 socialImageAlt = "Vladan Petrović, Senior Software Engineer, currently at Rivian"
 
 knowsAbout = [

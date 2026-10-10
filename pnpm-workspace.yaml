@@ -1,8 +1,26 @@
 engineStrict: true
+# pnpm 11 and later read this here, not from .npmrc.
+saveExact: true
 # Resolve only versions published at least 7 days ago (in minutes).
 minimumReleaseAge: 10080
-# Security fix released 2026-10-05; remove once it is 7 days old.
+# Refuse a version published with weaker provenance than earlier versions,
+# and transitive dependencies from git or tarball URLs.
+trustPolicy: no-downgrade
+blockExoticSubdeps: true
+# Remove each exception once its version is 7 days old.
 minimumReleaseAgeExclude:
+  # Security fix released 2026-10-05.
   - handlebars@4.7.10
+  # Latest tool releases from 2026-10-05 to 2026-10-08. Platform binaries
+  # are listed by name because their parents pin them to the same version.
+  - "@playwright/test@1.64.0"
+  - playwright@1.64.0
+  - playwright-core@1.64.0
+  - lefthook@2.2.1
+  - lefthook-*
+  - oxfmt@0.72.0
+  - "@oxfmt/binding-*"
+  - oxlint@1.87.0
+  - "@oxlint/binding-*"
 allowBuilds:
   lefthook: true

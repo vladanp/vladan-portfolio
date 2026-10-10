@@ -80,6 +80,46 @@ test.describe("generated site integrity", () => {
     );
   });
 
+  test("fragment links point to elements that exist", async ({ context }) => {
+    const paths = ["/", "/not-a-real-page"];
+    const pages = await Promise.all(
+      paths.map(async (path) => {
+        const page = await context.newPage();
+        await page.goto(path);
+        return page;
+      }),
+    );
+    const pageIds = await Promise.all(
+      pages.map((page) =>
+        page.evaluate(() =>
+          [...document.querySelectorAll("[id]")].map((element) => element.id),
+        ),
+      ),
+    );
+    const idsByPath = new Map(
+      paths.map((path, index) => [path, pageIds[index]] as const),
+    );
+    const links = (
+      await Promise.all(
+        pages.map((page) =>
+          page
+            .locator('a[href*="#"]')
+            .evaluateAll((anchors: HTMLAnchorElement[]) =>
+              anchors.map((anchor) => anchor.href),
+            ),
+        ),
+      )
+    ).flat();
+
+    expect(links.length).toBeGreaterThanOrEqual(10);
+    const brokenLinks = links.filter((link) => {
+      const url = new URL(link);
+      const ids = idsByPath.get(url.pathname) ?? [];
+      return ids.filter((id) => id === url.hash.slice(1)).length !== 1;
+    });
+    expect(brokenLinks).toEqual([]);
+  });
+
   test("homepage loads without browser or network errors", async ({ page }) => {
     const errors: string[] = [];
     page.on("console", (message) => {
@@ -112,6 +152,16 @@ test.describe("generated site integrity", () => {
         () => document.documentElement.scrollWidth <= window.innerWidth,
       ),
     ).toBe(true);
+
+    const toolsetLabel = await page
+      .locator(".toolsets dt")
+      .first()
+      .boundingBox();
+    const toolsetValue = await page
+      .locator(".toolsets dd")
+      .first()
+      .boundingBox();
+    expect(toolsetValue!.x).toBeCloseTo(toolsetLabel!.x, 0);
   });
 
   test("provides a working keyboard skip link", async ({
