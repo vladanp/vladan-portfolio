@@ -24,9 +24,9 @@ jobs:
       matrix:
         include:
           - browser: chromium
-            project_flags: "--project=desktop-chrome --project=mobile-chrome"
+            projects: "*-chrome"
           - browser: webkit
-            project_flags: "--project=desktop-webkit --project=mobile-webkit"
+            projects: "*-webkit"
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -58,10 +58,14 @@ jobs:
           key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+        run: pnpm exec playwright install --with-deps "$BROWSER"
+        env:
+          BROWSER: ${{ matrix.browser }}
 
       - name: Run browser, integrity, and accessibility tests
-        run: pnpm exec playwright test ${{ matrix.project_flags }}
+        run: pnpm exec playwright test --project="$PROJECTS"
+        env:
+          PROJECTS: ${{ matrix.projects }}
 
       - name: Upload diagnostics on failure
         if: failure()
@@ -181,7 +185,7 @@ jobs:
       name: production
       url: https://vladan.dev/
     permissions:
-      contents: write
+      contents: write # Push the built site to the gh-pages branch.
 
     steps:
       - name: Download validated production site

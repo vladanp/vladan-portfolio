@@ -1,6 +1,8 @@
 name: Production Audit
 
-on:
+# workflow_run jobs run with this repository's token, so they only act on
+# successful pushes to main from this repository, never on pull requests.
+on: # zizmor: ignore[dangerous-triggers]
   workflow_run:
     workflows: [CI and Deployment]
     types: [completed]
@@ -18,7 +20,8 @@ jobs:
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'main'
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
@@ -89,7 +92,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
-      contents: write
+      contents: write # Push the version tag and create the GitHub Release.
 
     steps:
       - name: Checkout audited revision
