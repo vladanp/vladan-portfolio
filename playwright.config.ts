@@ -9,7 +9,11 @@ export default defineConfig({
   },
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : 1,
-  reporter: [["list"], ["html", { open: "never" }]],
+  reporter: [
+    ["list"],
+    ...(process.env.CI ? [["github"] as const] : []),
+    ["html", { open: "never" }],
+  ],
   use: {
     baseURL: "http://127.0.0.1:1313",
     trace: "on-first-retry",
