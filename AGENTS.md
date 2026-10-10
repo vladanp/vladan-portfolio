@@ -21,7 +21,8 @@ webkit` for initial setup.
 - `pnpm test` runs Playwright in Chromium and WebKit on desktop and mobile
   profiles. It starts its own Hugo server, so stop `pnpm dev` first.
 - `pnpm lighthouse` starts and audits a local production Hugo server.
-- `pnpm format:check` and `pnpm lint` run Oxc validation.
+- `pnpm format:check` and `pnpm lint` run Oxc validation; linting includes
+  type aware rules and TypeScript type checking.
 - `pnpm commitlint --last` validates the latest commit message.
 - `pnpm check` runs formatting, linting, build, tests, and Lighthouse.
 

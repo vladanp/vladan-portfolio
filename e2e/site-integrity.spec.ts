@@ -89,15 +89,15 @@ test.describe("generated site integrity", () => {
         return page;
       }),
     );
-    const idsByPath = new Map(
-      await Promise.all(
-        pages.map(async (page, index) => [
-          paths[index],
-          await page.evaluate(() =>
-            [...document.querySelectorAll("[id]")].map((element) => element.id),
-          ),
-        ]),
+    const pageIds = await Promise.all(
+      pages.map((page) =>
+        page.evaluate(() =>
+          [...document.querySelectorAll("[id]")].map((element) => element.id),
+        ),
       ),
+    );
+    const idsByPath = new Map(
+      paths.map((path, index) => [path, pageIds[index]] as const),
     );
     const links = (
       await Promise.all(

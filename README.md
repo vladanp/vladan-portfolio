@@ -11,8 +11,8 @@ JavaScript sent to the browser and no external runtime dependencies.
 
 The site is built with Hugo. Node.js tooling handles committed asset generation
 and repository validation. Playwright, Axe, and Lighthouse cover browser
-behavior, accessibility, and performance; Oxfmt and Oxlint provide formatting
-and linting.
+behavior, accessibility, and performance; Oxfmt and Oxlint provide formatting,
+linting, and TypeScript type checking.
 
 The supported toolchain is defined in `.mise.toml`, `package.json`, and the
 pnpm lockfile. With [mise](https://mise.jdx.dev/) installed:
@@ -42,7 +42,7 @@ pnpm build               # strict, minified production build in public/
 pnpm test                # Chromium and WebKit desktop and mobile, integrity, and Axe tests
 pnpm lighthouse          # local Lighthouse audit against a production server
 pnpm format:check        # formatting validation
-pnpm lint                # JavaScript and TypeScript linting
+pnpm lint                # lint and type check JavaScript and TypeScript
 pnpm commitlint --last   # validate the latest commit message
 pnpm check               # format, lint, build, browser tests, and Lighthouse
 pnpm cv:build            # regenerate the hosted CV PDF

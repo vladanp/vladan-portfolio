@@ -5,6 +5,10 @@
     "suspicious": "error",
     "perf": "error"
   },
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  },
   "ignorePatterns": [
     "public/**",
     "resources/**",
