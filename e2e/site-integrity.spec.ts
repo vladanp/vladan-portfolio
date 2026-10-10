@@ -112,6 +112,16 @@ test.describe("generated site integrity", () => {
         () => document.documentElement.scrollWidth <= window.innerWidth,
       ),
     ).toBe(true);
+
+    const toolsetLabel = await page
+      .locator(".toolsets dt")
+      .first()
+      .boundingBox();
+    const toolsetValue = await page
+      .locator(".toolsets dd")
+      .first()
+      .boundingBox();
+    expect(toolsetValue!.x).toBeCloseTo(toolsetLabel!.x, 0);
   });
 
   test("provides a working keyboard skip link", async ({
