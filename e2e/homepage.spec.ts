@@ -42,7 +42,7 @@ test.describe("homepage", () => {
     await expect(page.locator(".system-entry__title")).toHaveText([
       "Vehicle returns",
       "Scheduling products",
-      "Where to buy commerce",
+      "Brand commerce widgets",
       "Cardiac care software",
     ]);
     await expect(page.locator(".system-entry__outcome")).toHaveText([
