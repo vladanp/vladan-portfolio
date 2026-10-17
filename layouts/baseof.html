@@ -11,7 +11,7 @@
 {{- end -}}
 {{- $author := .Params.author | default .Site.Params.searchName | strings.TrimSpace -}}
 <!doctype html>
-<html lang="{{ .Site.Language.Locale | default "en-US" }}">
+<html lang="{{ .Site.Language.Locale }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,7 +60,7 @@
       <meta property="og:type" content="profile" />
       <meta property="og:url" content="{{ .Permalink }}" />
       <meta property="og:site_name" content="{{ .Site.Params.name }}" />
-      <meta property="og:locale" content="{{ replace (.Site.Language.Locale | default "en-US") "-" "_" }}" />
+      <meta property="og:locale" content="{{ replace .Site.Language.Locale "-" "_" }}" />
       <meta property="og:image" content="{{ $socialImage.Permalink }}" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="{{ $socialImage.Width }}" />
@@ -125,7 +125,7 @@
         "name" .Site.Params.name
         "alternateName" .Site.Params.alternateNames
         "url" $homeURL
-        "inLanguage" (.Site.Language.Locale | default "en-US")
+        "inLanguage" .Site.Language.Locale
       }}
       {{- $profilePage := dict
         "@type" "ProfilePage"
@@ -134,7 +134,7 @@
         "url" $homeURL
         "dateCreated" (.Date.Format "2006-01-02T15:04:05Z07:00")
         "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
-        "inLanguage" (.Site.Language.Locale | default "en-US")
+        "inLanguage" .Site.Language.Locale
         "isPartOf" (dict "@id" $websiteID)
         "mainEntity" $person
       }}
