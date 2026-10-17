@@ -4,6 +4,7 @@ enableGitInfo = true
 locale = "en-US"
 disableKinds = ["taxonomy", "term", "rss"]
 title = "Vladan Petrovic | Senior Software Engineer"
+copyright = "© Vladan Petrović"
 
 [module.hugoVersion]
 min = "0.168.0"
