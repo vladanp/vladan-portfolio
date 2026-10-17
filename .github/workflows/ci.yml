@@ -44,10 +44,17 @@ jobs:
           node-version-file: .mise.toml
           cache: pnpm
 
+      - name: Read Hugo version
+        id: hugo
+        run: |
+          version=$(sed -n 's/^hugo = "\(.*\)"$/\1/p' .mise.toml)
+          test -n "$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@2752ce1d29631191ea3f27c23495fa06139a5b78 # v3.2.1
         with:
-          hugo-version: 0.168.0
+          hugo-version: ${{ steps.hugo.outputs.version }}
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
@@ -125,10 +132,17 @@ jobs:
           HEAD_SHA: ${{ github.sha }}
         run: pnpm commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
 
+      - name: Read Hugo version
+        id: hugo
+        run: |
+          version=$(sed -n 's/^hugo = "\(.*\)"$/\1/p' .mise.toml)
+          test -n "$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@2752ce1d29631191ea3f27c23495fa06139a5b78 # v3.2.1
         with:
-          hugo-version: 0.168.0
+          hugo-version: ${{ steps.hugo.outputs.version }}
 
       - name: Check formatting
         run: pnpm format:check
