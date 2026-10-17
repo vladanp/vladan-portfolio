@@ -11,7 +11,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: production-audit
+  # Pull request CI also triggers this workflow. Keep those skipped runs out of
+  # the push group so they cannot cancel a running audit and release.
+  group: production-audit-${{ github.event.workflow_run.event }}
   cancel-in-progress: true
 
 jobs:
