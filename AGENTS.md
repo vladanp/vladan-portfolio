@@ -32,7 +32,7 @@ Follow `.editorconfig`: UTF-8, LF endings, final newlines, and indentation of
 two spaces. Oxfmt wraps at 80 columns; run `pnpm format` before committing.
 Oxlint treats correctness, suspicious, and performance findings as errors. Use
 lowercase, hyphen separated filenames for Hugo partials and CSS, BEM style CSS
-classes such as `system-entry__title`, and `*.spec.ts` for tests. Follow
+classes such as `current-role__title`, and `*.spec.ts` for tests. Follow
 existing template formatting because Oxfmt excludes HTML. Regenerate the hosted
 CV with `pnpm cv:build`, PNG site icons with `pnpm site-icons:build`, and the
 social preview with `pnpm social-image:build`; do not edit the generated PDF or

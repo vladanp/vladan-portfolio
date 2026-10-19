@@ -67,7 +67,7 @@ Install them by running `pnpm install` or `pnpm prepare`.
   workflow security checks
 
 Public identity, contact details, current role data, and external links live in
-`config/_default/params.toml`. Homepage copy and selected work live in
+`config/_default/params.toml`. Homepage copy lives in
 `content/_index.md`. The editable CV, site icon, and social image sources are in
 `scripts/`; their generated files are committed so production builds stay
 static and do not require a browser. When professional details change, update

@@ -111,7 +111,7 @@ test.describe("generated site integrity", () => {
       )
     ).flat();
 
-    expect(links.length).toBeGreaterThanOrEqual(10);
+    expect(links.length).toBeGreaterThanOrEqual(8);
     const brokenLinks = links.filter((link) => {
       const url = new URL(link);
       const ids = idsByPath.get(url.pathname) ?? [];

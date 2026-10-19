@@ -1,9 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("homepage", () => {
-  test("presents the current role and selected work clearly", async ({
-    page,
-  }) => {
+  test("presents the current role clearly", async ({ page }) => {
     const response = await page.goto("/");
 
     expect(response?.status()).toBe(200);
@@ -28,35 +26,12 @@ test.describe("homepage", () => {
     await expect(page.locator(".hero__role")).toHaveText(
       "Senior Software Engineer",
     );
-    await expect(page.locator(".hero__actions")).toHaveAttribute(
-      "role",
-      "group",
-    );
     await expect(page.locator(".current-role")).toContainText(
       "Senior Software Engineer",
     );
     await expect(page.locator(".current-role")).toContainText("Rivian");
 
-    await expect(page.locator("main section")).toHaveCount(4);
-    await expect(page.locator(".system-entry")).toHaveCount(4);
-    await expect(page.locator(".system-entry__title")).toHaveText([
-      "Vehicle returns",
-      "Scheduling products",
-      "Brand commerce widgets",
-      "Cardiac care software",
-    ]);
-    await expect(page.locator(".system-entry__outcome")).toHaveText([
-      /vehicle return journey/,
-      /more than 100 A\/B tests/,
-      /EUR 2 million/,
-      /third party audits/,
-    ]);
-    await expect(page.locator("#work")).toContainText("Rivian");
-    await expect(page.locator("#work")).toContainText("Comtrade Group");
-    await expect(page.locator("#work")).toContainText(
-      "Commerce Connector GmbH",
-    );
-    await expect(page.locator("#work")).toContainText("Doodle AG");
+    await expect(page.locator("main section")).toHaveCount(3);
 
     const rivianLink = page.getByRole("link", {
       name: "Rivian company website, opens in a new tab",

@@ -9,8 +9,7 @@
       <h1 id="hero-title" class="hero__title">{{ .Site.Params.name }}</h1>
       <p class="hero__role">{{ .Site.Params.jobTitle }}</p>
       <p class="hero__statement">{{ .Params.hero_statement }}</p>
-      <div class="hero__actions" role="group" aria-label="Introductory links">
-        <a class="text-link" href="#work">{{ .Params.work_action_label }}</a>
+      <div class="hero__actions">
         <a
           class="text-link"
           href="{{ .Site.Params.cvPath | relURL }}"
