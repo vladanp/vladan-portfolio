@@ -133,9 +133,8 @@ GitHub Releases provide durable version notes. GitHub deployment history, the
 workflow run, and the live `build-revision` metadata remain the source of truth
 for the exact commit currently shipped. Dependencies and SHA pinned GitHub
 Actions are updated by hand. pnpm only installs versions published at least
-seven days earlier, apart from the dated exceptions listed in
-`pnpm-workspace.yaml`, and refuses versions published with weaker provenance
-than earlier releases. CI reads its Node.js version from `.mise.toml`.
+seven days earlier and refuses versions published with weaker provenance than
+earlier releases. CI reads its Node.js version from `.mise.toml`.
 
 ## License
 
