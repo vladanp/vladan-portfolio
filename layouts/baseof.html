@@ -1,15 +1,6 @@
 {{- $is404 := eq .Kind "404" -}}
-{{- $pageTitle := .Site.Title -}}
-{{- if $is404 -}}
-  {{- $pageTitle = printf "Page Not Found | %s" .Site.Title -}}
-{{- else if not .IsHome -}}
-  {{- $pageTitle = printf "%s | %s" .Title .Site.Title -}}
-{{- end -}}
-{{- $description := .Description | default .Site.Params.description | plainify | htmlUnescape | strings.TrimSpace -}}
-{{- if $is404 -}}
-  {{- $description = "The page you requested could not be found." -}}
-{{- end -}}
-{{- $author := .Params.author | default .Site.Params.searchName | strings.TrimSpace -}}
+{{- $pageTitle := cond $is404 (printf "Page Not Found | %s" .Site.Title) .Site.Title -}}
+{{- $description := cond $is404 "The page you requested could not be found." .Site.Params.description -}}
 <!doctype html>
 <html lang="{{ .Site.Language.Locale }}">
   <head>
@@ -41,8 +32,8 @@
     </style>
 
     <meta name="description" content="{{ $description }}" />
-    <meta name="author" content="{{ $author }}" />
-    {{- if or .Params.noindex $is404 }}
+    <meta name="author" content="{{ .Site.Params.searchName }}" />
+    {{- if $is404 }}
       <meta name="robots" content="noindex" />
     {{- else }}
       <meta name="robots" content="index, follow, max-image-preview:large" />
