@@ -7,17 +7,5 @@ minimumReleaseAge: 10080
 # and transitive dependencies from git or tarball URLs.
 trustPolicy: no-downgrade
 blockExoticSubdeps: true
-# Remove each exception once its version is 7 days old.
-minimumReleaseAgeExclude:
-  # Latest tool releases from 2026-10-13 to 2026-10-15. Platform binaries
-  # are listed by name because their parents pin them to the same version.
-  - "@axe-core/playwright@4.14.0"
-  - "@playwright/test@1.64.1"
-  - playwright@1.64.1
-  - playwright-core@1.64.1
-  - oxfmt@0.73.0
-  - "@oxfmt/binding-*"
-  - oxlint@1.88.0
-  - "@oxlint/binding-*"
 allowBuilds:
   lefthook: true
