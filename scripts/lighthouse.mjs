@@ -92,7 +92,8 @@ function playwrightChromePath() {
 
 function median(values) {
   const sorted = values.toSorted((left, right) => left - right);
-  return sorted[Math.floor(sorted.length / 2)];
+  // With an even count, the lower middle score keeps one weak run visible.
+  return sorted[Math.floor((sorted.length - 1) / 2)];
 }
 
 async function collectAuditScores(chromePath, scores, runNumber = 1) {
