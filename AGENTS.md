@@ -33,15 +33,14 @@ two spaces. Oxfmt wraps at 80 columns; run `pnpm format` before committing.
 Oxlint treats correctness, suspicious, and performance findings as errors. Use
 lowercase, hyphen separated filenames for Hugo partials and CSS, BEM style CSS
 classes such as `current-role__title`, and `*.spec.ts` for tests. Follow
-existing template formatting because Oxfmt excludes HTML. Regenerate the hosted
-CV with `pnpm cv:build`, PNG site icons with `pnpm site-icons:build`, and the
-social preview with `pnpm social-image:build`; do not edit the generated PDF or
-PNG outputs by hand.
+existing template formatting because Oxfmt excludes HTML. Regenerate PNG site
+icons with `pnpm site-icons:build` and the social preview with
+`pnpm social-image:build`; do not edit the generated PNG outputs by hand.
 
-In public facing prose, portfolio copy, the CV, documentation, and code
-comments, do not use em dashes, en dashes, or hyphens between words. Rewrite
-with plain words or punctuation instead. This prose rule does not change
-required code syntax or filename conventions.
+In public facing prose, portfolio copy, documentation, and code comments, do
+not use em dashes, en dashes, or hyphens between words. Rewrite with plain
+words or punctuation instead. This prose rule does not change required code
+syntax or filename conventions.
 
 Apply YAGNI and prefer simple, direct coding patterns. Add abstractions,
 dependencies, or runtime behavior only when a demonstrated requirement

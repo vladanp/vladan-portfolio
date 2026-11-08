@@ -8,7 +8,6 @@
     "build": "hugo --environment production --minify --gc --cleanDestinationDir --panicOnWarning --printPathWarnings --printUnusedTemplates",
     "check": "pnpm format:check && pnpm lint && pnpm build && pnpm test && pnpm lighthouse",
     "commitlint": "commitlint",
-    "cv:build": "node scripts/generate-cv.mjs",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
