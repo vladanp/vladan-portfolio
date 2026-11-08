@@ -45,6 +45,7 @@ pnpm format:check        # formatting validation
 pnpm lint                # lint and type check JavaScript and TypeScript
 pnpm commitlint --last   # validate the latest commit message
 pnpm check               # format, lint, build, browser tests, and Lighthouse
+pnpm cv:build            # regenerate the hosted CV PDF
 pnpm site-icons:build    # regenerate browser and install icons
 pnpm social-image:build  # regenerate the social preview image
 ```
@@ -59,7 +60,7 @@ Install them by running `pnpm install` or `pnpm prepare`.
 - `content/`: visible Markdown content
 - `layouts/`: base template, page layouts, partials, and `robots.txt`
 - `assets/`: CSS and fingerprinted brand and social images processed by Hugo
-- `static/`: the web manifest, install icons, and typeface
+- `static/`: the web manifest, install icons, typeface, and hosted CV
 - `e2e/`: Playwright and Axe validation of generated pages and endpoints
 - `scripts/`: Lighthouse validation and source templates for generated assets
 - `.github/workflows/`: validation, deployment, production auditing, and
@@ -67,11 +68,13 @@ Install them by running `pnpm install` or `pnpm prepare`.
 
 Public identity, contact details, current role data, and external links live in
 `config/_default/params.toml`. Homepage copy lives in
-`content/_index.md`. The editable site icon and social image sources are in
+`content/_index.md`. The editable CV, site icon, and social image sources are in
 `scripts/`; their generated files are committed so production builds stay
 static and do not require a browser. When professional details change, update
-the public configuration, homepage content, social image source, and web
-manifest as applicable, then regenerate the affected assets.
+the public configuration, homepage content, CV source, social image source, and
+web manifest as applicable, then regenerate the affected assets. When the CV
+changes, also update `cvLastmod` in `params.toml` so its sitemap timestamp stays
+accurate.
 
 ## Typeface
 

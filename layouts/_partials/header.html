@@ -20,6 +20,15 @@
     <nav class="site-nav" aria-label="Primary navigation">
       <ul class="site-nav__list">
         <li><a href="{{ $sectionPrefix }}#approach">Approach</a></li>
+        <li>
+          <a
+            href="{{ .Site.Params.cvPath | relURL }}"
+            type="application/pdf"
+            target="_blank"
+            rel="noopener"
+            aria-label="CV, PDF, opens in a new tab"
+          >CV</a>
+        </li>
         <li><a href="{{ $sectionPrefix }}#contact">Contact</a></li>
         {{- with index (where .Site.Params.socialLinks "name" "LinkedIn") 0 }}
           <li>

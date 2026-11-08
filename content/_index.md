@@ -2,6 +2,7 @@
 date: 2024-08-19T11:56:48+02:00
 hero_statement: I build products end to end and improve how teams build them.
 profile_label: Profile
+cv_action_label: View CV
 current_role_label: Currently
 approach_intro: I work across architecture, delivery, and tooling so software stays understandable and teams can keep moving.
 approach_section_title: Approach
