@@ -41,12 +41,37 @@ test.describe("homepage", () => {
     await expect(rivianLink).toHaveAttribute("rel", "external noopener");
   });
 
-  test("does not publish or link a CV", async ({ page, request }) => {
+  test("hosts the CV locally and links it from useful places", async ({
+    page,
+    request,
+  }) => {
     await page.goto("/");
 
-    await expect(page.locator('a[href$=".pdf"]')).toHaveCount(0);
-    await expect(page.getByRole("link", { name: /\bCV\b/ })).toHaveCount(0);
-    expect((await request.get("/vladan-petrovic-cv.pdf")).status()).toBe(404);
+    const cvLinks = page.locator('a[href="/vladan-petrovic-cv.pdf"]');
+    await expect(cvLinks).toHaveCount(3);
+    await expect(cvLinks).toContainText(["CV", "View CV", "CV, PDF"]);
+    expect(
+      await cvLinks.evaluateAll((links) =>
+        links.map((link) => link.getAttribute("type")),
+      ),
+    ).toEqual(["application/pdf", "application/pdf", "application/pdf"]);
+    expect(
+      await cvLinks.evaluateAll((links) =>
+        links.map((link) => ({
+          rel: link.getAttribute("rel"),
+          target: link.getAttribute("target"),
+        })),
+      ),
+    ).toEqual([
+      { rel: "noopener", target: "_blank" },
+      { rel: "noopener", target: "_blank" },
+      { rel: "noopener", target: "_blank" },
+    ]);
+
+    const response = await request.get("/vladan-petrovic-cv.pdf");
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toContain("application/pdf");
+    expect((await response.body()).subarray(0, 5).toString()).toBe("%PDF-");
   });
 
   test("uses named text links for contact and professional profiles", async ({

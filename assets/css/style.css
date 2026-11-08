@@ -215,6 +215,7 @@ section {
   }
 
   .site-nav,
+  .hero__actions,
   .site-footer a,
   .skip-link {
     display: none;

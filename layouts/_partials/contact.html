@@ -7,6 +7,18 @@
       <ul class="contact-links" aria-label="Contact and professional profiles">
         <li>
           <a
+            href="{{ .Site.Params.cvPath | relURL }}"
+            type="application/pdf"
+            target="_blank"
+            rel="noopener"
+            aria-label="CV, PDF, opens in a new tab"
+          >
+            <span>CV, PDF</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </li>
+        <li>
+          <a
             href="mailto:{{ .Site.Params.email }}"
             aria-label="Email {{ .Site.Params.name }}, opens an email composer"
           >
